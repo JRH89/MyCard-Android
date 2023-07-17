@@ -43,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
 
     ImageView qrImageView;
 
+    TextView weather;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         qrImageView = findViewById(R.id.qr_image);
         greeting = findViewById(R.id.greeting);
+        weather = findViewById(R.id.weather);
 
         Calendar calendar = Calendar.getInstance();
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
@@ -63,10 +66,12 @@ public class MainActivity extends AppCompatActivity {
         String greetingText;
         if (hour >= 0 && hour < 12) {
             greetingText = "Good morning";
-        } else if (hour >= 12 && hour < 18) {
+        } else if (hour >= 12 && hour < 16) {
             greetingText = "Good afternoon";
-        } else {
+        } else if (hour >= 16 && hour < 18) {
             greetingText = "Good evening";
+        } else {
+            greetingText = "Good night";
         }
 
         if (user == null) {
@@ -97,7 +102,12 @@ public class MainActivity extends AppCompatActivity {
                         String name = document.getString("name");
                         String[] names = name.split(" ");
                         String firstName = names[0];
-                        greeting.setText("Welcome back, " + firstName);
+
+// Capitalize the first letter of the first name
+                        String capitalizedFirstName = firstName.substring(0, 1).toUpperCase() + firstName.substring(1);
+
+                        greeting.setText(greetingText + ", " + capitalizedFirstName);
+
 
 
                         String url = document.getString("short");
@@ -113,6 +123,9 @@ public class MainActivity extends AppCompatActivity {
                         qrImageView.setAdjustViewBounds(true);
                         qrImageView.setMaxHeight(500);
                         qrImageView.setMaxWidth(500);
+
+                        String city = document.getString("favoriteCity");
+                        weather.setText(city);
                     }
                 } else {
                     // Handle any potential errors here

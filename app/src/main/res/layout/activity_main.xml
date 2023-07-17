@@ -15,12 +15,22 @@
         android:id="@+id/greeting"
         android:layout_width="281dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="5dp"
         android:layout_marginTop="20dp"
-        android:text="Hello World!"
+        android:text="@string/welcome_back"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="20dp"/>
+        android:textSize="20sp"/>
+
+    <TextView
+        android:id="@+id/weather"
+        android:layout_width="281dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="@string/welcome_back"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="20sp"/>
 
     <ImageView
         android:id="@+id/qr_image"
