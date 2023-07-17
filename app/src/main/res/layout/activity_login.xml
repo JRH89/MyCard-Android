@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:backgroundTint="@color/light_blue_600"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="30dp"
+    android:theme="@style/Theme.Material3.DynamicColors.Dark"
+    android:statusBarColor="@android:color/black"
+    tools:context=".Login">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
+        android:text="@string/login"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/light_blue_600"
+            android:foregroundTint="@color/light_blue_600"
+            android:hint="@string/email"
+            android:selectAllOnFocus="false"
+            android:textColor="@color/white"
+            android:theme="@style/Base.Theme.MyCard" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="false"
+        app:boxStrokeColor="@color/light_blue_600"
+        app:color="@color/light_blue_900"
+        app:counterTextColor="@color/light_blue_600"
+        app:endIconTint="@color/light_blue_600"
+        app:helperTextTextColor="@color/light_blue_600"
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="@color/white"
+        app:prefixTextColor="@color/light_blue_600">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/light_blue_600"
+            android:foregroundTint="@color/light_blue_600"
+            android:hint="@string/password"
+            android:selectAllOnFocus="false"
+            android:textColor="@color/white"
+            android:theme="@style/Base.Theme.MyCard" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <ProgressBar
+        android:id="@+id/progressbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="@color/light_blue_600"
+        android:text="@string/login"
+        android:layout_marginTop="40dp"
+        app:shapeAppearance="@style/TextAppearance.AppCompat.Widget.Button" />
+
+
+
+    <TextView
+        android:id="@+id/registerNow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="@string/click_to_register"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+<!--        android:visibility="gone" -->
+
+
+</LinearLayout>

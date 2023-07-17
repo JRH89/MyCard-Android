@@ -1,0 +1,17 @@
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:columnCount="2"
+    android:rowCount="2">
+
+    <ImageView
+        android:id="@+id/qr_code_image_widget"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true" />
+
+</GridLayout>
+
