@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.util.Linkify;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -25,10 +26,26 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import android.util.Base64;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,12 +56,8 @@ public class MainActivity extends AppCompatActivity {
     FirebaseFirestore db;
 
     TextView greeting;
-
-
     ImageView qrImageView;
-
     TextView weather;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,12 +116,10 @@ public class MainActivity extends AppCompatActivity {
                         String[] names = name.split(" ");
                         String firstName = names[0];
 
-// Capitalize the first letter of the first name
+                        // Capitalize the first letter of the first name
                         String capitalizedFirstName = firstName.substring(0, 1).toUpperCase() + firstName.substring(1);
 
                         greeting.setText(greetingText + ", " + capitalizedFirstName);
-
-
 
                         String url = document.getString("short");
                         textView.setText(url);
@@ -125,7 +136,11 @@ public class MainActivity extends AppCompatActivity {
                         qrImageView.setMaxWidth(500);
 
                         String city = document.getString("favoriteCity");
-                        weather.setText(city);
+
+
+                        // Call method to fetch weather data
+                        fetchWeatherData(city);
+
                     }
                 } else {
                     // Handle any potential errors here
@@ -159,4 +174,61 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         startActivity(intent);
     }
+
+    private void fetchWeatherData(String city) {
+        String apiKey = "bdeec3fe00b9a10009325e073c8ec400";
+        String units = "imperial";
+        String url = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey + "&units=" + units;
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    URL apiUrl = new URL(url);
+                    HttpURLConnection connection = (HttpURLConnection) apiUrl.openConnection();
+                    connection.setRequestMethod("GET");
+
+                    if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                        InputStream inputStream = connection.getInputStream();
+                        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                        StringBuilder responseBuilder = new StringBuilder();
+                        String line;
+                        while ((line = bufferedReader.readLine()) != null) {
+                            responseBuilder.append(line);
+                        }
+                        bufferedReader.close();
+                        inputStream.close();
+
+                        String responseData = responseBuilder.toString();
+                        Log.d("Weather Response", responseData); // Log the response data for debugging
+
+                        JSONObject json = new JSONObject(responseData);
+                        JSONObject mainObject = json.getJSONObject("main");
+                        double temperature = mainObject.getDouble("temp");
+                        Log.d("Weather Temperature", String.valueOf(temperature)); // Log the temperature for debugging
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                weather.setText(String.format(Locale.getDefault(), "%.1f", temperature) + "°F");
+                            }
+                        });
+                    } else {
+                        Log.e("Weather API", "Error response: " + connection.getResponseCode()); // Log error response code
+                    }
+
+                    connection.disconnect();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+
+
+
+
+
 }
+

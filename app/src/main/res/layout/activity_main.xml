@@ -56,7 +56,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_weight="0"
-        android:backgroundTint="@color/light_blue_600"
+        android:backgroundTint="@color/light_blue_900"
         android:text="@string/logout"
         app:shapeAppearance="@style/TextAppearance.AppCompat.Widget.Button" />
 
