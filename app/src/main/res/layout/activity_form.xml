@@ -1,33 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- activity_form.xml -->
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
     xmlns:tools="http://schemas.android.com/tools">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
-android:layout_marginHorizontal="10dp"
-    android:background="@color/black"
-
+        android:layout_marginHorizontal="10dp"
+        android:background="@color/black"
         android:orientation="vertical"
         >
-
-
-        <!-- Form fields -->
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/card_details"
             android:textStyle="bold"
+            android:textSize="30sp"
             android:layout_marginBottom="20dp"
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:textSize="20dp" />
+             />
 
         <TextView
             android:layout_width="match_parent"
@@ -46,12 +42,9 @@ android:layout_marginHorizontal="10dp"
             android:textColorHint="@color/black"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-           android:dropDownSelector="@color/white"
-android:background="@color/white"
-            android:selectAllOnFocus="false"
-            android:textColor="@color/white"
-            android:spinnerStyle="@style/SpinnerSelectedItem"
-
+            android:dropDownSelector="@color/black"
+            android:background="@color/white"
+            android:textColor="@color/black"
             android:entries="@array/choices" />
 
         <TextView
@@ -237,7 +230,7 @@ android:background="@color/white"
             android:textColor="@color/white"
             android:theme="@style/Base.Theme.MyCard"
             />
-        <!-- Navigation buttons -->
+
 
         <Button
             android:id="@+id/submit_button"
