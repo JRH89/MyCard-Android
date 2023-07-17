@@ -2,12 +2,18 @@ package mycard.mycard;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
 import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.HashMap;
@@ -68,6 +74,26 @@ public class FormActivity extends AppCompatActivity {
         theme = findViewById(R.id.theme);
         city = findViewById(R.id.city);
         submitButton = findViewById(R.id.submit_button);
+
+
+        TextView urlTextView = findViewById(R.id.exampleLink);
+        String url = "https://have-mycard.vercel.app/Samples";
+        String displayText = "View Theme Examples";
+
+        SpannableString spannableString = new SpannableString(displayText);
+        ClickableSpan clickableSpan = new ClickableSpan() {
+            @Override
+            public void onClick(View view) {
+                // Handle URL click event here
+                // For example, open the URL in a browser
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                startActivity(intent);
+            }
+        };
+
+        spannableString.setSpan(clickableSpan, 0, displayText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        urlTextView.setText(spannableString);
+        urlTextView.setMovementMethod(LinkMovementMethod.getInstance());
 
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -10,6 +10,7 @@
     android:theme="@style/Theme.Material3.DynamicColors.Dark"
     android:statusBarColor="@android:color/black"
     android:background="@color/black"
+    android:layout_marginHorizontal="30dp"
     android:backgroundTint="@color/black"
     tools:context=".Login">
 

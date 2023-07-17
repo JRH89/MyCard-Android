@@ -4,14 +4,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:theme="@android:style/Theme.Holo"
+
+  >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginHorizontal="10dp"
         android:background="@color/black"
         android:orientation="vertical"
+        android:layout_marginHorizontal="30dp"
+        android:textAlignment="center"
+        android:theme="@android:style/Theme.Holo"
+
         >
 
         <TextView
@@ -20,7 +25,7 @@
             android:text="@string/card_details"
             android:textStyle="bold"
             android:textSize="30sp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="10dp"
             android:textAlignment="center"
             android:textColor="@color/white"
              />
@@ -30,22 +35,41 @@
             android:layout_height="wrap_content"
             android:text="Choose a theme:"
             android:textAlignment="center"
-            android:layout_marginBottom="10dp"
+            android:layout_marginVertical="10dp"
             android:textColor="@color/white"
             android:textSize="20sp" />
 
-        <Spinner
-            android:id="@+id/theme"
-            android:textAlignment="center"
+        <TextView
+            android:id="@+id/exampleLink"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autoLink="web"
             android:layout_marginBottom="10dp"
-            android:popupBackground="@color/white"
+            android:textAlignment="center"
+            android:textColorLink="@color/green"
+            android:textColor="@color/green"
+            android:text="Click here to see examples" />
+
+
+        <Spinner
+
+            android:id="@+id/theme"
+
+            android:layout_marginBottom="10dp"
+
             android:textColorHint="@color/black"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:dropDownSelector="@color/black"
-            android:background="@color/white"
+            android:theme="@android:style/Theme.Holo"
+
+            android:popupTheme="@style/PopupTheme"
+
+            style="@android:style/Theme.Holo"
+
             android:textColor="@color/black"
             android:entries="@array/choices" />
+
 
         <TextView
             android:layout_width="match_parent"
@@ -151,7 +175,7 @@
             android:layout_height="wrap_content"
             android:textColorHint="@color/white"
             android:textSize="20sp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginVertical="10dp"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:text="@string/optional_links_"/>
@@ -237,9 +261,13 @@
             android:layout_width="match_parent"
             android:textColorHint="@color/white"
             android:layout_height="67dp"
-            android:layout_marginTop="50dp"
-            android:backgroundTint="@color/light_blue_600"
-            android:text="@string/submit" />
+            android:layout_marginTop="30dp"
+            android:background="@color/green"
+            android:layout_marginBottom="10dp"
+            android:backgroundTint="@color/green"
+
+            android:text="@string/submit"
+                                            />
 
 
 
