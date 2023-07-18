@@ -5,7 +5,7 @@
     android:initialLayout="@layout/q_r_code_widget"
     android:minWidth="40dp"
     android:minHeight="40dp"
-    android:previewImage="@drawable/example_appwidget_preview"
+    android:previewImage="@drawable/qrcode"
     android:previewLayout="@layout/q_r_code_widget"
     android:resizeMode="horizontal|vertical"
     android:targetCellWidth="2"

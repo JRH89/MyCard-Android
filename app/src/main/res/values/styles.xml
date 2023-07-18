@@ -4,7 +4,11 @@
         <item name="android:id">@android:id/background</item>
         <item name="android:background">?android:attr/colorBackground</item>
     </style>
-
+    <style name="GreenButtonStyle" parent="Widget.AppCompat.Button">
+        <item name="android:background">@color/green</item>
+        <item name="android:backgroundTint">@color/green</item>
+        <!-- Add other button attributes if needed -->
+    </style>
     <style name="Widget.MyCard.AppWidget.InnerView" parent="android:Widget">
         <item name="android:background">?android:attr/colorBackground</item>
         <item name="android:textColor">?android:attr/textColorPrimary</item>

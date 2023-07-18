@@ -16,8 +16,7 @@
         android:layout_width="281dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
-
-        android:text="@string/welcome_back"
+        android:text=""
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="20sp"/>
@@ -27,12 +26,10 @@
         android:layout_width="281dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
-        android:text="@string/welcome_back"
+        android:text=""
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="20sp"/>
-
-
 
     <ImageView
         android:id="@+id/qr_image"
@@ -43,27 +40,29 @@
         android:adjustViewBounds="true"
         android:scaleType="fitCenter" />
 
-
     <TextView
         android:id="@+id/user_details"
         android:layout_width="281dp"
         android:layout_weight="0"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
-        android:text="Hello World!"
-android:textSize="20sp"
+        android:text=""
+        android:textSize="20sp"
         android:backgroundTint="@color/black"
         android:textAlignment="center"
         android:textColorLink="@color/green"
         android:textColor="@color/white" />
+
     <Button
         android:id="@+id/logout"
+        android:text="@string/logout"
+        android:textStyle="bold"
+        android:textSize="20sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_weight="0"
+       android:padding="10dp"
         android:backgroundTint="@color/red"
-        android:text="@string/logout"
         app:shapeAppearance="@style/TextAppearance.AppCompat.Widget.Button" />
 
 </LinearLayout>

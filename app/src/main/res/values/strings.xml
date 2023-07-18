@@ -9,7 +9,7 @@
     <string name="logout">LOGOUT</string>
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
-    <string name="app_widget_description">This is an app widget description</string>
+    <string name="app_widget_description">QR Code Widget</string>
     <string name="title_activity_form">activity_form</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
@@ -124,4 +124,6 @@
     <string name="welcome_back">Welcome back!</string>
     <string name="optional_links_">Optional Links:</string>
     <string name="card_details">Card Details</string>
+    <string name="optional">Optional:</string>
+    <string name="required">Required:</string>
 </resources>
