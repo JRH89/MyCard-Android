@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="deleteAcct" type="id" />
+    <item name="btnCloseMenu" type="id" />
+    <item name="editCard" type="id" />
+</resources>

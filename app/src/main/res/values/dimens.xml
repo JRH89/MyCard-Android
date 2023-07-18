@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!--
+    <!--    <integer name="SendgridAPI">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</integer>
+
 Refer to App Widget Documentation for margin information
 http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
     -->

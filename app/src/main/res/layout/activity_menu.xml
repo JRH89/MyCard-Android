@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:backgroundTint="@color/black"
+    android:background="@color/black"
+    android:id="@+id/activity_menu"
+    android:textAlignment="center"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Menu"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <!-- Add any other views you want in between the TextView and buttons -->
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <Button
+        android:id="@+id/support"
+        android:visibility="gone"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:paddingVertical="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:backgroundTint="@color/white"
+        app:shapeAppearance="@style/TextAppearance.AppCompat.Widget.Button"
+        android:text="Support" />
+
+    <Button
+        android:id="@+id/editCard"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:paddingVertical="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:backgroundTint="@color/green"
+        app:shapeAppearance="@style/TextAppearance.AppCompat.Widget.Button"
+        android:text="Edit Card" />
+
+    <Button
+        android:id="@+id/deleteAcct"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:paddingVertical="10dp"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="30dp"
+        android:layout_height="wrap_content"
+        android:text="Delete Account"
+        android:backgroundTint="@color/red"
+        app:shapeAppearance="@style/TextAppearance.AppCompat.Widget.Button" />
+
+
+    <Button
+        android:id="@+id/logout"
+        android:text="@string/logout"
+        android:layout_width="match_parent"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:paddingVertical="10dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:backgroundTint="@color/light_blue_600"
+        app:shapeAppearance="@style/TextAppearance.AppCompat.Widget.Button"
+         />
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+
+    <Button
+        android:id="@+id/btnCloseMenu"
+        android:text="Close"
+        android:paddingVertical="10dp"
+        android:textStyle="bold"
+        android:paddingHorizontal="20dp"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:backgroundTint="@color/red"
+        app:shapeAppearance="@style/TextAppearance.AppCompat.Widget.Button" />
+
+
+</LinearLayout>

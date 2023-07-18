@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -19,7 +24,7 @@
         android:text=""
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="20sp"/>
+        android:textSize="30sp"/>
 
     <TextView
         android:id="@+id/weather"
@@ -29,7 +34,7 @@
         android:text=""
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="20sp"/>
+        android:textSize="25sp"/>
 
     <ImageView
         android:id="@+id/qr_image"
@@ -54,15 +59,19 @@
         android:textColor="@color/white" />
 
     <Button
-        android:id="@+id/logout"
-        android:text="@string/logout"
-        android:textStyle="bold"
-        android:textSize="20sp"
+        android:id="@+id/hamburger_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-       android:padding="10dp"
-        android:backgroundTint="@color/red"
+        android:layout_margin="8dp"
+        android:textAlignment="center"
+        android:text="Menu"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:paddingVertical="8dp"
+        android:textColor="@color/black"
+        android:contentDescription="Menu"
+        android:paddingHorizontal="20dp"
+        android:backgroundTint="@color/light_blue_600"
         app:shapeAppearance="@style/TextAppearance.AppCompat.Widget.Button" />
 
 </LinearLayout>
