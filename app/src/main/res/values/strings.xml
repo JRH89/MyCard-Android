@@ -102,7 +102,7 @@
     </string>
     <string-array name="choices">
         <item>Classic</item>
-        <item>Original</item>
+        <item>Dynamic</item>
         <item>Primary</item>
     </string-array>
 

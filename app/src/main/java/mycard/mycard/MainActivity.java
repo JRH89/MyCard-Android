@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.text.util.Linkify;
 import android.util.Log;
 import android.view.View;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -34,8 +36,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -51,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
     TextView greeting;
     ImageView qrImageView;
     TextView weather;
+    WebView cardPreview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,13 +63,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         auth = FirebaseAuth.getInstance();
-//        button = findViewById(R.id.logout);
         textView = findViewById(R.id.user_details);
         user = auth.getCurrentUser();
         db = FirebaseFirestore.getInstance();
         qrImageView = findViewById(R.id.qr_image);
         greeting = findViewById(R.id.greeting);
-        weather = findViewById(R.id.weather);
+        weather = findViewById(R.id.weather); // Initialize the weather TextView
+        cardPreview = findViewById(R.id.cardPreview);
 
         Calendar calendar = Calendar.getInstance();
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
@@ -87,17 +92,25 @@ public class MainActivity extends AppCompatActivity {
         } else {
             textView.setText(user.getEmail());
         }
+        TextView clickToShowQrCode = findViewById(R.id.click_to_show_qr_code);
+        final ImageView qrImageView = findViewById(R.id.qr_image);
 
-//        button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                FirebaseAuth.getInstance().signOut();
-//                Intent intent = new Intent(getApplicationContext(), Login.class);
-//                startActivity(intent);
-//                finish();
-//            }
-//        });
-
+        clickToShowQrCode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Toggle the visibility of the QR code ImageView
+                if (qrImageView.getVisibility() == View.VISIBLE) {
+                    qrImageView.setVisibility(View.GONE); // Hide the QR code
+                } else {
+                    qrImageView.setVisibility(View.VISIBLE); // Show the QR code
+                }
+                if (textView.getVisibility() == View.VISIBLE) {
+                    textView.setVisibility(View.GONE); // Hide the QR code
+                } else {
+                    textView.setVisibility(View.VISIBLE); // Show the QR code
+                }
+            }
+        });
         DocumentReference docRef = db.collection(user.getEmail()).document("userInfo");
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -120,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
 
                         String qrImageData = document.getString("qrImage");
                         // Convert the base64PNG data URL string to a Bitmap or load it directly into the ImageView
-                        // Here's an example of converting the base64 string to a Bitmap
+
                         Bitmap qrBitmap = convertBase64ToBitmap(qrImageData);
                         qrImageView.setImageBitmap(qrBitmap);
                         qrImageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
@@ -131,12 +144,54 @@ public class MainActivity extends AppCompatActivity {
                         String city = document.getString("favoriteCity");
 
 
-                        // Call method to fetch weather data
-                        fetchWeatherData(city);
+
+                      fetchWeatherData(city);
+                        String fullName = document.getString("name");
+                        String userJob = document.getString("jobTitle");
+                        String userPhone = document.getString("phone");
+                        String userEmail = document.getString("email");
+                        String userLabel1 = document.getString("social1Label");
+                        String userLink1 = document.getString("social1");
+                        String userLabel2 = document.getString("social2Label");
+                        String userLink2 = document.getString("social2");
+                        String userLabel3 = document.getString("social3Label");
+                        String userLink3 = document.getString("social3");
+                        String userLabel4 = document.getString("social4Label");
+                        String userLink4 = document.getString("social4");
+                        String userTheme = document.getString("theme");
+
+                        try {
+                        String encodedFullName = URLEncoder.encode(fullName, "UTF-8");
+                        String encodedUserJob = URLEncoder.encode(userJob, "UTF-8");
+                        String encodedUserPhone = URLEncoder.encode(userPhone, "UTF-8");
+                        String encodedUserEmail = URLEncoder.encode(userEmail, "UTF-8");
+                        String encodedUserLabel1 = URLEncoder.encode(userLabel1, "UTF-8");
+                        String encodedUserLink1 = URLEncoder.encode(userLink1, "UTF-8");
+                        String encodedUserLabel2 = URLEncoder.encode(userLabel2, "UTF-8");
+                        String encodedUserLink2 = URLEncoder.encode(userLink2, "UTF-8");
+                        String encodedUserLabel3 = URLEncoder.encode(userLabel3, "UTF-8");
+                        String encodedUserLink3 = URLEncoder.encode(userLink3, "UTF-8");
+                        String encodedUserLabel4 = URLEncoder.encode(userLabel4, "UTF-8");
+                        String encodedUserLink4 = URLEncoder.encode(userLink4, "UTF-8");
+                        String encodedUserTheme = URLEncoder.encode(userTheme, "UTF-8");
+
+                            String baseUrl = "https://have-mycard.vercel.app";
+                            String dynamicUrl = String.format("%s/%s/?name=%s&job=%s&phone=%s&email=%s&social1Label=%s&social1=%s&social2Label=%s&social2=%s&social3Label=%s&social3=%s&social4Label=%s&social4=%s",
+                                    baseUrl, encodedUserTheme, encodedFullName, encodedUserJob, encodedUserPhone, encodedUserEmail, encodedUserLabel1, encodedUserLink1, encodedUserLabel2, encodedUserLink2, encodedUserLabel3, encodedUserLink3, encodedUserLabel4, encodedUserLink4);
+
+                            Log.d("LongURL", dynamicUrl);
+
+                            cardPreview.getSettings().setJavaScriptEnabled(true);
+                            cardPreview.setWebViewClient(new WebViewClient());
+                            cardPreview.loadUrl(dynamicUrl);
+
+                        } catch (UnsupportedEncodingException e) {
+                            e.printStackTrace();
+                        }
 
                     }
                 } else {
-                    // Handle any potential errors here
+                    // Handle any potential errors
                     Exception e = task.getException();
                     if (e != null) {
                         e.printStackTrace();

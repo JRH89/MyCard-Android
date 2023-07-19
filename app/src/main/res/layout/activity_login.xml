@@ -13,7 +13,11 @@
     android:layout_marginHorizontal="30dp"
     android:backgroundTint="@color/black"
     tools:context=".Login">
-
+    <View
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -63,8 +67,7 @@
             android:selectAllOnFocus="false"
             android:textColor="@color/white"
             android:theme="@style/Base.Theme.MyCard" />
-
-    </com.google.android.material.textfield.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
     <ProgressBar
         android:id="@+id/progressbar"
@@ -86,8 +89,6 @@
         android:layout_marginTop="40dp"
         app:shapeAppearance="@style/TextAppearance.AppCompat.Widget.Button" />
 
-
-
     <TextView
         android:id="@+id/registerNow"
         android:layout_width="match_parent"
@@ -98,6 +99,20 @@
         android:textSize="20sp"
         android:textStyle="bold" />
 
+    <View
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_weight="1" />
 
+
+    <TextView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/forgot_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:textAlignment="center"
+        android:hint="Forgot your Password?"
+        android:maxLines="1"/>
 
 </LinearLayout>
