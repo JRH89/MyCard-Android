@@ -10,39 +10,16 @@ share your card with can save all of your contact information with the touch of 
 Each user is given a qr code and url that leads to their card, and the app feaures a home screen widget that displays the qr code 
 on the phone's home screen for easy card sharing. 
 </p>
-<div style="flex flex-grid">
-<Image
-  height="400px"
-  width="200px"
-  src="Screenshot_20230717_022650.png"
-  />
-  <Image
-  height="400px"
-  width="200px"
-  src="new1.png"
-  />
-    <Image
-  height="400px"
-  width="200px"
-  src="new2.png"
-  /></div>
-      <div style="flex flex-grid">
-      <Image
-  height="400px"
-  width="200px"
-  src="new3.png"
-  />
+<!-- Add the first row of images -->
+<div style="display: flex; flex-direction: row; flex-wrap: wrap;">
+  <img height="400px" width="200px" src="Screenshot_20230717_022650.png" />
+  <img height="400px" width="200px" src="new1.png" />
+  <img height="400px" width="200px" src="new2.png" />
+</div>
 
-  <Image
-  height="400px"
-  width="200px"
-  src="new4.png"
-  />
-
-  <Image
-  height="400px"
-  width="200px"
-  src="new5.png"
-  />
-    </div>    
-
+<!-- Add the second row of images -->
+<div style="display: flex; flex-direction: row; flex-wrap: wrap;">
+  <img height="400px" width="200px" src="new3.png" />
+  <img height="400px" width="200px" src="new4.png" />
+  <img height="400px" width="200px" src="new5.png" />
+</div>
