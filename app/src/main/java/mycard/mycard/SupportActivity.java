@@ -49,7 +49,7 @@ public class SupportActivity extends AppCompatActivity {
     private void sendEmail() {
         Executor executor = Executors.newSingleThreadExecutor();
         executor.execute(() -> {
-            SendGrid sendGrid = new SendGrid("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");
+            SendGrid sendGrid = new SendGrid("");
             Email from = new Email("hookerhillstudios@gmail.com");
             String subject = "Test Email";
             Email to = new Email("mycarddigitalbusinesscards@gmail.com");
