@@ -25,7 +25,8 @@ on the phone's home screen for easy card sharing.
   height="400px"
   width="200px"
   src="new2.png"
-  />
+  /></div>
+      <div style="flex flex-grid">
       <Image
   height="400px"
   width="200px"
@@ -43,5 +44,5 @@ on the phone's home screen for easy card sharing.
   width="200px"
   src="new5.png"
   />
-        
-</div>
+    </div>    
+
