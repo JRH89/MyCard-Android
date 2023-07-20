@@ -5,8 +5,12 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.util.Linkify;
+import android.util.Base64;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -15,8 +19,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.os.Bundle;
 import android.app.Dialog;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -26,7 +33,20 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import android.util.Base64;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.util.Calendar;
+import java.util.Locale;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -43,15 +63,14 @@ import java.net.URLEncoder;
 import java.util.Calendar;
 import java.util.Locale;
 
-
 public class MainActivity extends AppCompatActivity {
 
     FirebaseAuth auth;
+
     Button button;
     TextView textView;
     FirebaseUser user;
     FirebaseFirestore db;
-
     TextView greeting;
     ImageView qrImageView;
     TextView weather;
@@ -77,9 +96,9 @@ public class MainActivity extends AppCompatActivity {
         String greetingText;
         if (hour >= 0 && hour < 12) {
             greetingText = "Good morning";
-        } else if (hour >= 12 && hour < 16) {
+        } else if (hour >= 12 && hour < 18) {
             greetingText = "Good afternoon";
-        } else if (hour >= 16 && hour < 18) {
+        } else if (hour >= 18 && hour < 20) {
             greetingText = "Good evening";
         } else {
             greetingText = "Good night";
@@ -95,22 +114,27 @@ public class MainActivity extends AppCompatActivity {
         TextView clickToShowQrCode = findViewById(R.id.click_to_show_qr_code);
         final ImageView qrImageView = findViewById(R.id.qr_image);
 
+        final boolean[] qrCodeAndUrlVisible = {false}; // Flag to track the visibility state
+
         clickToShowQrCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Toggle the visibility of the QR code ImageView
-                if (qrImageView.getVisibility() == View.VISIBLE) {
-                    qrImageView.setVisibility(View.GONE); // Hide the QR code
+                // Toggle the visibility of the QR code ImageView and URL TextView
+                if (!qrCodeAndUrlVisible[0]) {
+                    cardPreview.setVisibility(View.VISIBLE);
+                    qrImageView.setVisibility(View.GONE); // Show the QR code
+                    textView.setVisibility(View.GONE); // Show the URL
+                    clickToShowQrCode.setText("Hide Card Preview"); // Update button text
                 } else {
+                    cardPreview.setVisibility(View.GONE);
                     qrImageView.setVisibility(View.VISIBLE); // Show the QR code
+                    textView.setVisibility(View.VISIBLE);// Hide the URL
+                    clickToShowQrCode.setText("Show Card Preview"); // Update button text
                 }
-                if (textView.getVisibility() == View.VISIBLE) {
-                    textView.setVisibility(View.GONE); // Hide the QR code
-                } else {
-                    textView.setVisibility(View.VISIBLE); // Show the QR code
-                }
+                qrCodeAndUrlVisible[0] = !qrCodeAndUrlVisible[0]; // Toggle the flag
             }
         });
+
         DocumentReference docRef = db.collection(user.getEmail()).document("userInfo");
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -142,8 +166,6 @@ public class MainActivity extends AppCompatActivity {
                         qrImageView.setMaxWidth(500);
 
                         String city = document.getString("favoriteCity");
-
-
 
                       fetchWeatherData(city);
                         String fullName = document.getString("name");
@@ -217,7 +239,96 @@ public class MainActivity extends AppCompatActivity {
                 openInBrowser(url);
             }
         });
+        registerForContextMenu(qrImageView);
     }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        getMenuInflater().inflate(R.menu.qr_image_context_menu, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        int itemId = item.getItemId();
+        if (itemId == R.id.menu_save) {
+            // Handle the "Save Image" option here
+            saveImageToGallery();
+            return true;
+        } else if (itemId == R.id.menu_send) {
+            // Handle the "Send Image" option here
+            sendImage();
+            return true;
+        } else {
+            return super.onContextItemSelected(item);
+        }
+    }
+
+    private void saveImageToGallery() {
+        // Get the current bitmap from qrImageView
+        qrImageView.setDrawingCacheEnabled(true);
+        Bitmap qrBitmap = Bitmap.createBitmap(qrImageView.getDrawingCache());
+        qrImageView.setDrawingCacheEnabled(false);
+
+        // Save the bitmap to the device's gallery
+        String displayName = "QR_Code_Image"; // Set a display name for the image
+        String mimeType = "image/png"; // Set the image MIME type (change if needed)
+        String uriString = MediaStore.Images.Media.insertImage(
+                getContentResolver(), qrBitmap, displayName, null
+        );
+
+        if (uriString != null) {
+            // Image saved successfully
+            Uri imageUri = Uri.parse(uriString);
+            Toast.makeText(this, "Image saved to gallery", Toast.LENGTH_SHORT).show();
+        } else {
+            // Failed to save the image
+            Toast.makeText(this, "Failed to save image", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void sendImage() {
+        // Get the current bitmap from qrImageView
+        qrImageView.setDrawingCacheEnabled(true);
+        Bitmap qrBitmap = Bitmap.createBitmap(qrImageView.getDrawingCache());
+        qrImageView.setDrawingCacheEnabled(false);
+
+        // Get the URL to be included in the message
+        String url = textView.getText().toString();
+
+        // Create an intent to send the image
+        Intent sendIntent = new Intent(Intent.ACTION_SEND);
+        sendIntent.setType("image/png"); // Set the image MIME type (change if needed)
+        String message = "My Card: " + url; // Include the URL in the message
+        sendIntent.putExtra(Intent.EXTRA_TEXT, message);
+        sendIntent.putExtra(Intent.EXTRA_STREAM, getBitmapUri(qrBitmap));
+
+        // Check if there's an app to handle the intent
+        if (sendIntent.resolveActivity(getPackageManager()) != null) {
+            startActivity(Intent.createChooser(sendIntent, "Send QR Code"));
+        } else {
+            Toast.makeText(this, "No app found to handle the intent", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    // Helper method to get the Uri of the image from the Bitmap
+    private Uri getBitmapUri(Bitmap bitmap) {
+        File imageFile = new File(getExternalCacheDir(), "qr_code_image.png");
+        try {
+            FileOutputStream fos = new FileOutputStream(imageFile);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
+            fos.flush();
+            fos.close();
+
+            return FileProvider.getUriForFile(this, getPackageName() + ".fileprovider", imageFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
 
     private Bitmap convertBase64ToBitmap(String base64String) {
         // Remove the data URL prefix (e.g., "data:image/png;base64,")
@@ -282,11 +393,4 @@ public class MainActivity extends AppCompatActivity {
             }
         }).start();
     }
-
-
-
-
-
-
 }
-

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- res/menu/qr_image_context_menu.xml -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_save"
+        android:title="Save QR Code" />
+    <item
+        android:id="@+id/menu_send"
+        android:title="Send QR Code and URL" />
+</menu>

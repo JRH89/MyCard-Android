@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:backgroundTint="@color/black"
     android:background="@color/black"
-    android:id="@+id/activity_menu"
+    android:id="@+id/support"
     android:textAlignment="center"
     android:padding="16dp">
 

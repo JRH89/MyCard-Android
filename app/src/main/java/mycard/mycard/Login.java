@@ -3,6 +3,7 @@ package mycard.mycard;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.AlertDialogLayout;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -28,7 +29,6 @@ public class Login extends AppCompatActivity {
     FirebaseAuth mAuth;
     ProgressBar progressBar;
     TextView textView;
-
     @Override
     public void onStart() {
         super.onStart();
@@ -106,65 +106,61 @@ public class Login extends AppCompatActivity {
     private void showForgotPasswordDialog() {
         // Create a new AlertDialog Builder
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Forgot Password");
-        builder.setMessage("Enter the email associated with your My Card account. A password reset email will be sent to you shortly (make sure to check your spam folder):");
+
 
         // Set up the layout for the dialog
         View view = getLayoutInflater().inflate(R.layout.dialog_forgot_password, null);
         final EditText editTextEmail = view.findViewById(R.id.editTextEmail);
         builder.setView(view);
 
-        // Set up the positive button for submitting the email
-        builder.setPositiveButton("Reset", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                String email = editTextEmail.getText().toString().trim();
-                if (TextUtils.isEmpty(email)) {
-                    Toast.makeText(Login.this, "Enter your email", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                progressBar.setVisibility(View.VISIBLE);
-                mAuth.sendPasswordResetEmail(email)
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                progressBar.setVisibility(View.GONE);
-                                if (task.isSuccessful()) {
-                                    Toast.makeText(Login.this, "Password reset email sent", Toast.LENGTH_SHORT).show();
-                                } else {
-                                    Toast.makeText(Login.this, "Failed to send password reset email", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
-            }
-        });
-
-        // Set up the negative button for canceling the dialog
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-            }
-        });
-
         // Create and show the AlertDialog
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
-        Button positiveButton = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
-        if (positiveButton != null) {
-            positiveButton.setTextColor(getColor(R.color.black));
-            positiveButton.setBackgroundColor(getColor(R.color.white));
 
-            // You can also apply other customizations to the positive button here
+        // Get references to the custom-styled buttons
+        Button btnSubmit = alertDialog.findViewById(R.id.btnSubmit);
+        Button btnCancel = alertDialog.findViewById(R.id.btnCancel);
+
+        // Set button click listeners
+        if (btnSubmit != null) {
+            btnSubmit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Handle Submit button click (if needed)
+                    String email = editTextEmail.getText().toString().trim();
+                    if (TextUtils.isEmpty(email)) {
+                        Toast.makeText(Login.this, "Enter your email", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    progressBar.setVisibility(View.VISIBLE);
+                    mAuth.sendPasswordResetEmail(email)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    progressBar.setVisibility(View.GONE);
+                                    if (task.isSuccessful()) {
+                                        Toast.makeText(Login.this, "Password reset email sent", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(Login.this, "Failed to send password reset email", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+
+                    alertDialog.dismiss(); // Dismiss the dialog after handling the click
+                }
+            });
         }
 
-        Button negativeButton = alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE);
-        if (negativeButton != null) {
-            negativeButton.setTextColor(getColor(R.color.black));
-            negativeButton.setBackgroundColor(getColor(R.color.white));
-            // You can also apply other customizations to the negative button here
+        if (btnCancel != null) {
+            btnCancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Handle Cancel button click (if needed)
+                    alertDialog.dismiss(); // Dismiss the dialog after handling the click
+                }
+            });
         }
-
     }
+
 }

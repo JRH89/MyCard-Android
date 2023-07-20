@@ -10,9 +10,11 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Base64;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -115,32 +117,32 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     private void showDeleteAccountConfirmationDialog() {
+        // Create a LayoutInflater object to inflate the custom layout
+        LayoutInflater inflater = getLayoutInflater();
+        View customView = inflater.inflate(R.layout.custom_dialog_layout, null);
+
+        // Get references to views in the custom layout
+        TextView dialogTitle = customView.findViewById(R.id.dialogTitle);
+        TextView dialogMessage = customView.findViewById(R.id.dialogMessage);
+        Button btnPositive = customView.findViewById(R.id.btnPositive);
+        Button btnNegative = customView.findViewById(R.id.btnNegative);
+
+        dialogTitle.setText("Confirm Account Deletion");
+        dialogMessage.setText("Are you sure you want to delete your account? This action cannot be undone.");
+
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Confirm Account Deletion");
-        builder.setMessage("Are you sure you want to delete your account? This action cannot be undone.");
-        builder.setPositiveButton("Delete", (dialog, which) -> {
-            deleteAccount();
-        });
-        builder.setNegativeButton("Cancel", null);
+        builder.setView(customView);
 
         AlertDialog alertDialog = builder.create();
+
+        btnPositive.setOnClickListener(view -> {
+            deleteAccount();
+            alertDialog.dismiss();
+        });
+
+        btnNegative.setOnClickListener(view -> alertDialog.dismiss());
+
         alertDialog.show();
-
-        Button positiveButton = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
-        if (positiveButton != null) {
-            positiveButton.setTextColor(getResources().getColor(R.color.black));
-            positiveButton.setBackgroundColor(getResources().getColor(R.color.white));
-
-            // You can also apply other customizations to the positive button here
-        }
-
-        Button negativeButton = alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE);
-        if (negativeButton != null) {
-            negativeButton.setTextColor(getResources().getColor(R.color.black));
-            negativeButton.setBackgroundColor(getResources().getColor(R.color.white));
-
-            // You can also apply other customizations to the negative button here
-        }
     }
 
 

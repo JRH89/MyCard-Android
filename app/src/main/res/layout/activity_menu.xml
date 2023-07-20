@@ -10,8 +10,6 @@
     android:id="@+id/activity_menu"
     android:textAlignment="center">
 
-
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,6 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"></View>
+
     <!-- Add any other views you want in between the TextView and buttons -->
     <ImageView
         android:id="@+id/qr_image"
@@ -33,16 +32,15 @@
         android:visibility="gone"
         android:layout_marginBottom="20dp"
         android:layout_weight="2"
-android:layout_gravity="center"
+        android:layout_gravity="center"
         android:adjustViewBounds="true"
         android:scaleType="fitCenter" />
 
-
     <Button
         android:id="@+id/support"
-        android:visibility="gone"
         android:textColor="@color/black"
         android:textStyle="bold"
+        android:visibility="gone"
         android:paddingVertical="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -78,7 +76,6 @@ android:layout_gravity="center"
         android:backgroundTint="@color/green"
         app:shapeAppearance="@style/TextAppearance.AppCompat.Widget.Button" />
 
-
     <Button
         android:id="@+id/logout"
         android:text="@string/logout"
@@ -93,13 +90,10 @@ android:layout_gravity="center"
         app:shapeAppearance="@style/TextAppearance.AppCompat.Widget.Button"
          />
 
-
     <View
         android:layout_width="match_parent"
         android:layout_height="0dp"
-
         android:layout_weight="1" />
-
 
     <Button
         android:id="@+id/btnCloseMenu"

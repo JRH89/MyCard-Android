@@ -1,12 +1,18 @@
 package mycard.mycard;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -66,6 +72,25 @@ public class EditActivity extends AppCompatActivity {
 
         // Call a method to retrieve the user's data and populate the form fields
         loadUserData();
+
+        TextView urlTextView = findViewById(R.id.exampleLink);
+        String url = "https://have-mycard.vercel.app/Samples";
+        String displayText = "View Theme Examples";
+
+        SpannableString spannableString = new SpannableString(displayText);
+        ClickableSpan clickableSpan = new ClickableSpan() {
+            @Override
+            public void onClick(View view) {
+                // Handle URL click event here
+                // For example, open the URL in a browser
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                startActivity(intent);
+            }
+        };
+
+        spannableString.setSpan(clickableSpan, 0, displayText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        urlTextView.setText(spannableString);
+        urlTextView.setMovementMethod(LinkMovementMethod.getInstance());
 
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override

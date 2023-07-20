@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.util.Base64;
@@ -132,7 +133,7 @@ public class FormActivity extends AppCompatActivity {
         String qrCodeBase64 = convertBitmapToBase64(qrCodeBitmap);
 
         // Perform form validation
-        boolean isValid = validateForm(value1, value2);
+        boolean isValid = validateForm(value1, value2, value3, value4, value5, value6);
 
         if (isValid) {
             // Submit the form data to the database
@@ -210,11 +211,23 @@ public class FormActivity extends AppCompatActivity {
         return sb.toString();
     }
 
-    private boolean validateForm(String value1, String value2) {
-        // Implement your form validation logic here
-        // Return true if the form is valid, false otherwise
-        // You can validate the input fields, check for required fields, format validation, etc.
+    private boolean validateForm(String value1, String value2, String value3, String value4, String value5, String value6) {
+        if (TextUtils.isEmpty(value1)
+                || TextUtils.isEmpty(value2)
+                || TextUtils.isEmpty(value3)
+                || TextUtils.isEmpty(value4)
+                || TextUtils.isEmpty(value5)
+                || TextUtils.isEmpty(value6)) {
+
+            showToast("Please fill in all required fields.");
+            return false;
+        }
+
         return true;
+    }
+
+    private void showToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
     private Bitmap generateQRCode(String value) {
