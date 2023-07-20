@@ -24,7 +24,7 @@ on the phone's home screen for easy card sharing.
     <Image
   height="400px"
   width="200px"
-  src=new2.png"
+  src="new2.png"
   />
       <Image
   height="400px"
