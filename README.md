@@ -10,7 +10,7 @@ share your card with can save all of your contact information with the touch of 
 Each user is given a qr code and url that leads to their card, and the app feaures a home screen widget that displays the qr code 
 on the phone's home screen for easy card sharing. 
 </p>
-<div style="flex flex-row">
+<div style="flex flex-grid">
 <Image
   height="400px"
   width="200px"
