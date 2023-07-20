@@ -15,7 +15,8 @@ on the phone's home screen for easy card sharing.
   <img height="400px" width="200px" src="Screenshot_20230717_022650.png" />
   <img height="400px" width="200px" src="new1.png" />
   <img height="400px" width="200px" src="new2.png" />
-
+</div>
+<div style="display: flex; flex-direction: row; flex-wrap: wrap;">
   <img height="400px" width="200px" src="new3.png" />
   <img height="400px" width="200px" src="new4.png" />
   <img height="400px" width="200px" src="new5.png" />
