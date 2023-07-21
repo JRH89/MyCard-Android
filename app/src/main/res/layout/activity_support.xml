@@ -14,7 +14,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_weight="1"
-        android:layout_height="wrap_content"></View>
+        android:layout_height="wrap_content" />
 
     <TextView
     android:layout_width="match_parent"
@@ -26,6 +26,7 @@
     android:layout_height="wrap_content"/>
 
     <EditText
+        android:id="@+id/subjectEditText"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginHorizontal="20dp"
@@ -47,6 +48,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/messageEditText"
         android:maxLines="10"
         android:padding="8dp"
         android:layout_marginHorizontal="20dp"
@@ -75,3 +77,4 @@
         app:shapeAppearance="@style/TextAppearance.AppCompat.Widget.Button"
         android:layout_height="wrap_content"/>
 </LinearLayout>
+
