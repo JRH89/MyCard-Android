@@ -3,7 +3,7 @@
 <h1>About</h1>
 <p>
 My Card is a digital business card creator that allows the user to display their name, job/title, phone number, email address,
-amd 1-4 links on a digital card. The cards come pre designed with three unique themes, and are equipped with a 'save' button so that those you
+and 1-4 links on a digital card. The cards come pre designed with three unique themes, and are equipped with a 'save' button so that those you
 share your card with can save all of your contact information with the touch of a button.
 </p>
 <p>
