@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         qrImageView = findViewById(R.id.qr_image);
         greeting = findViewById(R.id.greeting);
-        weather = findViewById(R.id.weather); // Initialize the weather TextView
+        weather = findViewById(R.id.temperature); // Initialize the weather TextView
         cardPreview = findViewById(R.id.cardPreview);
 
         Calendar calendar = Calendar.getInstance();
@@ -376,12 +376,33 @@ public class MainActivity extends AppCompatActivity {
                         double temperature = mainObject.getDouble("temp");
                         Log.d("Weather Temperature", String.valueOf(temperature)); // Log the temperature for debugging
 
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                weather.setText(String.format(Locale.getDefault(), "%.1f", temperature) + "°F");
-                            }
-                        });
+                        // Get the weather description and humidity
+                        JSONArray weatherArray = json.getJSONArray("weather");
+                        if (weatherArray.length() > 0) {
+                            JSONObject weatherObject = weatherArray.getJSONObject(0);
+                            String weatherDescription = weatherObject.getString("description");
+                            double humidity = mainObject.getDouble("humidity");
+
+                            // Update the weather description and humidity in the UI
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    // Update the weather description in the description TextView
+                                    TextView descriptionTextView = findViewById(R.id.description);
+                                    descriptionTextView.setText(weatherDescription);
+
+                                    TextView favoriteCityTextView = findViewById(R.id.favoriteCity);
+                                    favoriteCityTextView.setText(city);
+
+                                    // Update the humidity value in the humidity TextView
+                                    TextView humidityTextView = findViewById(R.id.humidity);
+                                    humidityTextView.setText(+ Math.round(humidity) + "%");
+
+                                    // Update the temperature in the UI (as you did before)
+                                    weather.setText(+ Math.round(temperature) + "°F");
+                                }
+                            });
+                        }
                     } else {
                         Log.e("Weather API", "Error response: " + connection.getResponseCode()); // Log error response code
                     }
@@ -393,4 +414,5 @@ public class MainActivity extends AppCompatActivity {
             }
         }).start();
     }
+
 }
