@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "mycard.mycard"
-        minSdk 24
+        minSdk 31
         targetSdk 33
         versionCode 30
         versionName "3.0"
