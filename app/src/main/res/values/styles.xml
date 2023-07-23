@@ -24,9 +24,10 @@
         <item name="android:background">@color/white</item>
     </style>
 
-    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.NoActionBar">
         <!-- Customize other theme attributes if needed -->
         <!-- ... -->
+
 
         <!-- Set the status bar color -->
         <item name="android:statusBarColor">@color/black</item>

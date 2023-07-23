@@ -45,7 +45,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="60dp"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="@color/yellow"
         app:shapeAppearance="@style/TextAppearance.AppCompat.Widget.Button"
         android:text="Support" />
 

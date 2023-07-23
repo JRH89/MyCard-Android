@@ -20,8 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="10dp"
-        android:text=""
-
+        android:text="Welcome back"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="25sp"/>
@@ -31,7 +30,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginHorizontal="20dp"
-        android:background="@color/white"
+        android:background="@drawable/rounded_background_white"
         android:padding="10dp"
 
         android:gravity="center"
@@ -43,9 +42,11 @@
             android:id="@+id/humidity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/black"
-            android:padding="8dp"
-            android:paddingHorizontal="15dp"
+            android:background="@drawable/rounded_background"
+           android:paddingVertical="8dp"
+            android:text="20%"
+
+            android:paddingHorizontal="12dp"
             android:textSize="25sp"
             android:textColor="@color/white" />
 
@@ -62,7 +63,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Favorite City"
+                android:text="Los Angeles"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="25sp" />
@@ -70,9 +71,9 @@
                 android:layout_width="match_parent"
                 android:id="@+id/description"
                 android:textSize="15dp"
+                android:text="very windy"
                 android:textColor="@color/black"
                 android:layout_gravity="center"
-                android:textStyle="italic"
                 android:gravity="center"
                 android:layout_height="wrap_content"/>
 
@@ -80,7 +81,7 @@
         <TextView
             android:id="@+id/temperature"
             android:layout_width="wrap_content"
-            android:background="@color/black"
+            android:background="@drawable/rounded_background"
             android:layout_height="wrap_content"
             android:text="25°C"
             android:padding="8dp"
@@ -139,6 +140,7 @@
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:text="Menu"
+
         android:textStyle="bold"
         android:textSize="20sp"
         android:paddingVertical="10dp"
