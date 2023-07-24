@@ -1,5 +1,8 @@
 package mycard.mycard;
 
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -97,6 +100,20 @@ public class ManageTodosActivity extends AppCompatActivity {
         }
     }
 
+    private void sendWidgetUpdateBroadcast() {
+        Intent intent = new Intent(this, ToDoWidget.class);
+        intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+        int[] ids = AppWidgetManager.getInstance(getApplication()).getAppWidgetIds(new ComponentName(getApplication(), ToDoWidget.class));
+        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
+        sendBroadcast(intent);
+    }
+
+// Call this method whenever a todo is added or deleted in the activity
+// For example, after adding a todo to Firestore, call sendWidgetUpdateBroadcast()
+// And after deleting a todo from Firestore, call sendWidgetUpdateBroadcast()
+
+
+
     private void addTodoToFirestore(String newTodo) {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         // Check if the user is logged in
@@ -121,7 +138,8 @@ public class ManageTodosActivity extends AppCompatActivity {
                             userDocRef.update("todos", todos)
                                     .addOnSuccessListener(aVoid -> {
                                         // Update successful
-                                        fetchTodosFromFirestore(); // Refresh the list to show the added todo
+                                        fetchTodosFromFirestore();
+                                        sendWidgetUpdateBroadcast();// Refresh the list to show the added todo
                                     })
                                     .addOnFailureListener(e -> {
                                         // Handle the error here
@@ -134,7 +152,8 @@ public class ManageTodosActivity extends AppCompatActivity {
                         userDocRef.set(newTodos)
                                 .addOnSuccessListener(aVoid -> {
                                     // Todo added successfully
-                                    fetchTodosFromFirestore(); // Refresh the list to show the added todo
+                                    fetchTodosFromFirestore();
+                                    sendWidgetUpdateBroadcast();// Refresh the list to show the added todo
                                 })
                                 .addOnFailureListener(e -> {
                                     // Handle the error here
@@ -145,7 +164,9 @@ public class ManageTodosActivity extends AppCompatActivity {
                 }
             });
         }
+
     }
+
 
     private void deleteTodoFromFirestore(String todo) {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -171,7 +192,8 @@ public class ManageTodosActivity extends AppCompatActivity {
                             userDocRef.update("todos", todos)
                                     .addOnSuccessListener(aVoid -> {
                                         // Update successful
-                                        fetchTodosFromFirestore(); // Refresh the list to show the updated todos
+                                        fetchTodosFromFirestore();
+                                        sendWidgetUpdateBroadcast();// Refresh the list to show the updated todos
                                     })
                                     .addOnFailureListener(e -> {
                                         // Handle the error here
@@ -185,5 +207,7 @@ public class ManageTodosActivity extends AppCompatActivity {
                 }
             });
         }
+
     }
+
 }

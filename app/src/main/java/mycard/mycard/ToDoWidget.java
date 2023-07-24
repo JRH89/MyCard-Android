@@ -22,7 +22,8 @@ public class ToDoWidget extends AppWidgetProvider {
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         // Called when the widget is updated
-
+        Intent updateServiceIntent = new Intent(context, ToDoWidgetUpdateService.class);
+        context.startService(updateServiceIntent);
         // Fetch the current user from Firebase Auth
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -71,6 +72,22 @@ public class ToDoWidget extends AppWidgetProvider {
         }
     }
 
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        super.onReceive(context, intent);
+        if (intent != null) {
+            String action = intent.getAction();
+            if (action != null && action.equals(AppWidgetManager.ACTION_APPWIDGET_UPDATE)) {
+                // Update the widget UI whenever the broadcast is received
+                AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+                int[] appWidgetIds = intent.getIntArrayExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS);
+                if (appWidgetIds != null && appWidgetIds.length > 0) {
+                    onUpdate(context, appWidgetManager, appWidgetIds);
+                }
+            }
+        }
+    }
+
     private void updateToDoWidgetUI(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds, String todos) {
         // Update the widget UI here with the fetched To-Do items (todos)
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.to_do_widget);
@@ -80,6 +97,4 @@ public class ToDoWidget extends AppWidgetProvider {
         appWidgetManager.updateAppWidget(appWidgetIds, views);
     }
 
-
-    // Add other methods as needed for your widget functionality
 }
