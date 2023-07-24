@@ -37,6 +37,8 @@ public class MenuActivity extends AppCompatActivity {
 
     ImageView qrCode;
 
+    Button buttonSettings;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +54,12 @@ public class MenuActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         });
+
+        buttonSettings = findViewById(R.id.settings);
+        buttonSettings.setOnClickListener(view -> {
+                    Intent intent = new Intent(getApplicationContext(), ManageTodosActivity.class);
+                    startActivity(intent);
+                });
 
         buttonDelete = findViewById(R.id.deleteAcct);
         buttonDelete.setOnClickListener(view -> {
@@ -106,6 +114,8 @@ public class MenuActivity extends AppCompatActivity {
                 }
             }
         });
+
+
     }
 
         private Bitmap convertBase64ToBitmap(String base64String) {

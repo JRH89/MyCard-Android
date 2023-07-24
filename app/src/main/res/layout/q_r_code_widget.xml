@@ -6,6 +6,8 @@
 
     <ImageView
         android:src="@drawable/qrcode"
+        android:background="#B3000000"
+        android:padding="10dp"
         android:id="@+id/qr_code_image_widget"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"

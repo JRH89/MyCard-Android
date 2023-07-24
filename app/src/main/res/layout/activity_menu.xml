@@ -37,6 +37,20 @@
         android:scaleType="fitCenter" />
 
     <Button
+        android:id="@+id/settings"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:paddingVertical="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="60dp"
+        android:backgroundTint="@color/white"
+        app:shapeAppearance="@style/TextAppearance.AppCompat.Widget.Button"
+        android:text="Manage ToDos" />
+
+
+    <Button
         android:id="@+id/support"
         android:textColor="@color/black"
         android:textStyle="bold"

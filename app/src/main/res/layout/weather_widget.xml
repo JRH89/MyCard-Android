@@ -1,47 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- res/layout/widget_layout.xml -->
-<!-- res/layout/widget_layout.xml -->
+
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
+    android:layout_gravity="center_vertical"
     android:background="#B3000000"
-    android:orientation="vertical">
+    android:orientation="horizontal">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:layout_gravity="center_vertical"
+        android:orientation="vertical">
 
-<TextView
-android:id="@+id/favoriteCity"
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:textSize="18sp"
-    android:textAlignment="center"
-android:textColor="#FFFFFF"
-    android:text="City Name" />
+            <!-- Clock View -->
+            <TextClock
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:format12Hour="h:mm a"
+                android:format24Hour="HH:mm" />
 
-<TextView
-android:id="@+id/temperature"
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:textSize="24sp"
-android:textColor="#FFFFFF"
-    android:text="Temperature" />
+            <!-- Date View -->
+            <TextClock
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textAlignment="center"
+                android:format12Hour="EEE, d"
+                android:format24Hour="EEE, d" />
 
-<TextView
-android:id="@+id/description"
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:textSize="18sp"
-android:textColor="#FFFFFF"
-    android:text="Weather Description" />
+        </LinearLayout>
 
-<TextView
-android:id="@+id/humidity"
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:textSize="18sp"
-    android:textAlignment="center"
-android:textColor="#FFFFFF"
-    android:text="Humidity" />
+    <TextView
+        android:id="@+id/temperature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="40sp"
+        android:padding="5dp"
+        android:textColor="#121212"
+        android:text="88 F"
+        android:layout_gravity="center_vertical"
+    android:gravity="center"
+    android:layout_marginHorizontal="5dp"
+    android:background="@drawable/rounded" />
 
-    <!-- Add other UI elements as needed -->
-    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:layout_gravity="center_vertical"
+        android:orientation="vertical">
+
+            <!-- Add TextViews or other views to display weather information -->
+            <TextView
+                android:id="@+id/favoriteCity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:layout_gravity="center"
+                android:textAlignment="center"
+                android:textColor="#FFF"
+                android:text="City Name" />
+
+
+
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textColor="#FFF"
+                android:text="Description" />
+
+            <TextView
+                android:id="@+id/humidity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:visibility="gone"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:text="Humidity" />
+
+        </LinearLayout>
+
+
+
+</LinearLayout>

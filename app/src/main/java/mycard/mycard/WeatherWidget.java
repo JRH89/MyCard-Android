@@ -21,12 +21,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-/**
- * Implementation of App Widget functionality.
- */
 public class WeatherWidget extends AppWidgetProvider {
-
-
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
@@ -113,7 +108,7 @@ public class WeatherWidget extends AppWidgetProvider {
                                 // Construct the RemoteViews object for the widget
                                 RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.weather_widget);
                                 views.setTextViewText(R.id.favoriteCity, city);
-                                views.setTextViewText(R.id.temperature, String.valueOf(temperature) + "°F");
+                                views.setTextViewText(R.id.temperature, Math.round(temperature) + "°F");
                                 views.setTextViewText(R.id.description, weatherDescription);
                                 views.setTextViewText(R.id.humidity, Math.round(humidity) + "%");
 

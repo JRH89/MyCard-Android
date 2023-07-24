@@ -51,7 +51,13 @@
 
     <style name="AppTheme.AppWidgetContainer" parent="AppTheme.AppWidgetContainerParent">
         <!-- Apply padding to avoid the content of the widget colliding with the rounded corners -->
-        <item name="appWidgetPadding">16dp</item>
+        <item name="appWidgetPadding">8dp</item>
+
+        <item name="appWidgetRadius">16dp</item>
+
+        <item name="appWidgetInnerRadius">16dp</item>
+
+
     </style>
 
 </resources>
