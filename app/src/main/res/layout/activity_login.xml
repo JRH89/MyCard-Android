@@ -96,7 +96,7 @@
         android:textColor="@color/black"
         android:textSize="20sp"
         android:layout_marginTop="40dp"
-        app:shapeAppearance="@style/TextAppearance.AppCompat.Widget.Button" />
+         />
 
     <TextView
         android:id="@+id/registerNow"

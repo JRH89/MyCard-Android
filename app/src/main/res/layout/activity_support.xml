@@ -3,7 +3,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:backgroundTint="@color/black"
     android:background="@color/black"
@@ -45,6 +44,7 @@
         android:layout_marginTop="40dp"
         android:textColor="@color/white"
         android:layout_height="wrap_content"/>
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -56,13 +56,12 @@
         android:background="@color/white"
         android:minLines="5"
         android:gravity="top"
-  android:inputType="textMultiLine"/>
-
+    android:inputType="textMultiLine"/>
 
     <View
         android:layout_width="match_parent"
         android:layout_weight="1"
-        android:layout_height="wrap_content"></View>
+        android:layout_height="wrap_content"/>
 
     <Button
         android:layout_width="match_parent"
@@ -70,11 +69,10 @@
         android:text="Send"
         android:textSize="20sp"
         android:padding="10dp"
-
         android:id="@+id/sendButton"
         android:layout_marginHorizontal="20dp"
         android:backgroundTint="@color/green"
-        app:shapeAppearance="@style/TextAppearance.AppCompat.Widget.Button"
         android:layout_height="wrap_content"/>
+
 </LinearLayout>
 
