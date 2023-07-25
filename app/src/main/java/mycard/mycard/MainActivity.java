@@ -76,6 +76,10 @@ public class MainActivity extends AppCompatActivity {
     TextView weather;
     WebView cardPreview;
 
+    Button editCard;
+    Button editTodos;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,7 +93,8 @@ public class MainActivity extends AppCompatActivity {
         greeting = findViewById(R.id.greeting);
         weather = findViewById(R.id.temperature); // Initialize the weather TextView
         cardPreview = findViewById(R.id.cardPreview);
-
+        editCard = findViewById(R.id.editCard);
+        editTodos = findViewById(R.id.manageTodos);
         Calendar calendar = Calendar.getInstance();
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
 
@@ -228,6 +233,22 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), MenuActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        editTodos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ManageTodosActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        editCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), EditActivity.class);
                 startActivity(intent);
             }
         });

@@ -77,6 +77,8 @@
                 android:layout_height="wrap_content"/>
 
         </LinearLayout>
+
+
         <TextView
             android:id="@+id/temperature"
             android:layout_width="wrap_content"
@@ -88,6 +90,8 @@
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="25sp" />
+
+
 
     </LinearLayout>
 
@@ -133,22 +137,73 @@
         android:textColorLink="@color/green"
         android:textColor="@color/white" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="30dp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/hamburger_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:text="Menu"
+        <Button
+            android:id="@+id/editCard"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            android:text="Edit"
+            android:textStyle="bold"
+            android:textSize="20sp"
 
-        android:textStyle="bold"
-        android:textSize="20sp"
-        android:paddingVertical="10dp"
-        android:layout_marginTop="10dp"
-        android:textColor="@color/black"
-        android:contentDescription="Menu"
-        android:paddingHorizontal="23dp"
-        android:backgroundTint="@color/light_blue_600"
-        app:shapeAppearance="@style/TextAppearance.AppCompat.Widget.Button" />
+            android:paddingVertical="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/black"
+            android:contentDescription="Edit"
+            android:backgroundTint="@color/light_blue_600"
+            app:shapeAppearance="@style/TextAppearance.AppCompat.Widget.Button"
+ />
+
+        <Space
+            android:layout_width="10dp"
+            android:layout_height="match_parent" />
+
+        <Button
+            android:id="@+id/hamburger_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            android:text="Menu"
+            android:textStyle="bold"
+            android:textSize="20sp"
+
+            android:paddingVertical="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/black"
+            android:contentDescription="Menu"
+            android:backgroundTint="@color/green"
+            app:shapeAppearance="@style/TextAppearance.AppCompat.Widget.Button" />
+
+        <Space
+            android:layout_width="10dp"
+            android:layout_height="match_parent" />
+
+        <Button
+            android:id="@+id/manageTodos"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            android:text="ToDo"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:paddingVertical="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/black"
+            android:contentDescription="Menu"
+            android:backgroundTint="@color/red"
+            app:shapeAppearance="@style/TextAppearance.AppCompat.Widget.Button" />
+
+    </LinearLayout>
 
 </LinearLayout>
