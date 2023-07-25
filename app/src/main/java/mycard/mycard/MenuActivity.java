@@ -55,9 +55,9 @@ public class MenuActivity extends AppCompatActivity {
             finish();
         });
 
-        buttonSettings = findViewById(R.id.settings);
+        buttonSettings = findViewById(R.id.qrCodeButton);
         buttonSettings.setOnClickListener(view -> {
-                    Intent intent = new Intent(getApplicationContext(), ManageTodosActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), GenerateQRCodeActivity.class);
                     startActivity(intent);
                 });
 

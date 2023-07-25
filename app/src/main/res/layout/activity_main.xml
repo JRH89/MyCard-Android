@@ -136,6 +136,21 @@
         android:textAlignment="center"
         android:textColorLink="@color/green"
         android:textColor="@color/white" />
+    <Button
+        android:id="@+id/showMenuButton"
+        android:text="..."
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:paddingHorizontal="20dp"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:paddingVertical="10dp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/light_blue_600"
+        app:shapeAppearance="@style/TextAppearance.AppCompat.Widget.Button" />
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -143,6 +158,8 @@
         android:layout_gravity="center_horizontal"
         android:gravity="center_horizontal"
         android:orientation="horizontal"
+        android:visibility="gone"
+        android:id="@+id/buttonRow"
         android:layout_height="wrap_content">
 
         <Button
@@ -154,9 +171,8 @@
             android:text="Edit"
             android:textStyle="bold"
             android:textSize="20sp"
-
             android:paddingVertical="10dp"
-            android:layout_marginTop="10dp"
+
             android:textColor="@color/black"
             android:contentDescription="Edit"
             android:backgroundTint="@color/light_blue_600"
@@ -178,7 +194,7 @@
             android:textSize="20sp"
 
             android:paddingVertical="10dp"
-            android:layout_marginTop="10dp"
+
             android:textColor="@color/black"
             android:contentDescription="Menu"
             android:backgroundTint="@color/green"
@@ -198,7 +214,7 @@
             android:textStyle="bold"
             android:textSize="20sp"
             android:paddingVertical="10dp"
-            android:layout_marginTop="10dp"
+
             android:textColor="@color/black"
             android:contentDescription="Menu"
             android:backgroundTint="@color/red"

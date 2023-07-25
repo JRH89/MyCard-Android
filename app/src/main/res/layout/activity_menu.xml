@@ -37,18 +37,17 @@
         android:scaleType="fitCenter" />
 
     <Button
-        android:id="@+id/settings"
+        android:id="@+id/qrCodeButton"
         android:textColor="@color/black"
         android:textStyle="bold"
-        android:visibility="gone"
         android:textSize="20sp"
         android:paddingVertical="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="60dp"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="@color/yellow"
         app:shapeAppearance="@style/TextAppearance.AppCompat.Widget.Button"
-        android:text="Manage ToDos" />
+        android:text="Create QR Codes" />
 
 
     <Button

@@ -3,6 +3,7 @@ package mycard.mycard;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -16,10 +17,10 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.os.Bundle;
-import android.app.Dialog;
 import android.widget.Toast;
+
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,7 +34,6 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -46,22 +46,10 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Calendar;
-import java.util.Locale;
 
 import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.util.Calendar;
-import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -79,6 +67,8 @@ public class MainActivity extends AppCompatActivity {
     Button editCard;
     Button editTodos;
 
+    Button menuButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
         cardPreview = findViewById(R.id.cardPreview);
         editCard = findViewById(R.id.editCard);
         editTodos = findViewById(R.id.manageTodos);
+        menuButton = findViewById(R.id.showMenuButton);
         Calendar calendar = Calendar.getInstance();
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
 
@@ -228,12 +219,41 @@ public class MainActivity extends AppCompatActivity {
         });
 
         Button hamburgerButton = findViewById(R.id.hamburger_button);
-
         hamburgerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), MenuActivity.class);
                 startActivity(intent);
+            }
+        });
+        LinearLayout buttonRow = findViewById(R.id.buttonRow);
+        final boolean[] buttonRowVisible = {false};
+
+        menuButton.setOnClickListener(new View.OnClickListener() {
+
+            String myBlue = "#FF039BE5";
+            String myRed = "#FF0660" ;
+
+            String myYellow = "#D4E157";
+
+            int myBlueColor = Color.parseColor(myBlue);
+            int myRedColor = Color.parseColor(myRed);
+            int myYellowColor = Color.parseColor(myYellow);
+            @Override
+            public void onClick(View v) {
+                if (!buttonRowVisible[0]) {
+                    // Show the button row and update the text of the menuButton
+                    buttonRow.setVisibility(View.VISIBLE);
+                    menuButton.setText("X");
+                    menuButton.setBackgroundColor(myYellowColor);
+                    buttonRowVisible[0] = true;
+                } else {
+                    // Hide the button row and update the text of the menuButton
+                    buttonRow.setVisibility(View.GONE);
+                    menuButton.setText("...");
+                    menuButton.setBackgroundColor(myBlueColor);
+                    buttonRowVisible[0] = false;
+                }
             }
         });
 
