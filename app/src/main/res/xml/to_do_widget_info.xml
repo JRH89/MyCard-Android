@@ -4,7 +4,7 @@
     android:initialKeyguardLayout="@layout/to_do_widget"
     android:initialLayout="@layout/to_do_widget"
     android:minWidth="60dp"
-    android:minHeight="100dp"
+    android:minHeight="40dp"
     android:previewImage="@drawable/example_appwidget_preview"
     android:previewLayout="@layout/to_do_widget"
     android:resizeMode="horizontal|vertical"

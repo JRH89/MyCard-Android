@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:text="ToDo List:"
             android:layout_marginBottom="5dp"
             android:textAlignment="center" />
@@ -28,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
-            android:textSize="14sp"
+            android:textSize="13sp"
             android:text="" />
 
     </LinearLayout>
