@@ -70,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
     Button menuButton;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -215,6 +216,15 @@ public class MainActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
+            }
+        });
+
+        LinearLayout weatherWidget = findViewById(R.id.weatherWidget);
+        weatherWidget.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), WeatherActivity.class);
+                startActivity(intent);
             }
         });
 

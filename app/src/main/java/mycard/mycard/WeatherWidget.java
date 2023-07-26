@@ -149,5 +149,4 @@ public class WeatherWidget extends AppWidgetProvider {
         alarmManager.setRepeating(AlarmManager.RTC, System.currentTimeMillis(), intervalMillis, pendingIntent);
     }
 
-
 }
