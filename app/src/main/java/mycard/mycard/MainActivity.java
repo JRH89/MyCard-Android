@@ -254,14 +254,12 @@ public class MainActivity extends AppCompatActivity {
                 if (!buttonRowVisible[0]) {
                     // Show the button row and update the text of the menuButton
                     buttonRow.setVisibility(View.VISIBLE);
-                    menuButton.setText("X");
-                    menuButton.setBackgroundColor(Color.WHITE);
+
                     buttonRowVisible[0] = true;
                 } else {
                     // Hide the button row and update the text of the menuButton
                     buttonRow.setVisibility(View.GONE);
-                    menuButton.setText("...");
-                    menuButton.setBackgroundColor(myBlueColor);
+
                     buttonRowVisible[0] = false;
                 }
             }

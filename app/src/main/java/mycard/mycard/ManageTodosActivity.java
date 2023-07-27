@@ -167,7 +167,6 @@ public class ManageTodosActivity extends AppCompatActivity {
 
     }
 
-
     private void deleteTodoFromFirestore(String todo) {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         // Check if the user is logged in
