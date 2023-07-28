@@ -203,10 +203,9 @@ android:paddingHorizontal="41dp"
             android:textStyle="bold"
             android:textSize="20sp"
             android:paddingVertical="10dp"
-
             android:textColor="@color/black"
             android:contentDescription="Menu"
-            android:backgroundTint="@color/red"/>
+            android:backgroundTint="@color/yellow"/>
 
     </LinearLayout>
 

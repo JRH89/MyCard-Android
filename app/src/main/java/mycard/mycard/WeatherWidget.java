@@ -7,6 +7,7 @@ import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.RemoteViews;
 import com.google.firebase.auth.FirebaseAuth;
@@ -50,8 +51,14 @@ public class WeatherWidget extends AppWidgetProvider {
                         // Document exists, fetch the favorite city
                         String favoriteCity = document.getString("favoriteCity");
 
-                        // Fetch weather data using the method from MainActivity
-                        fetchWeatherDataForWidget(context, appWidgetManager, appWidgetIds, favoriteCity);
+                        // Fetch weather data using the AsyncTask
+                        if (favoriteCity != null) {
+                            FetchWeatherDataTask weatherDataTask = new FetchWeatherDataTask(context, appWidgetManager, appWidgetIds, favoriteCity);
+                            weatherDataTask.execute();
+                        } else {
+                            // Handle the case when favoriteCity is null
+                            Log.e("WeatherWidgetProvider", "Favorite city is null");
+                        }
                     } else {
                         // Document does not exist
                         Log.e("WeatherWidgetProvider", "Document does not exist");
@@ -67,36 +74,64 @@ public class WeatherWidget extends AppWidgetProvider {
         }
     }
 
-    // Method to fetch weather data for the widget
-    private void fetchWeatherDataForWidget(Context context, AppWidgetManager appWidgetManager,
-                                           int[] appWidgetIds, String city) {
-        String apiKey = "bdeec3fe00b9a10009325e073c8ec400";
-        String units = "imperial";
-        String url = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey + "&units=" + units;
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
+    // Method to fetch weather data for the widget using AsyncTask
+    private static class FetchWeatherDataTask extends AsyncTask<Void, Void, String> {
+        private Context context;
+        private AppWidgetManager appWidgetManager;
+        private int[] appWidgetIds;
+        private String city;
+
+        public FetchWeatherDataTask(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds, String city) {
+            this.context = context;
+            this.appWidgetManager = appWidgetManager;
+            this.appWidgetIds = appWidgetIds;
+            this.city = city;
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+            String apiKey = "bdeec3fe00b9a10009325e073c8ec400";
+            String units = "imperial";
+            String url = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey + "&units=" + units;
+
+            try {
+                URL apiUrl = new URL(url);
+                HttpURLConnection connection = (HttpURLConnection) apiUrl.openConnection();
+                connection.setRequestMethod("GET");
+
+                if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                    InputStream inputStream = connection.getInputStream();
+                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                    StringBuilder responseBuilder = new StringBuilder();
+                    String line;
+                    while ((line = bufferedReader.readLine()) != null) {
+                        responseBuilder.append(line);
+                    }
+                    bufferedReader.close();
+                    inputStream.close();
+
+                    return responseBuilder.toString();
+                } else {
+                    Log.e("Weather API", "Error response: " + connection.getResponseCode()); // Log error response code
+                }
+
+                connection.disconnect();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+        @Override
+        protected void onPostExecute(String responseData) {
+            if (responseData != null) {
                 try {
-                    URL apiUrl = new URL(url);
-                    HttpURLConnection connection = (HttpURLConnection) apiUrl.openConnection();
-                    connection.setRequestMethod("GET");
+                    JSONObject json = new JSONObject(responseData);
 
-                    if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
-                        InputStream inputStream = connection.getInputStream();
-                        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-                        StringBuilder responseBuilder = new StringBuilder();
-                        String line;
-                        while ((line = bufferedReader.readLine()) != null) {
-                            responseBuilder.append(line);
-                        }
-                        bufferedReader.close();
-                        inputStream.close();
-
-                        String responseData = responseBuilder.toString();
-                        Log.d("Weather Response", responseData); // Log the response data for debugging
-
-                        JSONObject json = new JSONObject(responseData);
+                    // Check if the API response contains "cod" key with value 200, indicating a successful response
+                    int responseCode = json.getInt("cod");
+                    if (responseCode == 200) {
                         JSONObject mainObject = json.getJSONObject("main");
                         double temperature = mainObject.getDouble("temp");
                         Log.d("Weather Temperature", String.valueOf(temperature)); // Log the temperature for debugging
@@ -112,27 +147,31 @@ public class WeatherWidget extends AppWidgetProvider {
                             for (int appWidgetId : appWidgetIds) {
                                 // Construct the RemoteViews object for the widget
                                 RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.weather_widget);
-                                views.setTextViewText(R.id.favoriteCity, city);
+//                                views.setTextViewText(R.id.favoriteCity, city);
                                 views.setTextViewText(R.id.temperature, Math.round(temperature) + "°F");
-                                views.setTextViewText(R.id.description, weatherDescription);
-                                views.setTextViewText(R.id.humidity, Math.round(humidity) + "%");
+//                                views.setTextViewText(R.id.description, weatherDescription);
+//                                views.setTextViewText(R.id.humidity, Math.round(humidity) + "%");
 
                                 // Instruct the widget manager to update the widget
                                 appWidgetManager.updateAppWidget(appWidgetId, views);
                             }
+                        } else {
+                            // Handle the case when weatherArray is empty
+                            Log.e("WeatherWidgetProvider", "Weather array is empty");
                         }
                     } else {
-                        Log.e("Weather API", "Error response: " + connection.getResponseCode()); // Log error response code
+                        // Handle the case when the API response is not successful
+                        Log.e("WeatherWidgetProvider", "API response is not successful, cod: " + responseCode);
                     }
-
-                    connection.disconnect();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+            } else {
+                // Handle the case when responseData is null or there was an error fetching data
+                Log.e("WeatherWidgetProvider", "Error fetching weather data");
             }
-        }).start();
+        }
     }
-
     private void schedulePeriodicUpdates(Context context) {
         // Create an intent to be sent when the alarm triggers
         Intent updateIntent = new Intent(context, WeatherWidget.class);
@@ -145,7 +184,7 @@ public class WeatherWidget extends AppWidgetProvider {
 
         // Set up a repeating alarm using AlarmManager
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        long intervalMillis = AlarmManager.INTERVAL_HOUR; // Update every one hour
+        long intervalMillis = AlarmManager.INTERVAL_HALF_HOUR; // Update every half hour
         alarmManager.setRepeating(AlarmManager.RTC, System.currentTimeMillis(), intervalMillis, pendingIntent);
     }
 

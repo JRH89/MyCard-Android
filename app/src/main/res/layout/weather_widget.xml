@@ -27,7 +27,7 @@
             android:layout_gravity="center"
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:format12Hour="h:mm a"
+            android:format12Hour="h:mm"
             android:format24Hour="HH:mm" />
     </LinearLayout>
 

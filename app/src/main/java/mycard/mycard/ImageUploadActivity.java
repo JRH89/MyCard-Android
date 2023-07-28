@@ -221,8 +221,6 @@ public class ImageUploadActivity extends AppCompatActivity {
     }
 
     // Handle the "Upload Image" button click to upload the cropped image to Firestore
-    // Handle the "Upload Image" button click to upload the cropped image to Firestore
-    // Handle the "Upload Image" button click to upload the cropped image to Firestore
     public void onUploadImageClick(View view) {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         // Check if an image is selected before proceeding with the upload
@@ -247,8 +245,6 @@ public class ImageUploadActivity extends AppCompatActivity {
     }
 
 
-    // Upload the imageData object to Firestore as a document
-    // Upload the imageData object to Firestore as a document
     private void uploadImageToFirestore(String base64Image, String collectionName, String documentId) {
         // Create an ImageData object with the updated "base64Image" field
         ImageData imageData = new ImageData(base64Image);
