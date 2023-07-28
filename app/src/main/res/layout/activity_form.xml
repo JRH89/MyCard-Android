@@ -258,6 +258,19 @@
             android:textColor="@color/white"
             android:theme="@style/Base.Theme.MyCard"
             />
+        <Button
+            android:id="@+id/uploadButton"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:layout_marginTop="10dp"
+            android:paddingVertical="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="60dp"
+            android:backgroundTint="@color/yellow"
+            android:text="Upload Contact Image" />
+
 
 
         <Button
@@ -272,7 +285,7 @@
             android:backgroundTint="@color/green"
             android:textStyle="bold"
             android:textSize="20sp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="10dp"
             />
     </LinearLayout>
 </ScrollView>

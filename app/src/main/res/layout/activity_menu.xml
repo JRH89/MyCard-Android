@@ -9,20 +9,21 @@
     android:background="@color/black"
     android:id="@+id/activity_menu"
     android:textAlignment="center">
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="MENU"
+        android:layout_marginBottom="20dp"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="30sp"
         android:textStyle="bold" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+
 
     <!-- Add any other views you want in between the TextView and buttons -->
     <ImageView
@@ -47,6 +48,8 @@
         android:layout_marginHorizontal="60dp"
         android:backgroundTint="@color/yellow"
         android:text="Create QR Codes" />
+
+
 
 
     <Button
@@ -100,6 +103,17 @@
         android:layout_marginHorizontal="60dp"
         android:backgroundTint="@color/red"
          />
+    <TextView
+        android:id="@+id/websiteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Visit My Card for the Web"
+        android:textAlignment="center"
+        android:layout_gravity="center"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_marginTop="20dp"
+        android:textColorLink="@android:color/holo_blue_dark" />
 
     <View
         android:layout_width="match_parent"

@@ -140,23 +140,36 @@ public class MainActivity extends AppCompatActivity {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         String name = document.getString("name");
-                        String[] names = name.split(" ");
-                        String firstName = names[0];
 
-                        // Capitalize the first letter of the first name
-                        String capitalizedFirstName = firstName.substring(0, 1).toUpperCase() + firstName.substring(1);
+                        // Check if 'name' field exists and is not null
+                        if (name != null && !name.isEmpty()) {
+                            String[] names = name.split(" ");
+                            String firstName = names[0];
 
-                        greeting.setText(greetingText + ", " + capitalizedFirstName);
+                            // Capitalize the first letter of the first name
+                            String capitalizedFirstName = firstName.substring(0, 1).toUpperCase() + firstName.substring(1);
+
+                            greeting.setText(greetingText + ", " + capitalizedFirstName);
+                        } else {
+                            // Handle the case where 'name' field is missing or null
+                            greeting.setText(greetingText); // Use the default greeting
+                        }
+
 
                         String url = document.getString("short");
                         textView.setText(url);
                         Linkify.addLinks(textView, Linkify.WEB_URLS); // Make the URL clickable
 
                         String qrImageData = document.getString("qrImage");
-                        // Convert the base64PNG data URL string to a Bitmap or load it directly into the ImageView
-
-                        Bitmap qrBitmap = convertBase64ToBitmap(qrImageData);
-                        qrImageView.setImageBitmap(qrBitmap);
+                        if (qrImageData != null) {
+                            Bitmap qrBitmap = convertBase64ToBitmap(qrImageData);
+                            qrImageView.setImageBitmap(qrBitmap);
+                            // Rest of the code...
+                        } else {
+                            // Handle the case where 'qrImage' field is missing or null
+                            // You can set a default image or hide the ImageView
+                            qrImageView.setVisibility(View.GONE);
+                        }
                         qrImageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
                         qrImageView.setAdjustViewBounds(true);
                         qrImageView.setMaxHeight(500);

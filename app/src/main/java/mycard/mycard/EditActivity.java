@@ -49,6 +49,8 @@ public class EditActivity extends AppCompatActivity {
     // Add other form fields here as needed
     private String userId; // Store the user ID
 
+    Button uploadButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +71,15 @@ public class EditActivity extends AppCompatActivity {
         theme = findViewById(R.id.theme);
         city = findViewById(R.id.city);
         submitButton = findViewById(R.id.submit_button);
+        uploadButton = findViewById(R.id.uploadButton);
+
+        uploadButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ImageUploadActivity.class);
+                startActivity(intent);
+            }
+        });
 
         // Call a method to retrieve the user's data and populate the form fields
         loadUserData();

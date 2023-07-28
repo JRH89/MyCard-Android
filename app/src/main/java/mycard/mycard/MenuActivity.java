@@ -8,13 +8,16 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.text.util.Linkify;
 import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -33,6 +36,8 @@ public class MenuActivity extends AppCompatActivity {
     FirebaseUser user;
     Button buttonDelete;
     Button buttonSupport;
+
+    TextView webButton;
     FirebaseFirestore db;
 
     ImageView qrCode;
@@ -80,6 +85,24 @@ public class MenuActivity extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), SupportActivity.class);
             startActivity(intent);
         });
+
+        TextView webButton = findViewById(R.id.websiteButton);
+
+        // Set a click listener on the "websiteButton" TextView
+        webButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Define the URL you want to navigate to
+                String websiteUrl = "https://have-mycard.vercel.app";
+
+                // Create an intent to open the URL in the device's web browser
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(websiteUrl));
+
+                // Start the activity (web browser) to open the URL
+                startActivity(intent);
+            }
+        });
+
         qrCode = findViewById(R.id.qr_image);
 
         // Initialize Firestore

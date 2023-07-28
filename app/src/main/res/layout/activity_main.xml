@@ -142,6 +142,7 @@
         android:paddingBottom="14dp"
         android:textAlignment="center"
 android:paddingHorizontal="41dp"
+        android:gravity="center"
         android:layout_marginTop="10dp"
         android:textColor="@color/black"
         android:backgroundTint="@color/white"/>

@@ -22,30 +22,20 @@
         <TextClock
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="22sp"
+            android:textSize="28sp"
             android:gravity="center"
             android:layout_gravity="center"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:format12Hour="h:mm a"
             android:format24Hour="HH:mm" />
-
-        <!-- Date View -->
-        <TextClock
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:textColor="@color/white"
-            android:textAlignment="center"
-            android:format12Hour="EEE, d"
-            android:format24Hour="EEE, d" />
-
     </LinearLayout>
 
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
 
-    <!-- Middle TextView (Temperature) -->
     <TextView
         android:id="@+id/temperature"
         android:layout_width="wrap_content"
@@ -59,7 +49,17 @@
         android:layout_marginHorizontal="5dp"
         android:background="@drawable/rounded" />
 
-    <!-- Right LinearLayout (City and Weather Description) -->
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:textColor="#FFF"
+        android:text="Description" />
+</LinearLayout>
+
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
@@ -68,25 +68,27 @@
         android:layout_gravity="center_vertical"
         android:orientation="vertical">
 
-        <!-- Add TextViews or other views to display weather information -->
+        <TextClock
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="28sp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:format12Hour="EEE, d"
+            android:format24Hour="EEE, d" />
+
         <TextView
             android:id="@+id/favoriteCity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="22sp"
+            android:visibility="gone"
             android:layout_gravity="center"
             android:textAlignment="center"
             android:textColor="#FFF"
             android:text="City Name" />
-
-        <TextView
-            android:id="@+id/description"
-            android:layout_width="wrap_content"
-            android:layout_gravity="center"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:textColor="#FFF"
-            android:text="Description" />
 
         <TextView
             android:id="@+id/humidity"

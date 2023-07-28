@@ -174,6 +174,7 @@ public class WeatherActivity extends AppCompatActivity {
 
                     // Clear focus from the EditText
                     editTextCity.clearFocus();
+                    editTextCity.setText("");
                 } else {
                     Toast.makeText(WeatherActivity.this, "Please enter a city name.", Toast.LENGTH_SHORT).show();
                 }

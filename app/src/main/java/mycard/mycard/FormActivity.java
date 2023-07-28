@@ -55,6 +55,8 @@ public class FormActivity extends AppCompatActivity {
     private EditText city;
     private Button submitButton;
 
+    Button uploadButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,7 +77,15 @@ public class FormActivity extends AppCompatActivity {
         theme = findViewById(R.id.theme);
         city = findViewById(R.id.city);
         submitButton = findViewById(R.id.submit_button);
+        uploadButton = findViewById(R.id.uploadButton);
 
+        uploadButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ImageUploadActivity.class);
+                startActivity(intent);
+            }
+        });
 
         TextView urlTextView = findViewById(R.id.exampleLink);
         String url = "https://have-mycard.vercel.app/Samples";
