@@ -110,6 +110,7 @@ public class FormActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 submitForm();
+
             }
         });
     }
@@ -191,7 +192,7 @@ public class FormActivity extends AppCompatActivity {
                             @Override
                             public void onSuccess(Void aVoid) {
                                 Toast.makeText(FormActivity.this, "Card created", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(FormActivity.this, MainActivity.class);
+                                Intent intent = new Intent(FormActivity.this, ImageUploadActivity.class);
                                 startActivity(intent);
                                 finish();
                             }

@@ -11,6 +11,7 @@ import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.exifinterface.media.ExifInterface;
@@ -51,6 +52,8 @@ public class ImageUploadActivity extends AppCompatActivity {
     private Bitmap selectedBitmap;
     private String userId;
 
+    private TextView buttonClose;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +71,23 @@ public class ImageUploadActivity extends AppCompatActivity {
                     new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                     REQUEST_GALLERY_PERMISSION);
         }
+
+        buttonClose = findViewById(R.id.buttonClose);
+        buttonClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Create an explicit Intent to go back to the previous activity
+                // Here, assuming the previous activity is MainActivity, but it may vary in your case
+                Intent intent = new Intent(ImageUploadActivity.this, MainActivity.class);
+                startActivity(intent);
+                // Finish the current activity to remove it from the activity stack
+                finish();
+            }
+        });
+
     }
+
+
     // Retrieve the 'id' field from the 'userInfo' document in the 'user.getEmail()' collection
     private void retrieveUserIdAndSetVariable() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();

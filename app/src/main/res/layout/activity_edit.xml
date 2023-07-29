@@ -22,7 +22,7 @@
             android:text="@string/card_details"
             android:textStyle="bold"
             android:textSize="30sp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="5dp"
             android:textAlignment="center"
             android:textColor="@color/white"
             />
@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:text="@string/required"
             android:textAlignment="center"
-            android:layout_marginBottom="5dp"
+
             android:textColor="@color/white"
             android:textSize="22sp" />
         <TextView
@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:text="Choose a theme:"
             android:textAlignment="center"
-            android:layout_marginVertical="10dp"
+            android:layout_marginTop="10dp"
             android:textColor="@color/white"
             android:textSize="20sp" />
 
@@ -48,7 +48,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:autoLink="web"
-            android:textSize="16sp"
+            android:textSize="18sp"
             android:layout_marginBottom="10dp"
             android:textAlignment="center"
             android:textColorLink="@color/green"
@@ -172,8 +172,8 @@
             android:layout_height="wrap_content"
             android:textColorHint="@color/white"
             android:textSize="22sp"
-
-            android:layout_marginVertical="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:text="@string/optional"/>
@@ -259,7 +259,6 @@
             android:theme="@style/Base.Theme.MyCard"
             />
 
-
         <Button
             android:id="@+id/uploadButton"
             android:textColor="@color/black"
@@ -273,13 +272,12 @@
             android:backgroundTint="@color/yellow"
             android:text="Upload Contact Image" />
 
-
         <Button
             android:textAlignment="center"
-android:gravity="center_horizontal"
+            android:gravity="center_horizontal"
             android:id="@+id/submit_button"
             android:text="@string/submit"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:paddingVertical="10dp"
