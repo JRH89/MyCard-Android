@@ -11,8 +11,8 @@ android {
         applicationId "mycard.mycard"
         minSdk 31
         targetSdk 33
-        versionCode 47
-        versionName "4.8"
+        versionCode 49
+        versionName "4.9"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
     }
