@@ -24,10 +24,11 @@
             android:layout_height="wrap_content"
             android:textSize="28sp"
             android:gravity="center"
+            android:textAllCaps="false"
             android:layout_gravity="center"
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:format12Hour="h:mm"
+            android:format12Hour="h:mm a"
             android:format24Hour="HH:mm" />
     </LinearLayout>
 
@@ -40,7 +41,7 @@
         android:id="@+id/temperature"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="35sp"
+        android:textSize="30sp"
         android:padding="5dp"
         android:textColor="#121212"
         android:text="88 F"

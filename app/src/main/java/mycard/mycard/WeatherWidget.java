@@ -76,7 +76,8 @@ public class WeatherWidget extends AppWidgetProvider {
 
 
     // Method to fetch weather data for the widget using AsyncTask
-    private static class FetchWeatherDataTask extends AsyncTask<Void, Void, String> {
+    // Method to fetch weather data for the widget using AsyncTask
+    private static class FetchWeatherDataTask extends AsyncTask<Void, Void, Double> {
         private Context context;
         private AppWidgetManager appWidgetManager;
         private int[] appWidgetIds;
@@ -90,7 +91,7 @@ public class WeatherWidget extends AppWidgetProvider {
         }
 
         @Override
-        protected String doInBackground(Void... params) {
+        protected Double doInBackground(Void... params) {
             String apiKey = "bdeec3fe00b9a10009325e073c8ec400";
             String units = "imperial";
             String url = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey + "&units=" + units;
@@ -111,7 +112,19 @@ public class WeatherWidget extends AppWidgetProvider {
                     bufferedReader.close();
                     inputStream.close();
 
-                    return responseBuilder.toString();
+                    String responseData = responseBuilder.toString();
+                    JSONObject json = new JSONObject(responseData);
+
+                    // Check if the API response contains "cod" key with value 200, indicating a successful response
+                    int responseCode = json.getInt("cod");
+                    if (responseCode == 200) {
+                        JSONObject mainObject = json.getJSONObject("main");
+                        double temperature = mainObject.getDouble("temp");
+                        return temperature;
+                    } else {
+                        // Handle the case when the API response is not successful
+                        Log.e("WeatherWidgetProvider", "API response is not successful, cod: " + responseCode);
+                    }
                 } else {
                     Log.e("Weather API", "Error response: " + connection.getResponseCode()); // Log error response code
                 }
@@ -123,55 +136,26 @@ public class WeatherWidget extends AppWidgetProvider {
 
             return null;
         }
+
         @Override
-        protected void onPostExecute(String responseData) {
-            if (responseData != null) {
-                try {
-                    JSONObject json = new JSONObject(responseData);
+        protected void onPostExecute(Double temperature) {
+            if (temperature != null) {
+                // Update the widget UI
+                for (int appWidgetId : appWidgetIds) {
+                    // Construct the RemoteViews object for the widget
+                    RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.weather_widget);
+                    views.setTextViewText(R.id.temperature, Math.round(temperature) + "°F");
 
-                    // Check if the API response contains "cod" key with value 200, indicating a successful response
-                    int responseCode = json.getInt("cod");
-                    if (responseCode == 200) {
-                        JSONObject mainObject = json.getJSONObject("main");
-                        double temperature = mainObject.getDouble("temp");
-                        Log.d("Weather Temperature", String.valueOf(temperature)); // Log the temperature for debugging
-
-                        // Get the weather description and humidity
-                        JSONArray weatherArray = json.getJSONArray("weather");
-                        if (weatherArray.length() > 0) {
-                            JSONObject weatherObject = weatherArray.getJSONObject(0);
-                            String weatherDescription = weatherObject.getString("description");
-                            double humidity = mainObject.getDouble("humidity");
-
-                            // Update the widget UI
-                            for (int appWidgetId : appWidgetIds) {
-                                // Construct the RemoteViews object for the widget
-                                RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.weather_widget);
-//                                views.setTextViewText(R.id.favoriteCity, city);
-                                views.setTextViewText(R.id.temperature, Math.round(temperature) + "°F");
-//                                views.setTextViewText(R.id.description, weatherDescription);
-//                                views.setTextViewText(R.id.humidity, Math.round(humidity) + "%");
-
-                                // Instruct the widget manager to update the widget
-                                appWidgetManager.updateAppWidget(appWidgetId, views);
-                            }
-                        } else {
-                            // Handle the case when weatherArray is empty
-                            Log.e("WeatherWidgetProvider", "Weather array is empty");
-                        }
-                    } else {
-                        // Handle the case when the API response is not successful
-                        Log.e("WeatherWidgetProvider", "API response is not successful, cod: " + responseCode);
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
+                    // Instruct the widget manager to update the widget
+                    appWidgetManager.updateAppWidget(appWidgetId, views);
                 }
             } else {
-                // Handle the case when responseData is null or there was an error fetching data
+                // Handle the case when there was an error fetching data
                 Log.e("WeatherWidgetProvider", "Error fetching weather data");
             }
         }
     }
+
     private void schedulePeriodicUpdates(Context context) {
         // Create an intent to be sent when the alarm triggers
         Intent updateIntent = new Intent(context, WeatherWidget.class);
@@ -184,7 +168,7 @@ public class WeatherWidget extends AppWidgetProvider {
 
         // Set up a repeating alarm using AlarmManager
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        long intervalMillis = AlarmManager.INTERVAL_HALF_HOUR; // Update every half hour
+        long intervalMillis = AlarmManager.INTERVAL_HOUR; // Update every half hour
         alarmManager.setRepeating(AlarmManager.RTC, System.currentTimeMillis(), intervalMillis, pendingIntent);
     }
 
