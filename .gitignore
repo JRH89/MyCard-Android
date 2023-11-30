@@ -18,3 +18,5 @@ SupportActivity.java
 *.aab
 app/release/app-release.aab
 app/release/app-release.apk
+*.aab
+*.apk
