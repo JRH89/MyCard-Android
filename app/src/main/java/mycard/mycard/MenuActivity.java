@@ -35,7 +35,7 @@ public class MenuActivity extends AppCompatActivity {
     FirebaseAuth auth;
     FirebaseUser user;
     Button buttonDelete;
-    Button buttonSupport;
+
 
     TextView webButton;
     FirebaseFirestore db;
@@ -79,12 +79,6 @@ public class MenuActivity extends AppCompatActivity {
 
         buttonCloseMenu = findViewById(R.id.btnCloseMenu);
         buttonCloseMenu.setOnClickListener(view -> onBackPressed());
-
-        buttonSupport = findViewById(R.id.support);
-        buttonSupport.setOnClickListener(view -> {
-            Intent intent = new Intent(getApplicationContext(), SupportActivity.class);
-            startActivity(intent);
-        });
 
         TextView webButton = findViewById(R.id.websiteButton);
 

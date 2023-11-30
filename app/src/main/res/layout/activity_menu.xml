@@ -46,23 +46,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="60dp"
-        android:backgroundTint="@color/yellow"
+        android:backgroundTint="@color/light_blue_600"
         android:text="Create QR Codes" />
-
-
 
 
     <Button
         android:id="@+id/support"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:textSize="20sp"
-        android:paddingVertical="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="60dp"
         android:backgroundTint="@color/light_blue_600"
-        android:text="Support" />
+        android:paddingVertical="10dp"
+        android:text="Support"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/editCard"

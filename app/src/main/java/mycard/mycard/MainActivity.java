@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
     Button editCard;
     Button editTodos;
 
-    Button menuButton;
+
 
 
 
@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
         cardPreview = findViewById(R.id.cardPreview);
         editCard = findViewById(R.id.editCard);
         editTodos = findViewById(R.id.manageTodos);
-        menuButton = findViewById(R.id.showMenuButton);
+
         Calendar calendar = Calendar.getInstance();
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
 
@@ -252,31 +252,7 @@ public class MainActivity extends AppCompatActivity {
         LinearLayout buttonRow = findViewById(R.id.buttonRow);
         final boolean[] buttonRowVisible = {false};
 
-        menuButton.setOnClickListener(new View.OnClickListener() {
 
-            String myBlue = "#FF039BE5";
-            String myRed = "#FF0660" ;
-
-            String myYellow = "#D4E157";
-
-            int myBlueColor = Color.parseColor(myBlue);
-            int myRedColor = Color.parseColor(myRed);
-            int myYellowColor = Color.parseColor(myYellow);
-            @Override
-            public void onClick(View v) {
-                if (!buttonRowVisible[0]) {
-                    // Show the button row and update the text of the menuButton
-                    buttonRow.setVisibility(View.VISIBLE);
-
-                    buttonRowVisible[0] = true;
-                } else {
-                    // Hide the button row and update the text of the menuButton
-                    buttonRow.setVisibility(View.GONE);
-
-                    buttonRowVisible[0] = false;
-                }
-            }
-        });
 
         editTodos.setOnClickListener(new View.OnClickListener() {
             @Override
