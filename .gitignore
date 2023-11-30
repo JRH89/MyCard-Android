@@ -14,3 +14,5 @@
 local.properties
 /app/google-services.json
 SupportActivity.java
+*.apk
+*.aab
