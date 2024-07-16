@@ -301,7 +301,6 @@ public class WeatherActivity extends AppCompatActivity {
         }
     }
 
-
     private class WeatherDataAsyncTask extends AsyncTask<Void, Void, WeatherData> {
 
         private String city;
@@ -364,7 +363,6 @@ public class WeatherActivity extends AppCompatActivity {
             }
             return null;
         }
-
 
         @Override
         protected void onPostExecute(WeatherData weatherData) {
