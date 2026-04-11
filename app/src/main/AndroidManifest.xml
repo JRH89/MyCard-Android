@@ -61,10 +61,7 @@
                 android:resource="@xml/weather_widget_info" />
         </receiver>
 
-        <activity
-            android:name=".SupportActivity"
-            android:parentActivityName=".MainActivity"
-            android:windowSoftInputMode="adjustResize" />
+
         <activity
             android:name=".MenuActivity"
             android:exported="false"
