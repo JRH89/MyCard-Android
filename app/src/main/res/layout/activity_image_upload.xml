@@ -1,87 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:background="@color/background"
+    android:padding="24dp">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/buttonClose"
-        android:text="X"
-        android:textSize="40dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:gravity="center"
+        android:text="@string/close_icon"
+        android:textColor="@color/error"
+        android:textSize="24sp"
         android:textStyle="bold"
-        android:layout_marginTop="5dp"
-        android:layout_marginRight="10dp"
-        android:textColor="@color/red"
-        android:textAlignment="textEnd"
-        />
-    <TextView
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        android:textSize="25sp"
-        android:textStyle="bold"
-        android:textAlignment="center"
-        android:layout_width="match_parent"
-        android:text="Optional Image Upload"
-        android:layout_height="wrap_content"/>
-    <FrameLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/uploadTitle"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_gravity="center">
+        android:layout_marginTop="16dp"
+        android:text="@string/image_upload_title"
+        android:textColor="@color/primary"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/buttonClose" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/imageCard"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginVertical="32dp"
+        app:cardBackgroundColor="@color/surface"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="0dp"
+        app:layout_constraintBottom_toTopOf="@id/uploadDescription"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/uploadTitle"
+        app:strokeColor="@color/outline"
+        app:strokeWidth="1dp">
 
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-    </FrameLayout>
+            android:layout_height="match_parent"
+            android:scaleType="centerInside" />
+    </com.google.android.material.card.MaterialCardView>
 
     <TextView
-        android:layout_width="match_parent"
-        android:text="This image will be used as the contact photo when your card is downloaded and saved."
+        android:id="@+id/uploadDescription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:text="@string/image_upload_instruction"
         android:textAlignment="center"
-        android:layout_marginHorizontal="10dp"
-        android:textSize="18sp"
+        android:textColor="@color/onSurface"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@id/btnPickImage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-        android:layout_height="wrap_content"/>
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:gravity="center_horizontal"
-    android:layout_marginTop="10dp"
-    android:layout_marginHorizontal="30dp"
-    android:layout_gravity="center_horizontal"
-    android:orientation="horizontal">
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnPickImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_gravity="center"
-        android:textStyle="bold"
-        android:backgroundTint="@color/light_blue_600"
+        style="@style/Widget.Material3.Button.TonalButton"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="24dp"
         android:onClick="onPickImageClick"
-        android:text="Image Gallery" />
+        android:text="@string/gallery"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnUploadImage"
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <Space
-        android:layout_width="10dp"
-        android:layout_height="match_parent" />
-
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnUploadImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textStyle="bold"
-        android:layout_weight="1"
-        android:backgroundTint="@color/green"
+        style="@style/Widget.Material3.Button"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="24dp"
         android:onClick="onUploadImageClick"
-        android:text="Upload Image" />
+        android:text="@string/upload"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnPickImage" />
 
-
-</LinearLayout>
-
-</LinearLayout>
-
+</androidx.constraintlayout.widget.ConstraintLayout>

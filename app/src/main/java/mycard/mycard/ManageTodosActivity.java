@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import com.google.android.material.button.MaterialButton;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -50,7 +51,7 @@ public class ManageTodosActivity extends AppCompatActivity {
         });
 
         // Handle button click to add a new todo
-        Button addButton = findViewById(R.id.btnAddTodo);
+        MaterialButton addButton = findViewById(R.id.btnAddTodo);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

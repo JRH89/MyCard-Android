@@ -11,6 +11,7 @@ import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.util.Base64;
 import android.view.View;
+import com.google.android.material.button.MaterialButton;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -53,9 +54,9 @@ public class FormActivity extends AppCompatActivity {
     private EditText link4;
     private Spinner theme;
     private EditText city;
-    private Button submitButton;
+    private MaterialButton submitButton;
 
-    Button uploadButton;
+    MaterialButton uploadButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

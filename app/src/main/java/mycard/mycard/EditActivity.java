@@ -8,6 +8,7 @@ import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.view.View;
+import com.google.android.material.button.MaterialButton;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -45,11 +46,11 @@ public class EditActivity extends AppCompatActivity {
     private EditText link4;
     private Spinner theme;
     private EditText city;
-    private Button submitButton;
+    private MaterialButton submitButton;
     // Add other form fields here as needed
     private String userId; // Store the user ID
 
-    Button uploadButton;
+    MaterialButton uploadButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

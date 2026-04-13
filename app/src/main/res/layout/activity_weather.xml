@@ -1,162 +1,171 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".WeatherActivity"
-    android:paddingTop="16dp"
-    android:paddingHorizontal="16dp">
+    android:background="@color/background"
+    android:padding="16dp"
+    tools:context=".WeatherActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/searchLayout"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal">
+        android:layout_marginTop="8dp"
+        android:hint="@string/enter_city_name"
+        app:boxStrokeColor="@color/secondary"
+        app:hintTextColor="@color/secondary"
+        app:layout_constraintEnd_toStartOf="@id/buttonSearch"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextCity"
-            android:layout_width="wrap_content"
-            android:layout_weight="1"
-            android:textSize="22sp"
-
-            android:selectAllOnFocus="true"
-            android:padding="8dp"
-            android:inputType="textCapWords"
-            android:layout_height="wrap_content"
-            android:hint="Enter city name"
-            android:imeOptions="actionSearch" />
-
-        <Button
-            android:id="@+id/buttonSearch"
-            android:layout_width="wrap_content"
-            android:textSize="18sp"
-            android:padding="8dp"
-            android:backgroundTint="@color/yellow"
-            android:layout_height="wrap_content"
-            android:text="Search" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/currentWeatherLayout"
-        android:gravity="center"
-        android:padding="16dp"
-        android:background="@drawable/rounded"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="32dp">
-
-        <TextView
-            android:id="@+id/currentCity"
-            android:textSize="40sp"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:textAlignment="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <TextView
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:id="@+id/weatherDesc"/>
+            android:imeOptions="actionSearch"
+            android:inputType="textCapWords"
+            android:textColor="@color/onSurface" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/textViewTemperature"
-            android:layout_width="wrap_content"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/search"
+        android:textColor="@color/black"
+        app:backgroundTint="@color/yellow"
+        app:layout_constraintBottom_toBottomOf="@id/searchLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/searchLayout" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/currentWeatherCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        app:cardBackgroundColor="@color/surface"
+        app:cardCornerRadius="24dp"
+        app:layout_constraintTop_toBottomOf="@id/searchLayout"
+        app:strokeWidth="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:textColor="@color/white"
-            android:padding="12dp"
-            android:background="@drawable/rounded_background"
-            android:layout_marginTop="20dp"
-            android:textSize="50sp" />
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="24dp">
 
-        <TextView
-            android:id="@+id/textViewHumidity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Humidity: "
-            android:textColor="@color/black"
-            android:textSize="22sp" />
+            <TextView
+                android:id="@+id/currentCity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/onSurface"
+                android:textSize="32sp"
+                android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/textViewWind"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Wind: "
-            android:textColor="@color/black"
-            android:textSize="22sp" />
+            <TextView
+                android:id="@+id/weatherDesc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/onSurface"
+                android:alpha="0.7"
+                android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/textViewFeelsLike"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Feels Like: "
-            android:layout_marginBottom="8dp"
-            android:textColor="@color/black"
-            android:textSize="22sp" />
+            <TextView
+                android:id="@+id/textViewTemperature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/rounded_background"
+                android:paddingHorizontal="24dp"
+                android:paddingVertical="12dp"
+                android:textColor="@color/white"
+                android:textSize="48sp"
+                android:textStyle="bold" />
 
-    </LinearLayout>
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:columnCount="2"
+                android:rowCount="2">
 
-    <!-- Forecast options -->
+                <TextView
+                    android:id="@+id/textViewHumidity"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:gravity="center"
+                    android:text="@string/humidity_label"
+                    android:textColor="@color/onSurface"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/textViewWind"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:gravity="center"
+                    android:text="@string/wind_label"
+                    android:textColor="@color/onSurface"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/textViewFeelsLike"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:text="@string/feels_like_label"
+                    android:textColor="@color/onSurface"
+                    android:textSize="16sp" />
+            </GridLayout>
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 
     <LinearLayout
         android:id="@+id/forecastLayout"
-        android:visibility="gone"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
         android:orientation="vertical"
-        android:layout_marginTop="16dp">
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/buttonSetFavoriteCity"
+        app:layout_constraintTop_toBottomOf="@id/currentWeatherCard">
 
-        <!-- 3-Hour Forecast display area -->
         <TextView
             android:id="@+id/textViewForecastTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="3-Hour Forecast:"
+            android:text="@string/three_hour_forecast"
+            android:textColor="@color/onSurface"
             android:textSize="18sp"
-            android:layout_marginTop="16dp" />
+            android:textStyle="bold" />
 
-        <LinearLayout
-            android:id="@+id/forecastDataLayout"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewForecast"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <!-- Forecast data will be dynamically added here -->
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewForecast"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp" />
-
-        </LinearLayout>
+            android:layout_marginTop="8dp" />
     </LinearLayout>
 
-<View
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_weight="1"/>
-
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonSetFavoriteCity"
-        android:layout_width="wrap_content"
-        android:layout_gravity="bottom|center"
+        style="@style/Widget.Material3.Button.TonalButton"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="10dp"
-        android:paddingVertical="10dp"
-        android:textSize="16sp"
-        android:text="Set as Current City"
-        android:layout_below="@id/currentCity"
-        android:layout_centerHorizontal="true"
-        android:backgroundTint="@color/light_blue_600"
-        android:textColor="@color/black" />
+        android:layout_marginBottom="8dp"
+        android:paddingVertical="12dp"
+        android:text="@string/set_current_city"
+        android:textColor="@color/white"
+        app:backgroundTint="@color/secondary"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
 

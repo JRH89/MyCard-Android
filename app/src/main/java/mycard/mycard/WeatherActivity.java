@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import com.google.android.material.button.MaterialButton;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -42,7 +43,7 @@ import android.view.inputmethod.InputMethodManager;
 public class WeatherActivity extends AppCompatActivity {
 
     private EditText editTextCity;
-    private Button buttonSearch;
+    private MaterialButton buttonSearch;
     private TextView textViewTemperature;
     private TextView textViewHumidity;
     private TextView currentCity;
@@ -185,7 +186,7 @@ public class WeatherActivity extends AppCompatActivity {
         // Inside the onCreate method
 // ...
 
-        Button buttonSetFavoriteCity = findViewById(R.id.buttonSetFavoriteCity);
+        MaterialButton buttonSetFavoriteCity = findViewById(R.id.buttonSetFavoriteCity);
         buttonSetFavoriteCity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

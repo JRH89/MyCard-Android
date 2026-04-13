@@ -1,294 +1,335 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
-  >
+    android:background="@color/background">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/black"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginHorizontal="30dp"
-        android:textAlignment="center"
-        >
+        android:padding="24dp">
 
         <TextView
+            android:id="@+id/formTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="@string/card_details"
-            android:textStyle="bold"
-            android:textSize="30sp"
-            android:layout_marginBottom="5dp"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-             />
+            android:textColor="@color/onSurface"
+            android:textSize="32sp"
+            android:textStyle="bold" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
             android:text="@string/required"
-            android:textAlignment="center"
-
-            android:textColor="@color/white"
-            android:textSize="22sp" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Choose a theme:"
-            android:textAlignment="center"
-            android:layout_marginTop="10dp"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/exampleLink"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:autoLink="web"
+            android:textColor="@color/primary"
             android:textSize="18sp"
-            android:layout_marginBottom="10dp"
-            android:textAlignment="center"
-            android:textColorLink="@color/green"
-            android:textColor="@color/green"
-            android:text="(click here to see examples)" />
+            android:textStyle="bold" />
 
-
-        <Spinner
-            android:id="@+id/theme"
-            android:layout_marginBottom="10dp"
-            android:textColorHint="@color/black"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:dropDownSelector="@color/black"
-            android:theme="@android:style/Theme.Holo"
-            android:popupTheme="@style/PopupTheme"
-            style="@android:style/Theme.Holo"
-            android:textColor="@color/black"
-            android:entries="@array/choices" />
-
-
-        <EditText
-            android:id="@+id/name"
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/light_blue_600"
-            android:foregroundTint="@color/light_blue_600"
-            android:selectAllOnFocus="false"
-            android:textColor="@color/white"
-            android:inputType="textPersonName"
-            android:textColorHint="@color/white"
-            android:theme="@style/Base.Theme.MyCard"
-            android:hint="@string/name" />
+            android:layout_marginTop="24dp"
+            app:cardBackgroundColor="@color/surface"
+            app:cardCornerRadius="12dp"
+            app:strokeWidth="0dp">
 
-        <EditText
-            android:id="@+id/job"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/choose_theme"
+                    android:textColor="@color/onSurface"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/exampleLink"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:autoLink="web"
+                    android:text="@string/click_here_to_see_examples"
+                    android:textColor="@color/secondary"
+                    android:textSize="14sp" />
+
+                <Spinner
+                    android:id="@+id/theme"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="8dp"
+                    android:entries="@array/choices"
+                    android:backgroundTint="@color/onSurface" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="@string/name"
+            app:boxStrokeColor="@color/secondary"
+            app:hintTextColor="@color/secondary">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:textColor="@color/onSurface" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
             android:hint="@string/job_title"
-            android:inputType="text"
-            android:textColorHint="@color/white"
+            app:boxStrokeColor="@color/secondary"
+            app:hintTextColor="@color/secondary">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/job"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:textColor="@color/onSurface" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/light_blue_600"
-            android:foregroundTint="@color/light_blue_600"
-            android:selectAllOnFocus="false"
-            android:textColor="@color/white"
-            android:theme="@style/Base.Theme.MyCard"
-            />
-
-        <EditText
-            android:id="@+id/phone"
+            android:layout_marginTop="12dp"
             android:hint="@string/phone"
-            android:inputType="phone"
-            android:textColorHint="@color/white"
+            app:boxStrokeColor="@color/secondary"
+            app:hintTextColor="@color/secondary">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="phone"
+                android:textColor="@color/onSurface" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/light_blue_600"
-            android:foregroundTint="@color/light_blue_600"
-            android:selectAllOnFocus="false"
-            android:textColor="@color/white"
-            android:theme="@style/Base.Theme.MyCard"
-            />
-
-        <EditText
-            android:id="@+id/email"
+            android:layout_marginTop="12dp"
             android:hint="@string/cardemail"
-            android:inputType="textEmailAddress"
-            android:textColorHint="@color/white"
+            app:boxStrokeColor="@color/secondary"
+            app:hintTextColor="@color/secondary">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:textColor="@color/onSurface" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/light_blue_600"
-            android:foregroundTint="@color/light_blue_600"
-            android:selectAllOnFocus="false"
-            android:textColor="@color/white"
-            android:theme="@style/Base.Theme.MyCard"
-            />
-
-        <EditText
-            android:id="@+id/city"
+            android:layout_marginTop="12dp"
             android:hint="@string/city"
-            android:inputType="text"
-            android:layout_width="match_parent"
-            android:textColorHint="@color/white"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/light_blue_600"
-            android:foregroundTint="@color/light_blue_600"
-            android:selectAllOnFocus="false"
-            android:textColor="@color/white"
-            android:theme="@style/Base.Theme.MyCard"
-            />
+            app:boxStrokeColor="@color/secondary"
+            app:hintTextColor="@color/secondary">
 
-        <EditText
-            android:id="@+id/Link1Label"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/city"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:textColor="@color/onSurface" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
             android:hint="@string/link_1_label"
-            android:textColorHint="@color/white"
-            android:layout_width="match_parent"
-            android:inputType="text"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/light_blue_600"
-            android:foregroundTint="@color/light_blue_600"
-            android:selectAllOnFocus="false"
-            android:textColor="@color/white"
-            android:theme="@style/Base.Theme.MyCard"
-            />
+            app:boxStrokeColor="@color/secondary"
+            app:hintTextColor="@color/secondary">
 
-        <EditText
-            android:id="@+id/Link1"
-            android:hint="@string/https"
-            android:inputType="text"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/Link1Label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:textColor="@color/onSurface" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="@color/white"
-            android:backgroundTint="@color/light_blue_600"
-            android:foregroundTint="@color/light_blue_600"
-            android:selectAllOnFocus="false"
-            android:textColor="@color/white"
-            android:theme="@style/Base.Theme.MyCard"
-            />
+            android:layout_marginTop="8dp"
+            android:hint="@string/https"
+            app:boxStrokeColor="@color/secondary"
+            app:hintTextColor="@color/secondary">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/Link1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:textColor="@color/onSurface" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="@color/white"
-            android:textSize="22sp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:text="@string/optional"/>
+            android:layout_marginTop="32dp"
+            android:gravity="center"
+            android:text="@string/optional"
+            android:textColor="@color/onSurface"
+            android:alpha="0.6"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/Link2Label"
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
-            android:inputType="text"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/light_blue_600"
-            android:foregroundTint="@color/light_blue_600"
+            android:layout_marginTop="16dp"
             android:hint="@string/link_2_label"
-            android:selectAllOnFocus="false"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            android:theme="@style/Base.Theme.MyCard" />
+            app:boxStrokeColor="@color/secondary"
+            app:hintTextColor="@color/secondary">
 
-        <EditText
-            android:id="@+id/Link2"
-            android:hint="@string/https"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/Link2Label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:textColor="@color/onSurface" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
-            android:textColorHint="@color/white"
-            android:inputType="text"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/light_blue_600"
-            android:foregroundTint="@color/light_blue_600"
-            android:selectAllOnFocus="false"
-            android:textColor="@color/white"
-            android:theme="@style/Base.Theme.MyCard"
-            />
+            android:layout_marginTop="8dp"
+            android:hint="@string/https"
+            app:boxStrokeColor="@color/secondary"
+            app:hintTextColor="@color/secondary">
 
-        <EditText
-            android:id="@+id/Link3Label"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/Link2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:textColor="@color/onSurface" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:hint="@string/link_3_label"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColorHint="@color/white"
-            android:inputType="text"
-            android:backgroundTint="@color/light_blue_600"
-            android:foregroundTint="@color/light_blue_600"
-            android:selectAllOnFocus="false"
-            android:textColor="@color/white"
-            android:theme="@style/Base.Theme.MyCard"
-            />
-        <EditText
-            android:id="@+id/Link3"
-            android:hint="@string/https"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColorHint="@color/white"
-            android:inputType="text"
-            android:backgroundTint="@color/light_blue_600"
-            android:foregroundTint="@color/light_blue_600"
-            android:selectAllOnFocus="false"
-            android:textColor="@color/white"
-            android:theme="@style/Base.Theme.MyCard"
-            />
+            app:boxStrokeColor="@color/secondary"
+            app:hintTextColor="@color/secondary">
 
-        <EditText
-            android:id="@+id/Link4Label"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/Link3Label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:textColor="@color/onSurface" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="@string/https"
+            app:boxStrokeColor="@color/secondary"
+            app:hintTextColor="@color/secondary">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/Link3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:textColor="@color/onSurface" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:hint="@string/link_4_label"
+            app:boxStrokeColor="@color/secondary"
+            app:hintTextColor="@color/secondary">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/Link4Label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:textColor="@color/onSurface" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
-            android:textColorHint="@color/white"
-            android:inputType="text"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/light_blue_600"
-            android:foregroundTint="@color/light_blue_600"
-            android:selectAllOnFocus="false"
-            android:textColor="@color/white"
-            android:theme="@style/Base.Theme.MyCard"
-            />
-        <EditText
-            android:id="@+id/Link4"
+            android:layout_marginTop="8dp"
             android:hint="@string/https"
-            android:layout_width="match_parent"
-            android:textColorHint="@color/white"
-            android:inputType="text"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/light_blue_600"
-            android:foregroundTint="@color/light_blue_600"
-            android:selectAllOnFocus="false"
-            android:textColor="@color/white"
-            android:theme="@style/Base.Theme.MyCard"
-            />
-        <Button
+            app:boxStrokeColor="@color/secondary"
+            app:hintTextColor="@color/secondary">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/Link4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:textColor="@color/onSurface" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/uploadButton"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:textSize="14sp"
-            android:visibility="gone"
-            android:layout_marginTop="10dp"
-            android:paddingVertical="10dp"
+            style="@style/Widget.Material3.Button.TonalButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="60dp"
-            android:backgroundTint="@color/yellow"
-            android:text="Upload Contact Image" />
+            android:layout_marginTop="32dp"
+            android:paddingVertical="12dp"
+            android:text="@string/upload_contact_image"
+            android:visibility="gone"
+            app:backgroundTint="@color/yellow"
+            android:textColor="@color/black" />
 
-
-
-        <Button
-            android:textAlignment="center"
-            android:gravity="center_horizontal"
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/submit_button"
-            android:text="@string/submit"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:paddingVertical="10dp"
-            android:layout_marginBottom="10dp"
-            android:textColor="@color/black"
-            android:backgroundTint="@color/green"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:layout_marginTop="10dp"
-            />
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="32dp"
+            android:paddingVertical="12dp"
+            android:text="@string/submit"
+            app:backgroundTint="@color/primary"
+            android:textColor="@color/onPrimary"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
     </LinearLayout>
 </ScrollView>

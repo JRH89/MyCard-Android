@@ -1,12 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#121212</color>
-    <color name="white">#FFF</color>
+    <color name="white">#FFFFFF</color>
     <color name="green">#4ade80</color>
     <color name="red">#FF0660</color>
-    <color name="light_blue_50">#FFE1F5FE</color>
-    <color name="light_blue_200">#FF81D4FA</color>
-    <color name="light_blue_600">#FF039BE5</color>
-    <color name="light_blue_900">#FF01579B</color>
+    <color name="light_blue_50">#E1F5FE</color>
+    <color name="light_blue_200">#81D4FA</color>
+    <color name="light_blue_600">#039BE5</color>
+    <color name="light_blue_900">#01579B</color>
     <color name="yellow">#D4E157</color>
+    <color name="orange">#FB8C00</color>
+
+    <!-- Modern Palette -->
+    <color name="primary">#4ade80</color>
+    <color name="onPrimary">#000000</color>
+    <color name="secondary">#039BE5</color>
+    <color name="onSecondary">#FFFFFF</color>
+    <color name="surface">#1E1E1E</color>
+    <color name="onSurface">#FFFFFF</color>
+    <color name="background">#121212</color>
+    <color name="error">#FF0660</color>
+    <color name="outline">#444444</color>
 </resources>

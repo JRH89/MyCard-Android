@@ -1,78 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/support"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:backgroundTint="@color/black"
-    android:background="@color/black"
-    android:id="@+id/support"
-    android:textAlignment="center"
-    android:padding="16dp">
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_weight="1"
-        android:layout_height="wrap_content" />
+    android:background="@color/background"
+    android:padding="24dp">
 
     <TextView
-    android:layout_width="match_parent"
-    android:text="Subject:"
-    android:layout_marginBottom="10dp"
-    android:textAlignment="center"
-    android:textSize="30sp"
-    android:textColor="@color/white"
-    android:layout_height="wrap_content"/>
-
-    <EditText
-        android:id="@+id/subjectEditText"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginHorizontal="20dp"
-        android:background="@color/white"
-        android:maxLines="1"
-        android:padding="8dp"
-        android:minLines="1"
-        android:textColor="@color/black" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:text="Message:"
-        android:textAlignment="center"
-        android:textSize="30sp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="40dp"
-        android:textColor="@color/white"
-        android:layout_height="wrap_content"/>
-
-    <EditText
-        android:layout_width="match_parent"
+        android:id="@+id/supportTitle"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/messageEditText"
-        android:maxLines="10"
-        android:padding="8dp"
-        android:layout_marginHorizontal="20dp"
-        android:textColor="@color/black"
-        android:background="@color/white"
-        android:minLines="5"
-        android:gravity="top"
-    android:inputType="textMultiLine"/>
+        android:layout_marginTop="32dp"
+        android:text="@string/support_title"
+        android:textColor="@color/primary"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"/>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/subjectInputLayout"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:hint="@string/subject"
+        android:textColorHint="@color/outline"
+        app:boxStrokeColor="@color/primary"
+        app:hintTextColor="@color/primary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/supportTitle">
 
-    <Button
-        android:layout_width="match_parent"
-        android:textColor="@color/black"
-        android:text="Send"
-        android:textSize="20sp"
-        android:padding="10dp"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/subjectEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:maxLines="1"
+            android:textColor="@color/onSurface" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/messageInputLayout"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:hint="@string/message"
+        android:textColorHint="@color/outline"
+        app:boxStrokeColor="@color/primary"
+        app:hintTextColor="@color/primary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/subjectInputLayout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/messageEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top"
+            android:inputType="textMultiLine"
+            android:minLines="6"
+            android:textColor="@color/onSurface" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/sendButton"
-        android:layout_marginHorizontal="20dp"
-        android:backgroundTint="@color/green"
-        android:layout_height="wrap_content"/>
+        style="@style/Widget.Material3.Button"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="32dp"
+        android:text="@string/send_message"
+        android:textSize="18sp"
+        app:cornerRadius="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-</LinearLayout>
-
+</androidx.constraintlayout.widget.ConstraintLayout>

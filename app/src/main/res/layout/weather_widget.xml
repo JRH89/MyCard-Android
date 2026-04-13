@@ -1,105 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:layout_gravity="center_vertical"
-    android:background="#B3000000"
-    android:orientation="horizontal">
+    app:cardBackgroundColor="#CC121212"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="0dp">
 
-    <!-- Left LinearLayout (Date and Clock) -->
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:gravity="center_vertical"
-        android:layout_gravity="center_horizontal"
-        android:orientation="vertical">
-
-        <!-- Clock View -->
-        <TextClock
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="28sp"
-            android:gravity="center"
-            android:textAllCaps="false"
-            android:layout_gravity="center"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:format12Hour="h:mm a"
-            android:format24Hour="HH:mm" />
-    </LinearLayout>
-
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:orientation="vertical"
-    android:layout_height="wrap_content">
-
-    <TextView
-        android:id="@+id/temperature"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:padding="5dp"
-        android:textColor="#121212"
-        android:text="88 F"
-        android:layout_gravity="center_vertical"
         android:gravity="center"
-        android:layout_marginHorizontal="5dp"
-        android:background="@drawable/rounded" />
+        android:orientation="horizontal"
+        android:padding="8dp">
 
-    <TextView
-        android:id="@+id/description"
-        android:layout_width="wrap_content"
-        android:layout_gravity="center"
-        android:visibility="gone"
-        android:layout_height="wrap_content"
-        android:textSize="12sp"
-        android:textColor="#FFF"
-        android:text="Description" />
-</LinearLayout>
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:gravity="center_vertical"
-        android:layout_gravity="center_vertical"
-        android:orientation="vertical">
-
-        <TextClock
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="28sp"
-            android:layout_gravity="center"
+        <!-- Time Section -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:gravity="center"
-            android:textColor="@color/white"
-            android:textAlignment="center"
-            android:format12Hour="EEE, d"
-            android:format24Hour="EEE, d" />
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/favoriteCity"
+            <TextClock
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:format12Hour="h:mm"
+                android:format24Hour="HH:mm"
+                android:textColor="@color/white"
+                android:textSize="26sp"
+                android:textStyle="bold" />
+
+            <TextClock
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:format12Hour="EEE, MMM d"
+                android:format24Hour="EEE, MMM d"
+                android:textColor="@color/outline"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <!-- Temperature Section -->
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="22sp"
-            android:visibility="gone"
-            android:layout_gravity="center"
-            android:textAlignment="center"
-            android:textColor="#FFF"
-            android:text="City Name" />
+            app:cardBackgroundColor="@color/primary"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp">
 
-        <TextView
-            android:id="@+id/humidity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:visibility="gone"
-            android:textAlignment="center"
-            android:textColor="#FFFFFF"
-            android:text="Humidity" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="8dp">
+
+                <TextView
+                    android:id="@+id/temperature"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/placeholder_temp_simple"
+                    android:textColor="@color/onPrimary"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/placeholder_sunny"
+                    android:textColor="@color/onPrimary"
+                    android:textSize="10sp"
+                    android:visibility="gone" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Additional Info Section -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/favoriteCity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/placeholder_city_label"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/humidity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/placeholder_humidity_simple"
+                android:textColor="@color/outline"
+                android:textSize="12sp"
+                android:visibility="gone" />
+        </LinearLayout>
 
     </LinearLayout>
-</LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

@@ -18,6 +18,7 @@ import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import com.google.android.material.card.MaterialCardView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -65,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
     WebView cardPreview;
 
     Button editCard;
-    Button editTodos;
 
 
 
@@ -85,7 +85,6 @@ public class MainActivity extends AppCompatActivity {
         weather = findViewById(R.id.temperature); // Initialize the weather TextView
         cardPreview = findViewById(R.id.cardPreview);
         editCard = findViewById(R.id.editCard);
-        editTodos = findViewById(R.id.manageTodos);
 
         Calendar calendar = Calendar.getInstance();
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
@@ -108,29 +107,7 @@ public class MainActivity extends AppCompatActivity {
         } else {
             textView.setText(user.getEmail());
         }
-        TextView clickToShowQrCode = findViewById(R.id.click_to_show_qr_code);
         final ImageView qrImageView = findViewById(R.id.qr_image);
-
-        final boolean[] qrCodeAndUrlVisible = {false}; // Flag to track the visibility state
-
-        clickToShowQrCode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Toggle the visibility of the QR code ImageView and URL TextView
-                if (!qrCodeAndUrlVisible[0]) {
-                    cardPreview.setVisibility(View.VISIBLE);
-                    qrImageView.setVisibility(View.GONE); // Show the QR code
-                    textView.setVisibility(View.GONE); // Show the URL
-                    clickToShowQrCode.setText("Hide Card Preview"); // Update button text
-                } else {
-                    cardPreview.setVisibility(View.GONE);
-                    qrImageView.setVisibility(View.VISIBLE); // Show the QR code
-                    textView.setVisibility(View.VISIBLE);// Hide the URL
-                    clickToShowQrCode.setText("Show Card Preview"); // Update button text
-                }
-                qrCodeAndUrlVisible[0] = !qrCodeAndUrlVisible[0]; // Toggle the flag
-            }
-        });
 
         DocumentReference docRef = db.collection(user.getEmail()).document("userInfo");
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -232,7 +209,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        LinearLayout weatherWidget = findViewById(R.id.weatherWidget);
+        MaterialCardView weatherWidget = findViewById(R.id.weatherWidget);
         weatherWidget.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -250,17 +227,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         LinearLayout buttonRow = findViewById(R.id.buttonRow);
-        final boolean[] buttonRowVisible = {false};
-
-
-
-        editTodos.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ManageTodosActivity.class);
-                startActivity(intent);
-            }
-        });
 
         editCard.setOnClickListener(new View.OnClickListener() {
             @Override

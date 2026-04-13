@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import com.google.android.material.button.MaterialButton;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -30,7 +31,7 @@ import java.io.IOException;
 public class GenerateQRCodeActivity extends AppCompatActivity {
 
     private EditText editText;
-    private Button generateButton, foregroundButton, backgroundButton;
+    private MaterialButton generateButton, foregroundButton, backgroundButton;
     private ImageView qrCodeImageView;
     private int foregroundColor = Color.BLACK; // Default foreground color is black
     private int backgroundColor = Color.WHITE;

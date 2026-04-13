@@ -14,6 +14,7 @@ import android.text.util.Linkify;
 import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
+import com.google.android.material.button.MaterialButton;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -29,12 +30,12 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MenuActivity extends AppCompatActivity {
 
-    Button buttonEditCard;
-    Button buttonLogout;
-    Button buttonCloseMenu;
+    MaterialButton buttonEditCard;
+    MaterialButton buttonLogout;
+    MaterialButton buttonCloseMenu;
     FirebaseAuth auth;
     FirebaseUser user;
-    Button buttonDelete;
+    MaterialButton buttonDelete;
 
 
     TextView webButton;
@@ -42,7 +43,8 @@ public class MenuActivity extends AppCompatActivity {
 
     ImageView qrCode;
 
-    Button buttonSettings;
+    MaterialButton buttonTodo;
+    MaterialButton buttonSupport;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,9 +62,9 @@ public class MenuActivity extends AppCompatActivity {
             finish();
         });
 
-        buttonSettings = findViewById(R.id.qrCodeButton);
-        buttonSettings.setOnClickListener(view -> {
-                    Intent intent = new Intent(getApplicationContext(), GenerateQRCodeActivity.class);
+        buttonTodo = findViewById(R.id.todoButton);
+        buttonTodo.setOnClickListener(view -> {
+                    Intent intent = new Intent(getApplicationContext(), ManageTodosActivity.class);
                     startActivity(intent);
                 });
 
@@ -79,6 +81,12 @@ public class MenuActivity extends AppCompatActivity {
 
         buttonCloseMenu = findViewById(R.id.btnCloseMenu);
         buttonCloseMenu.setOnClickListener(view -> onBackPressed());
+
+        buttonSupport = findViewById(R.id.supportButton);
+        buttonSupport.setOnClickListener(view -> {
+            Intent intent = new Intent(getApplicationContext(), SupportActivity.class);
+            startActivity(intent);
+        });
 
         TextView webButton = findViewById(R.id.websiteButton);
 
@@ -151,8 +159,8 @@ public class MenuActivity extends AppCompatActivity {
         // Get references to views in the custom layout
         TextView dialogTitle = customView.findViewById(R.id.dialogTitle);
         TextView dialogMessage = customView.findViewById(R.id.dialogMessage);
-        Button btnPositive = customView.findViewById(R.id.btnPositive);
-        Button btnNegative = customView.findViewById(R.id.btnNegative);
+        MaterialButton btnPositive = customView.findViewById(R.id.btnPositive);
+        MaterialButton btnNegative = customView.findViewById(R.id.btnNegative);
 
         dialogTitle.setText("Confirm Account Deletion");
         dialogMessage.setText("Are you sure you want to delete your account? This action cannot be undone.");
