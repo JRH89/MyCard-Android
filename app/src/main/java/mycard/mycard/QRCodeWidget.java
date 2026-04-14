@@ -122,8 +122,8 @@ public class QRCodeWidget extends AppWidgetProvider {
         // Set the generated QR code bitmap to the ImageView in the widget layout
         views.setImageViewBitmap(R.id.qr_code_image_widget, qrCodeBitmap);
 
-        // Create an Intent to launch GenerateQRCodeActivity
-        Intent intent = new Intent(context, GenerateQRCodeActivity.class);
+        // Create an Intent to launch MainActivity
+        Intent intent = new Intent(context, MainActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
         views.setOnClickPendingIntent(R.id.qr_widget_layout, pendingIntent);
 

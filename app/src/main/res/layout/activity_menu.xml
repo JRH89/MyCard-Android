@@ -55,7 +55,8 @@
             android:textColor="@color/primary"
             app:icon="@android:drawable/checkbox_on_background"
             app:iconTint="@color/primary"
-            android:textSize="18sp"
+            app:iconPadding="8dp"
+            android:textSize="20sp"
             app:cornerRadius="12dp" />
 
         <com.google.android.material.button.MaterialButton
@@ -70,7 +71,8 @@
             android:textColor="@color/secondary"
             app:icon="@android:drawable/ic_menu_help"
             app:iconTint="@color/secondary"
-            android:textSize="18sp"
+            app:iconPadding="8dp"
+            android:textSize="20sp"
             app:cornerRadius="12dp" />
 
         <com.google.android.material.button.MaterialButton
@@ -86,7 +88,8 @@
             android:textColor="@color/primary"
             app:icon="@android:drawable/ic_menu_edit"
             app:iconTint="@color/primary"
-            android:textSize="18sp"
+            app:iconPadding="8dp"
+            android:textSize="20sp"
             app:cornerRadius="12dp" />
 
         <com.google.android.material.button.MaterialButton
@@ -101,7 +104,8 @@
             android:textColor="@color/error"
             app:icon="@android:drawable/ic_menu_delete"
             app:iconTint="@color/error"
-            android:textSize="18sp"
+            app:iconPadding="8dp"
+            android:textSize="20sp"
             app:cornerRadius="12dp" />
 
         <com.google.android.material.button.MaterialButton
@@ -116,7 +120,8 @@
             android:textColor="@color/onSurface"
             app:icon="@android:drawable/ic_lock_power_off"
             app:iconTint="@color/onSurface"
-            android:textSize="18sp"
+            app:iconPadding="8dp"
+            android:textSize="20sp"
             app:cornerRadius="12dp" />
 
     </LinearLayout>

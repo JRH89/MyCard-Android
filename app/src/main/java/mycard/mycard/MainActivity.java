@@ -342,6 +342,9 @@ public class MainActivity extends AppCompatActivity {
         builder.setView(dialogView);
 
         final android.app.AlertDialog dialog = builder.create();
+        if (dialog.getWindow() != null) {
+            dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        }
 
         MaterialButton shareLinkBtn = dialogView.findViewById(R.id.shareLink);
         MaterialButton shareQRCodeBtn = dialogView.findViewById(R.id.shareQRCode);

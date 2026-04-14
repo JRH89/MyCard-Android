@@ -4,6 +4,7 @@ import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -26,6 +27,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 import mycard.mycard.workers.ToDoUpdateWorker;
+import mycard.mycard.workers.CombinedUpdateWorker;
 
 public class ManageTodosActivity extends AppCompatActivity {
 
@@ -86,19 +88,26 @@ public class ManageTodosActivity extends AppCompatActivity {
             userDocRef.get().addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
+                    if (document != null && document.exists()) {
                         // Document exists, fetch the todos and update the list
                         Object todosObject = document.get("todos");
                         if (todosObject instanceof List<?>) {
                             todos.clear();
                             todos.addAll((List<String>) todosObject);
                             todoAdapter.notifyDataSetChanged();
+                        } else {
+                            // todos field is missing or not a list, but document exists
+                            todos.clear();
+                            todoAdapter.notifyDataSetChanged();
                         }
                     } else {
-                        // Document does not exist
+                        // Document does not exist (no todos yet)
+                        todos.clear();
+                        todoAdapter.notifyDataSetChanged();
                     }
                 } else {
                     // Error fetching document
+                    Log.e("ManageTodosActivity", "Error fetching todos", task.getException());
                 }
             });
         }
@@ -114,6 +123,9 @@ public class ManageTodosActivity extends AppCompatActivity {
         // Trigger an immediate update via WorkManager
         OneTimeWorkRequest updateRequest = new OneTimeWorkRequest.Builder(ToDoUpdateWorker.class).build();
         WorkManager.getInstance(this).enqueue(updateRequest);
+
+        OneTimeWorkRequest combinedUpdateRequest = new OneTimeWorkRequest.Builder(CombinedUpdateWorker.class).build();
+        WorkManager.getInstance(this).enqueue(combinedUpdateRequest);
     }
 
 // Call this method whenever a todo is added or deleted in the activity

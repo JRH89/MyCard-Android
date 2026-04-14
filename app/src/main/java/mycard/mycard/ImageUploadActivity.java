@@ -30,6 +30,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.google.android.material.button.MaterialButton;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -53,6 +55,7 @@ public class ImageUploadActivity extends AppCompatActivity {
     private String userId;
 
     private TextView buttonClose;
+    private MaterialButton btnPickImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,16 +63,42 @@ public class ImageUploadActivity extends AppCompatActivity {
         setContentView(R.layout.activity_image_upload);
 
         imageView = findViewById(R.id.imageView);
+        btnPickImage = findViewById(R.id.btnPickImage);
+
+        // Always retrieve user ID regardless of permissions
+        retrieveUserIdAndSetVariable();
+
+        btnPickImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onPickImageClick(v);
+            }
+        });
 
         // Check for gallery permission
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
-                == PackageManager.PERMISSION_GRANTED) {
-            // Permission already granted, do nothing
-            retrieveUserIdAndSetVariable(); // Call the method to retrieve the user ID
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            if (!(ContextCompat.checkSelfPermission(this, Manifest.permission.READ_MEDIA_IMAGES)
+                    == PackageManager.PERMISSION_GRANTED ||
+                    ContextCompat.checkSelfPermission(this, Manifest.permission.READ_MEDIA_VISUAL_USER_SELECTED)
+                            == PackageManager.PERMISSION_GRANTED)) {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.READ_MEDIA_IMAGES, Manifest.permission.READ_MEDIA_VISUAL_USER_SELECTED},
+                        REQUEST_GALLERY_PERMISSION);
+            }
+        } else if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+             if (!(ContextCompat.checkSelfPermission(this, Manifest.permission.READ_MEDIA_IMAGES)
+                    == PackageManager.PERMISSION_GRANTED)) {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.READ_MEDIA_IMAGES},
+                        REQUEST_GALLERY_PERMISSION);
+            }
         } else {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                    REQUEST_GALLERY_PERMISSION);
+            if (!(ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_GRANTED)) {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                        REQUEST_GALLERY_PERMISSION);
+            }
         }
 
         buttonClose = findViewById(R.id.buttonClose);
@@ -147,19 +176,42 @@ public class ImageUploadActivity extends AppCompatActivity {
 
     // Open the gallery to select an image when the button is clicked
     public void onPickImageClick(View view) {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
-                == PackageManager.PERMISSION_GRANTED) {
-            openGallery();
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_MEDIA_IMAGES)
+                    == PackageManager.PERMISSION_GRANTED ||
+                    ContextCompat.checkSelfPermission(this, Manifest.permission.READ_MEDIA_VISUAL_USER_SELECTED)
+                            == PackageManager.PERMISSION_GRANTED) {
+                openGallery();
+            } else {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.READ_MEDIA_IMAGES, Manifest.permission.READ_MEDIA_VISUAL_USER_SELECTED},
+                        REQUEST_GALLERY_PERMISSION);
+            }
+        } else if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_MEDIA_IMAGES)
+                    == PackageManager.PERMISSION_GRANTED) {
+                openGallery();
+            } else {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.READ_MEDIA_IMAGES},
+                        REQUEST_GALLERY_PERMISSION);
+            }
         } else {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                    REQUEST_GALLERY_PERMISSION);
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_GRANTED) {
+                openGallery();
+            } else {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                        REQUEST_GALLERY_PERMISSION);
+            }
         }
     }
 
     // Open the gallery to select an image
     private void openGallery() {
-        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
         startActivityForResult(intent, REQUEST_PICK_IMAGE);
     }
 
@@ -242,34 +294,34 @@ public class ImageUploadActivity extends AppCompatActivity {
     // Handle the "Upload Image" button click to upload the cropped image to Firestore
     public void onUploadImageClick(View view) {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user == null) {
+            Toast.makeText(this, "User not logged in", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         // Check if an image is selected before proceeding with the upload
         if (selectedBitmap == null) {
-            // Show a message to select an image first
+            Toast.makeText(this, "Please select an image first", Toast.LENGTH_SHORT).show();
             return;
         }
 
         // Convert the cropped image to a Base64-encoded string
         String base64Image = encodeBitmapToBase64(selectedBitmap);
 
-        if (userId == null) {
-            // Show a message to indicate that the user ID is not available yet
+        String userEmail = user.getEmail();
+        if (userEmail == null) {
+            Toast.makeText(this, "User email not found", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        String userDocumentId = user.getEmail();
-        uploadImageToFirestore(base64Image, userDocumentId, "userInfo");
-
-        // Navigate back to the previous activity
-        finish();
+        Toast.makeText(this, "Uploading image...", Toast.LENGTH_SHORT).show();
+        uploadImageToFirestore(base64Image, userEmail, "userInfo");
     }
 
 
     private void uploadImageToFirestore(String base64Image, String collectionName, String documentId) {
         // Create an ImageData object with the updated "base64Image" field
         ImageData imageData = new ImageData(base64Image);
-
-        // TODO: Upload the imageData object to Firestore as a document in the specified collection
-        // and document ID.
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection(collectionName)
@@ -279,17 +331,17 @@ public class ImageUploadActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void aVoid) {
                         // Image upload success
-                        // Show a success message using a toast
                         Toast.makeText(ImageUploadActivity.this, "Image uploaded successfully!", Toast.LENGTH_SHORT).show();
                         Log.d("ImageUploadActivity", "Image uploaded successfully to " + collectionName + "/" + documentId);
+                        // Navigate back to the previous activity after success
+                        finish();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         // Handle the failure to upload the image data
-                        // Show an error message using a toast
-                        Toast.makeText(ImageUploadActivity.this, "Failed to upload image.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ImageUploadActivity.this, "Failed to upload image: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                         Log.e("ImageUploadActivity", "Error uploading image to " + collectionName + "/" + documentId, e);
                     }
                 });
