@@ -9,7 +9,8 @@
     <string name="logout">LOGOUT</string>
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
-    <string name="app_widget_description">QR Code Widget</string>
+    <string name="app_widget_description">Combo Widget</string>
+    <string name="app_widget_description_qr">QR Code Widget</string>
     <string name="app_widget_description2">Weather Widget</string>
     <string name="app_widget_description3">ToDo List Widget</string>
     <string name="no_todos">No Todos</string>
