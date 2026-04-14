@@ -84,8 +84,15 @@ public class MenuActivity extends AppCompatActivity {
 
         buttonSupport = findViewById(R.id.supportButton);
         buttonSupport.setOnClickListener(view -> {
-            Intent intent = new Intent(getApplicationContext(), SupportActivity.class);
-            startActivity(intent);
+            Intent intent = new Intent(Intent.ACTION_SENDTO);
+            intent.setData(Uri.parse("mailto:")); // only email apps should handle this
+            intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"hookerhillstudios@gmail.com"});
+            intent.putExtra(Intent.EXTRA_SUBJECT, "Support Request");
+            if (intent.resolveActivity(getPackageManager()) != null) {
+                startActivity(intent);
+            } else {
+                Toast.makeText(this, "No email app found", Toast.LENGTH_SHORT).show();
+            }
         });
 
         TextView webButton = findViewById(R.id.websiteButton);

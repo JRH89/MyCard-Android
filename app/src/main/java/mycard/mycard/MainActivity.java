@@ -392,7 +392,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void fetchWeatherData(String city) {
-        String apiKey = "bdeec3fe00b9a10009325e073c8ec400";
+        String apiKey = BuildConfig.OPEN_WEATHER_API_KEY;
         String units = "imperial";
         String url = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey + "&units=" + units;
 
