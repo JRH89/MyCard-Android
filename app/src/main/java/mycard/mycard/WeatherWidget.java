@@ -91,7 +91,19 @@ public class WeatherWidget extends AppWidgetProvider {
     }
 
     // Method to fetch weather data for the widget using AsyncTask
-    private static class FetchWeatherDataTask extends AsyncTask<Void, Void, Double> {
+    private static class WeatherData {
+        double temperature;
+        String description;
+        int humidity;
+
+        WeatherData(double temperature, String description, int humidity) {
+            this.temperature = temperature;
+            this.description = description;
+            this.humidity = humidity;
+        }
+    }
+
+    private static class FetchWeatherDataTask extends AsyncTask<Void, Void, WeatherData> {
         private Context context;
         private AppWidgetManager appWidgetManager;
         private int[] appWidgetIds;
@@ -105,7 +117,7 @@ public class WeatherWidget extends AppWidgetProvider {
         }
 
         @Override
-        protected Double doInBackground(Void... params) {
+        protected WeatherData doInBackground(Void... params) {
             String apiKey = "bdeec3fe00b9a10009325e073c8ec400";
             String units = "imperial";
             String url = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey + "&units=" + units;
@@ -134,7 +146,15 @@ public class WeatherWidget extends AppWidgetProvider {
                     if (responseCode == 200) {
                         JSONObject mainObject = json.getJSONObject("main");
                         double temperature = mainObject.getDouble("temp");
-                        return temperature;
+                        int humidity = mainObject.getInt("humidity");
+                        
+                        JSONArray weatherArray = json.getJSONArray("weather");
+                        String description = "";
+                        if (weatherArray.length() > 0) {
+                            description = weatherArray.getJSONObject(0).getString("description");
+                        }
+                        
+                        return new WeatherData(temperature, description, humidity);
                     } else {
                         // Handle the case when the API response is not successful
                         Log.e("WeatherWidgetProvider", "API response is not successful, cod: " + responseCode);
@@ -152,13 +172,22 @@ public class WeatherWidget extends AppWidgetProvider {
         }
 
         @Override
-        protected void onPostExecute(Double temperature) {
-            if (temperature != null) {
+        protected void onPostExecute(WeatherData weatherData) {
+            if (weatherData != null) {
                 // Update the widget UI
                 for (int appWidgetId : appWidgetIds) {
                     // Construct the RemoteViews object for the widget
                     RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.weather_widget);
-                    views.setTextViewText(R.id.temperature, Math.round(temperature) + "°F");
+                    views.setTextViewText(R.id.temperature, Math.round(weatherData.temperature) + "°F");
+                    
+                    views.setTextViewText(R.id.description, weatherData.description);
+                    views.setViewVisibility(R.id.description, android.view.View.VISIBLE);
+                    
+                    views.setTextViewText(R.id.favoriteCity, city);
+                    views.setViewVisibility(R.id.favoriteCity, android.view.View.VISIBLE);
+                    
+                    views.setTextViewText(R.id.humidity, "Humidity: " + weatherData.humidity + "%");
+                    views.setViewVisibility(R.id.humidity, android.view.View.VISIBLE);
 
                     // Create an Intent to launch WeatherActivity
                     Intent intent = new Intent(context, WeatherActivity.class);

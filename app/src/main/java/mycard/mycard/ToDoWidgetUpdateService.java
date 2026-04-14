@@ -1,5 +1,6 @@
 package mycard.mycard;
 // ToDoWidgetUpdateService.java
+import android.app.PendingIntent;
 import android.app.Service;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
@@ -39,6 +40,7 @@ public class ToDoWidgetUpdateService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        updateWidget();
         return START_STICKY;
     }
 
@@ -77,9 +79,14 @@ public class ToDoWidgetUpdateService extends Service {
 
                             List<String> todos = (List<String>) todosObject;
                             // Now 'todos' contains the array of strings, you can process it further
-                            // For example, you can join the strings into a single string to display in the widget
-                            String todosString = TextUtils.join("\n", todos);
-                            updateToDoWidgetUI(todosString);
+                            // Create a StringBuilder to hold the formatted todos with hyphens
+                            StringBuilder formattedTodos = new StringBuilder();
+                            for (String todo : todos) {
+                                if (todo != null && !todo.trim().isEmpty()) {
+                                    formattedTodos.append("- ").append(todo).append("\n");
+                                }
+                            }
+                            updateToDoWidgetUI(formattedTodos.toString().trim());
                         } else {
                             // Handle the case when the 'todos' field is not an array or empty
                             updateToDoWidgetUI("");
@@ -101,14 +108,20 @@ public class ToDoWidgetUpdateService extends Service {
         }
     }
 
-    private void updateToDoWidgetUI(String todos) {
+    private void updateToDoWidgetUI(String todosText) {
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
         int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(this, ToDoWidget.class));
 
-        for (int appWidgetId : appWidgetIds) {
+        if (appWidgetIds.length > 0) {
             RemoteViews views = new RemoteViews(getPackageName(), R.layout.to_do_widget);
-            views.setTextViewText(R.id.todoListTextView, todos);
-            appWidgetManager.updateAppWidget(appWidgetId, views);
+            views.setTextViewText(R.id.todoListTextView, todosText);
+
+            // Create an Intent to launch ManageTodosActivity
+            Intent intent = new Intent(this, ManageTodosActivity.class);
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+            views.setOnClickPendingIntent(R.id.widget_layout, pendingIntent);
+
+            appWidgetManager.updateAppWidget(appWidgetIds, views);
         }
     }
 }

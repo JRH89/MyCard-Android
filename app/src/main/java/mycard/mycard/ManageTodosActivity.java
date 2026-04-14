@@ -107,6 +107,10 @@ public class ManageTodosActivity extends AppCompatActivity {
         int[] ids = AppWidgetManager.getInstance(getApplication()).getAppWidgetIds(new ComponentName(getApplication(), ToDoWidget.class));
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
         sendBroadcast(intent);
+
+        // Also trigger the service update
+        Intent serviceIntent = new Intent(this, ToDoWidgetUpdateService.class);
+        startService(serviceIntent);
     }
 
 // Call this method whenever a todo is added or deleted in the activity
@@ -150,7 +154,9 @@ public class ManageTodosActivity extends AppCompatActivity {
                         // Document does not exist, create a new document and add the todo
                         List<String> newTodos = new ArrayList<>();
                         newTodos.add(newTodo);
-                        userDocRef.set(newTodos)
+                        java.util.Map<String, Object> data = new java.util.HashMap<>();
+                        data.put("todos", newTodos);
+                        userDocRef.set(data)
                                 .addOnSuccessListener(aVoid -> {
                                     // Todo added successfully
                                     fetchTodosFromFirestore();
