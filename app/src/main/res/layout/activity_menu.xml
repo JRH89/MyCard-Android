@@ -26,7 +26,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="32dp"
                 android:text="@string/menu_caps"
-                android:textColor="@color/onSurface"
+                android:textColor="@color/white"
                 android:textSize="32sp"
                 android:textStyle="bold" />
 
@@ -55,13 +55,13 @@
                     android:layout_marginBottom="16dp"
                     android:paddingVertical="14dp"
                     android:text="@string/todo_list"
-                    android:textColor="@color/primary"
+                    android:textColor="@color/white"
                     android:textSize="20sp"
                     app:backgroundTint="@color/surface"
                     app:cornerRadius="12dp"
                     app:icon="@android:drawable/checkbox_on_background"
                     app:iconPadding="8dp"
-                    app:iconTint="@color/primary" />
+                    app:iconTint="@color/white" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/supportButton"
@@ -71,29 +71,14 @@
                     android:layout_marginBottom="16dp"
                     android:paddingVertical="14dp"
                     android:text="@string/support"
-                    android:textColor="@color/secondary"
+                    android:textColor="@color/white"
                     android:textSize="20sp"
                     app:backgroundTint="@color/surface"
                     app:cornerRadius="12dp"
                     app:icon="@android:drawable/ic_menu_help"
                     app:iconPadding="8dp"
-                    app:iconTint="@color/secondary" />
+                    app:iconTint="@color/white" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/editCard"
-                    style="@style/Widget.Material3.Button.TonalButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:paddingVertical="14dp"
-                    android:text="@string/edit_card"
-                    android:textColor="@color/primary"
-                    android:textSize="20sp"
-                    app:backgroundTint="@color/surface"
-                    app:cornerRadius="12dp"
-                    app:icon="@android:drawable/ic_menu_edit"
-                    app:iconPadding="8dp"
-                    app:iconTint="@color/primary" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/deleteAcct"
@@ -103,13 +88,13 @@
                     android:layout_marginBottom="16dp"
                     android:paddingVertical="14dp"
                     android:text="@string/delete_account"
-                    android:textColor="@color/error"
+                    android:textColor="@color/white"
                     android:textSize="20sp"
                     app:backgroundTint="@color/surface"
                     app:cornerRadius="12dp"
                     app:icon="@android:drawable/ic_menu_delete"
                     app:iconPadding="8dp"
-                    app:iconTint="@color/error" />
+                    app:iconTint="@color/white" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/logout"
@@ -119,13 +104,13 @@
                     android:layout_marginBottom="16dp"
                     android:paddingVertical="14dp"
                     android:text="@string/logout"
-                    android:textColor="@color/onSurface"
+                    android:textColor="@color/white"
                     android:textSize="20sp"
                     app:backgroundTint="@color/surface"
                     app:cornerRadius="12dp"
                     app:icon="@android:drawable/ic_lock_power_off"
                     app:iconPadding="8dp"
-                    app:iconTint="@color/onSurface" />
+                    app:iconTint="@color/white" />
 
             </LinearLayout>
 
@@ -138,7 +123,7 @@
                 android:layout_marginBottom="32dp"
                 android:padding="8dp"
                 android:text="@string/visit_my_card_for_the_web"
-                android:textColor="@color/secondary"
+                android:textColor="@color/white"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 

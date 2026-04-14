@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    android:padding="16dp"
     tools:context=".WeatherActivity">
 
     <com.google.android.material.textfield.TextInputLayout
@@ -13,7 +12,8 @@
         style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="16dp"
         android:hint="@string/enter_city_name"
         app:boxStrokeColor="@color/secondary"
         app:hintTextColor="@color/secondary"
@@ -35,6 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
         android:text="@string/search"
         android:textColor="@color/black"
         app:backgroundTint="@color/yellow"
@@ -47,6 +48,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
+        android:layout_marginHorizontal="16dp"
         app:cardBackgroundColor="@color/surface"
         app:cardCornerRadius="24dp"
         app:layout_constraintTop_toBottomOf="@id/searchLayout"
@@ -134,6 +136,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="16dp"
         android:orientation="vertical"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/buttonSetFavoriteCity"
@@ -159,6 +162,7 @@
         android:id="@+id/buttonSetFavoriteCity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
         android:layout_marginBottom="16dp"
         android:text="@string/set_as_favorite"
         android:textColor="@color/white"
@@ -170,7 +174,9 @@
         layout="@layout/nav_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -13,7 +13,7 @@
         android:layout_gravity="center"
         android:layout_marginBottom="32dp"
         android:text="Share My Card"
-        android:textColor="@color/onSurface"
+        android:textColor="@color/white"
         android:textSize="22sp"
         android:textStyle="bold" />
 
@@ -25,11 +25,11 @@
         android:layout_marginBottom="16dp"
         android:paddingVertical="14dp"
         android:text="Share Link"
-        android:textColor="@color/secondary"
+        android:textColor="@color/white"
         android:textSize="18sp"
         app:backgroundTint="@color/background"
         app:icon="@android:drawable/ic_menu_share"
-        app:iconTint="@color/secondary"
+        app:iconTint="@color/white"
         app:iconPadding="8dp"
         app:cornerRadius="12dp" />
 
@@ -41,11 +41,11 @@
         android:layout_marginBottom="16dp"
         android:paddingVertical="14dp"
         android:text="Share QR Code"
-        android:textColor="@color/primary"
+        android:textColor="@color/white"
         android:textSize="18sp"
         app:backgroundTint="@color/background"
         app:icon="@drawable/qrcode"
-        app:iconTint="@color/primary"
+        app:iconTint="@color/white"
         app:iconPadding="8dp"
         app:cornerRadius="12dp" />
 
@@ -57,11 +57,11 @@
         android:layout_marginBottom="16dp"
         android:paddingVertical="14dp"
         android:text="Share via Email"
-        android:textColor="@color/onSurface"
+        android:textColor="@color/white"
         android:textSize="18sp"
         app:backgroundTint="@color/background"
         app:icon="@android:drawable/ic_dialog_email"
-        app:iconTint="@color/onSurface"
+        app:iconTint="@color/white"
         app:iconPadding="8dp"
         app:cornerRadius="12dp" />
 

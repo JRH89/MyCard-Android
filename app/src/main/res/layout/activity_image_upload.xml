@@ -3,13 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
-    android:padding="24dp">
+    android:background="@color/background">
 
     <TextView
         android:id="@+id/buttonClose"
         android:layout_width="48dp"
         android:layout_height="48dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
         android:gravity="center"
         android:text="@string/close_icon"
         android:textColor="@color/error"
@@ -23,6 +24,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         android:text="@string/image_upload_title"
         android:textColor="@color/primary"
         android:textSize="28sp"
@@ -35,6 +38,7 @@
         android:id="@+id/imageCard"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginHorizontal="24dp"
         android:layout_marginVertical="32dp"
         app:cardBackgroundColor="@color/surface"
         app:cardCornerRadius="16dp"
@@ -57,6 +61,7 @@
         android:id="@+id/uploadDescription"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
         android:layout_marginBottom="32dp"
         android:text="@string/image_upload_instruction"
         android:textAlignment="center"
@@ -71,6 +76,7 @@
         style="@style/Widget.Material3.Button.TonalButton"
         android:layout_width="0dp"
         android:layout_height="56dp"
+        android:layout_marginStart="24dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="24dp"
         android:onClick="onPickImageClick"
@@ -85,6 +91,7 @@
         android:layout_width="0dp"
         android:layout_height="56dp"
         android:layout_marginStart="8dp"
+        android:layout_marginEnd="24dp"
         android:layout_marginBottom="24dp"
         android:onClick="onUploadImageClick"
         android:text="@string/upload"
@@ -97,6 +104,8 @@
         layout="@layout/nav_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
