@@ -151,7 +151,8 @@
     <string name="choose_a_theme">Choose a theme</string>
     <string name="feels_like_label">Feels Like: </string>
     <string name="sunny">Sunny</string>
-    <string name="humidity_label">Humidity: </string>
+    <string name="humidity_format">Humidity: %1$d%%</string>
+    <string name="temp_format">%1$d°F</string>
     <string name="qr_generator">QR Generator</string>
     <string name="confirm_action">Confirm Action</string>
     <string name="generate_qr_code">Generate QR Code</string>

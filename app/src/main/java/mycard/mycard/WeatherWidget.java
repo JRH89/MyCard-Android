@@ -36,42 +36,46 @@ public class WeatherWidget extends AppWidgetProvider {
 
         // Check if the user is logged in
         if (currentUser != null) {
-            // Get the email of the current user
-            String userEmail = currentUser.getEmail();
+            updateFromFirestore(context, appWidgetManager, appWidgetIds, currentUser.getEmail());
+        } else {
+            Log.e("WeatherWidgetProvider", "User not logged in");
+            // Optionally update with a "Please log in" placeholder
+        }
+    }
 
-            // Access Firestore instance and get the document reference for the user's data
-            FirebaseFirestore db = FirebaseFirestore.getInstance();
-            DocumentReference userDocRef = db.collection(userEmail).document("userInfo");
+    private void updateFromFirestore(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds, String userEmail) {
+        // Access Firestore instance and get the document reference for the user's data
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        DocumentReference userDocRef = db.collection(userEmail).document("userInfo");
 
-            // Fetch the data from the document
-            userDocRef.get().addOnCompleteListener(task -> {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        // Document exists, fetch the favorite city
-                        String favoriteCity = document.getString("favoriteCity");
+        // Fetch the data from the document
+        userDocRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                DocumentSnapshot document = task.getResult();
+                if (document != null && document.exists()) {
+                    // Document exists, fetch the favorite city
+                    String favoriteCity = document.getString("favoriteCity");
 
-                        // Fetch weather data using the AsyncTask
-                        if (favoriteCity != null) {
-                            FetchWeatherDataTask weatherDataTask = new FetchWeatherDataTask(context, appWidgetManager, appWidgetIds, favoriteCity);
-                            weatherDataTask.execute();
-                        } else {
-                            // Handle the case when favoriteCity is null
-                            Log.e("WeatherWidgetProvider", "Favorite city is null");
-                        }
+                    // Fetch weather data using the AsyncTask
+                    if (favoriteCity != null) {
+                        FetchWeatherDataTask weatherDataTask = new FetchWeatherDataTask(context, appWidgetManager, appWidgetIds, favoriteCity);
+                        weatherDataTask.execute();
                     } else {
-                        // Document does not exist
-                        Log.e("WeatherWidgetProvider", "Document does not exist");
+                        // Handle the case when favoriteCity is null
+                        Log.e("WeatherWidgetProvider", "Favorite city is null");
                     }
                 } else {
-                    // Error fetching document
-                    FirebaseFirestoreException exception = (FirebaseFirestoreException) task.getException();
-                    if (exception != null) {
-                        Log.e("WeatherWidgetProvider", "Error fetching document: " + exception.getMessage());
-                    }
+                    // Document does not exist
+                    Log.e("WeatherWidgetProvider", "Document does not exist");
                 }
-            });
-        }
+            } else {
+                // Error fetching document
+                Exception exception = task.getException();
+                if (exception != null) {
+                    Log.e("WeatherWidgetProvider", "Error fetching document: " + exception.getMessage());
+                }
+            }
+        });
     }
 
 
@@ -118,7 +122,7 @@ public class WeatherWidget extends AppWidgetProvider {
 
         @Override
         protected WeatherData doInBackground(Void... params) {
-            String apiKey = "bdeec3fe00b9a10009325e073c8ec400";
+            String apiKey = BuildConfig.OPEN_WEATHER_API_KEY;
             String units = "imperial";
             String url = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey + "&units=" + units;
 
@@ -178,7 +182,7 @@ public class WeatherWidget extends AppWidgetProvider {
                 for (int appWidgetId : appWidgetIds) {
                     // Construct the RemoteViews object for the widget
                     RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.weather_widget);
-                    views.setTextViewText(R.id.temperature, Math.round(weatherData.temperature) + "°F");
+                    views.setTextViewText(R.id.temperature, context.getString(R.string.temp_format, Math.round(weatherData.temperature)));
                     
                     views.setTextViewText(R.id.description, weatherData.description);
                     views.setViewVisibility(R.id.description, android.view.View.VISIBLE);
@@ -186,7 +190,7 @@ public class WeatherWidget extends AppWidgetProvider {
                     views.setTextViewText(R.id.favoriteCity, city);
                     views.setViewVisibility(R.id.favoriteCity, android.view.View.VISIBLE);
                     
-                    views.setTextViewText(R.id.humidity, "Humidity: " + weatherData.humidity + "%");
+                    views.setTextViewText(R.id.humidity, context.getString(R.string.humidity_format, weatherData.humidity));
                     views.setViewVisibility(R.id.humidity, android.view.View.VISIBLE);
 
                     // Create an Intent to launch WeatherActivity
