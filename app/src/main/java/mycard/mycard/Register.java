@@ -67,11 +67,11 @@ public class Register extends AppCompatActivity {
                 password = String.valueOf(editTextPassword.getText());
 
                 if (TextUtils.isEmpty(email)) {
-                    Toast.makeText(Register.this, "Enter email", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Register.this, R.string.enter_email, Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (TextUtils.isEmpty(password)) {
-                    Toast.makeText(Register.this, "Enter password", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Register.this, R.string.enter_password, Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -81,7 +81,7 @@ public class Register extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 progressBar.setVisibility(View.GONE);
                                 if (task.isSuccessful()) {
-                                    Toast.makeText(Register.this, "Account Created.", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(Register.this, R.string.account_created, Toast.LENGTH_SHORT).show();
 
                                     // Navigate to the form activity
                                     Intent intent = new Intent(Register.this, FormActivity.class);
@@ -89,7 +89,7 @@ public class Register extends AppCompatActivity {
                                     finish();
                                 } else {
                                     // If sign in fails, display a message to the user.
-                                    Toast.makeText(Register.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(Register.this, R.string.auth_failed, Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });

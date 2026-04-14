@@ -23,6 +23,9 @@ import java.util.List;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
+import mycard.mycard.workers.ToDoUpdateWorker;
 
 public class ManageTodosActivity extends AppCompatActivity {
 
@@ -108,9 +111,9 @@ public class ManageTodosActivity extends AppCompatActivity {
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
         sendBroadcast(intent);
 
-        // Also trigger the service update
-        Intent serviceIntent = new Intent(this, ToDoWidgetUpdateService.class);
-        startService(serviceIntent);
+        // Trigger an immediate update via WorkManager
+        OneTimeWorkRequest updateRequest = new OneTimeWorkRequest.Builder(ToDoUpdateWorker.class).build();
+        WorkManager.getInstance(this).enqueue(updateRequest);
     }
 
 // Call this method whenever a todo is added or deleted in the activity
@@ -121,99 +124,43 @@ public class ManageTodosActivity extends AppCompatActivity {
 
     private void addTodoToFirestore(String newTodo) {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        // Check if the user is logged in
         if (currentUser != null) {
-            // Get the email of the current user
             String userEmail = currentUser.getEmail();
-
-            // Access Firestore instance and get the document reference for the user's data
             FirebaseFirestore db = FirebaseFirestore.getInstance();
             DocumentReference userDocRef = db.collection(userEmail).document("ToDo");
 
-            // Fetch the data from the document
-            userDocRef.get().addOnCompleteListener(task -> {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        // Document exists, fetch the todos and update the list
-                        Object todosObject = document.get("todos");
-                        if (todosObject instanceof List<?>) {
-                            List<String> todos = (List<String>) todosObject;
-                            todos.add(newTodo);
-                            userDocRef.update("todos", todos)
-                                    .addOnSuccessListener(aVoid -> {
-                                        // Update successful
-                                        fetchTodosFromFirestore();
-                                        sendWidgetUpdateBroadcast();// Refresh the list to show the added todo
-                                    })
-                                    .addOnFailureListener(e -> {
-                                        // Handle the error here
-                                    });
-                        }
-                    } else {
-                        // Document does not exist, create a new document and add the todo
-                        List<String> newTodos = new ArrayList<>();
-                        newTodos.add(newTodo);
+            userDocRef.update("todos", com.google.firebase.firestore.FieldValue.arrayUnion(newTodo))
+                    .addOnSuccessListener(aVoid -> {
+                        fetchTodosFromFirestore();
+                        sendWidgetUpdateBroadcast();
+                    })
+                    .addOnFailureListener(e -> {
+                        // If document doesn't exist, create it
                         java.util.Map<String, Object> data = new java.util.HashMap<>();
+                        java.util.List<String> newTodos = new java.util.ArrayList<>();
+                        newTodos.add(newTodo);
                         data.put("todos", newTodos);
-                        userDocRef.set(data)
-                                .addOnSuccessListener(aVoid -> {
-                                    // Todo added successfully
-                                    fetchTodosFromFirestore();
-                                    sendWidgetUpdateBroadcast();// Refresh the list to show the added todo
-                                })
-                                .addOnFailureListener(e -> {
-                                    // Handle the error here
-                                });
-                    }
-                } else {
-                    // Error fetching document
-                }
-            });
+                        userDocRef.set(data).addOnSuccessListener(aVoid2 -> {
+                            fetchTodosFromFirestore();
+                            sendWidgetUpdateBroadcast();
+                        });
+                    });
         }
-
     }
 
     private void deleteTodoFromFirestore(String todo) {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        // Check if the user is logged in
         if (currentUser != null) {
-            // Get the email of the current user
             String userEmail = currentUser.getEmail();
-
-            // Access Firestore instance and get the document reference for the user's data
             FirebaseFirestore db = FirebaseFirestore.getInstance();
             DocumentReference userDocRef = db.collection(userEmail).document("ToDo");
 
-            // Fetch the data from the document
-            userDocRef.get().addOnCompleteListener(task -> {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        // Document exists, fetch the todos and update the list
-                        Object todosObject = document.get("todos");
-                        if (todosObject instanceof List<?>) {
-                            List<String> todos = (List<String>) todosObject;
-                            todos.remove(todo);
-                            userDocRef.update("todos", todos)
-                                    .addOnSuccessListener(aVoid -> {
-                                        // Update successful
-                                        fetchTodosFromFirestore();
-                                        sendWidgetUpdateBroadcast();// Refresh the list to show the updated todos
-                                    })
-                                    .addOnFailureListener(e -> {
-                                        // Handle the error here
-                                    });
-                        }
-                    } else {
-                        // Document does not exist, nothing to delete
-                    }
-                } else {
-                    // Error fetching document
-                }
-            });
+            userDocRef.update("todos", com.google.firebase.firestore.FieldValue.arrayRemove(todo))
+                    .addOnSuccessListener(aVoid -> {
+                        fetchTodosFromFirestore();
+                        sendWidgetUpdateBroadcast();
+                    });
         }
-
     }
 
 }

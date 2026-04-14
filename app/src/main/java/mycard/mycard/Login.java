@@ -78,11 +78,11 @@ public class Login extends AppCompatActivity {
                 password = String.valueOf(editTextPassword.getText());
 
                 if (TextUtils.isEmpty(email)) {
-                    Toast.makeText(Login.this, "Enter email", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Login.this, R.string.enter_email, Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (TextUtils.isEmpty(password)) {
-                    Toast.makeText(Login.this, "Enter password", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Login.this, R.string.enter_password, Toast.LENGTH_SHORT).show();
                     return;
                 }
                 mAuth.signInWithEmailAndPassword(email, password)
@@ -91,12 +91,12 @@ public class Login extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 progressBar.setVisibility(View.GONE);
                                 if (task.isSuccessful()) {
-                                    Toast.makeText(getApplicationContext(), "Login Successful", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(), R.string.login_successful, Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                     startActivity(intent);
                                     finish();
                                 } else {
-                                    Toast.makeText(Login.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(Login.this, R.string.auth_failed, Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
@@ -130,7 +130,7 @@ public class Login extends AppCompatActivity {
                     // Handle Submit button click (if needed)
                     String email = editTextEmail.getText().toString().trim();
                     if (TextUtils.isEmpty(email)) {
-                        Toast.makeText(Login.this, "Enter your email", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Login.this, R.string.enter_email, Toast.LENGTH_SHORT).show();
                         return;
                     }
 
@@ -141,9 +141,9 @@ public class Login extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<Void> task) {
                                     progressBar.setVisibility(View.GONE);
                                     if (task.isSuccessful()) {
-                                        Toast.makeText(Login.this, "Password reset email sent", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(Login.this, R.string.password_reset_sent, Toast.LENGTH_SHORT).show();
                                     } else {
-                                        Toast.makeText(Login.this, "Failed to send password reset email", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(Login.this, R.string.password_reset_failed, Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });

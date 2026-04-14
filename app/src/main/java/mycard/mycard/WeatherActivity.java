@@ -54,7 +54,7 @@ public class WeatherActivity extends AppCompatActivity {
     private ForecastAdapter forecastAdapter; // Declare the forecastAdapter as a class-level member
     private RecyclerView recyclerViewForecast; // Declare the recyclerViewForecast as a class-level member
 
-    private static final String API_KEY = "35913733e7f076a1cac136c1de270b7d"; // Replace with your OpenWeatherMap API Key
+    private static final String API_KEY = BuildConfig.OPEN_WEATHER_API_KEY; 
     private static final String BASE_URL = "https://api.openweathermap.org/data/2.5/weather";
 
     private static class WeatherData {
@@ -177,7 +177,7 @@ public class WeatherActivity extends AppCompatActivity {
                     editTextCity.clearFocus();
                     editTextCity.setText("");
                 } else {
-                    Toast.makeText(WeatherActivity.this, "Please enter a city name.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(WeatherActivity.this, R.string.enter_city_error, Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -202,18 +202,18 @@ public class WeatherActivity extends AppCompatActivity {
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
-                                        Toast.makeText(WeatherActivity.this, "Favorite city updated.", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(WeatherActivity.this, R.string.favorite_city_updated, Toast.LENGTH_SHORT).show();
                                     }
                                 })
                                 .addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(WeatherActivity.this, "Failed to update favorite city.", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(WeatherActivity.this, R.string.favorite_city_update_failed, Toast.LENGTH_SHORT).show();
                                     }
                                 });
                     }
                 } else {
-                    Toast.makeText(WeatherActivity.this, "Please enter a city name.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(WeatherActivity.this, R.string.enter_city_error, Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -297,7 +297,7 @@ public class WeatherActivity extends AppCompatActivity {
                 // Update the UI with the forecast data
                 updateForecastUI(forecastItems);
             } else {
-                Toast.makeText(WeatherActivity.this, "Failed to fetch forecast data.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(WeatherActivity.this, R.string.fetch_forecast_failed, Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -371,17 +371,17 @@ public class WeatherActivity extends AppCompatActivity {
                 // Update the UI with the weather data
                 updateCurrentWeatherUI(weatherData);
             } else {
-                Toast.makeText(WeatherActivity.this, "Failed to fetch weather data.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(WeatherActivity.this, R.string.fetch_weather_failed, Toast.LENGTH_SHORT).show();
             }
         }
     }
 
     private void updateCurrentWeatherUI(WeatherData weatherData) {
         // Update the UI with the current weather data
-        textViewTemperature.setText(Math.round(weatherData.getTemperature()) + " °F");
-        textViewHumidity.setText("Humidity: " + Math.round(weatherData.getHumidity()) + "%");
-        textViewWind.setText("Wind Speed: " + Math.round(weatherData.getWindSpeed()) + " mph");
-        textViewFeelsLike.setText("Feels Like: " + Math.round(weatherData.getFeelsLike()) + " °F");
+        textViewTemperature.setText(getString(R.string.temp_format, Math.round(weatherData.getTemperature())));
+        textViewHumidity.setText(getString(R.string.humidity_format, Math.round(weatherData.getHumidity())));
+        textViewWind.setText(getString(R.string.wind_speed_format, Math.round(weatherData.getWindSpeed())));
+        textViewFeelsLike.setText(getString(R.string.feels_like_format, Math.round(weatherData.getFeelsLike())));
         weatherDesc.setText(weatherData.getWeatherDescription()); // Set the weather description
     }
 

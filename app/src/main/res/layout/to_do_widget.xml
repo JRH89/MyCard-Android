@@ -30,6 +30,16 @@
             android:textColor="@color/white"
             android:textSize="14sp" />
 
+        <TextView
+            android:id="@+id/lastUpdated"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textAlignment="center"
+            android:textColor="@color/outline"
+            android:textSize="10sp"
+            android:visibility="gone" />
+
     </LinearLayout>
 
 </FrameLayout>

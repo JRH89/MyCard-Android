@@ -1,116 +1,57 @@
 package mycard.mycard;
 
-import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
-import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
 import android.widget.RemoteViews;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.DocumentSnapshot;
+import androidx.work.ExistingPeriodicWorkPolicy;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import mycard.mycard.workers.ToDoUpdateWorker;
 
 public class ToDoWidget extends AppWidgetProvider {
 
+    private static final String WORK_NAME = "ToDoUpdateWorker";
+
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-        // Called when the widget is updated
-        Intent updateServiceIntent = new Intent(context, ToDoWidgetUpdateService.class);
-        context.startService(updateServiceIntent);
-        // Fetch the current user from Firebase Auth
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-
-        // Check if the user is logged in
-        if (currentUser != null) {
-            // Get the email of the current user
-            String userEmail = currentUser.getEmail();
-
-            // Access Firestore instance and get the document reference for the user's data
-            FirebaseFirestore db = FirebaseFirestore.getInstance();
-            DocumentReference userDocRef = db.collection(userEmail).document("ToDo");
-
-            // Fetch the data from the document
-            userDocRef.get().addOnCompleteListener(task -> {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        // Document exists, fetch the todos and update the widget UI
-                        Object todosObject = document.get("todos");
-                        if (todosObject instanceof List<?>) {
-                            List<String> todos = (List<String>) todosObject;
-                            // Now 'todos' contains the array of strings, you can process it further
-                            // For example, you can join the strings into a single string to display in the widget
-                            updateToDoWidgetUI(context, appWidgetManager, appWidgetIds, todos);
-                        } else {
-                            // Handle the case when the 'todos' field is not an array or empty
-                            updateToDoWidgetUI(context, appWidgetManager, appWidgetIds, new ArrayList<>());
-                        }
-
-                    } else {
-                        // Document does not exist
-                        // Handle the case when the document doesn't exist or todos array is empty
-                        updateToDoWidgetUI(context, appWidgetManager, appWidgetIds, Collections.singletonList(""));
-                    }
-                } else {
-                    // Error fetching document
-                    FirebaseFirestoreException exception = (FirebaseFirestoreException) task.getException();
-                    if (exception != null) {
-                        // Handle the error here
-                        updateToDoWidgetUI(context, appWidgetManager, appWidgetIds, Collections.singletonList(""));
-                    }
-                }
-            });
-
+        // Initial loading state
+        for (int appWidgetId : appWidgetIds) {
+            RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.to_do_widget);
+            views.setTextViewText(R.id.todoListTextView, context.getString(R.string.loading));
+            appWidgetManager.updateAppWidget(appWidgetId, views);
         }
+
+        // Schedule periodic updates
+        schedulePeriodicUpdate(context);
     }
 
     @Override
-    public void onReceive(Context context, Intent intent) {
-        super.onReceive(context, intent);
-        if (intent != null) {
-            String action = intent.getAction();
-            if (action != null && (action.equals(AppWidgetManager.ACTION_APPWIDGET_UPDATE) || action.equals(Intent.ACTION_BOOT_COMPLETED))) {
-                // Update the widget UI whenever the broadcast is received
-                AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-                int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(context, ToDoWidget.class));
-                if (appWidgetIds != null && appWidgetIds.length > 0) {
-                    onUpdate(context, appWidgetManager, appWidgetIds);
-                }
-            }
-        }
+    public void onEnabled(Context context) {
+        super.onEnabled(context);
+        schedulePeriodicUpdate(context);
     }
 
-    private void updateToDoWidgetUI(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds, List<String> todos) {
-        // Update the widget UI here with the fetched To-Do items (todos)
-        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.to_do_widget);
-
-        // Create a StringBuilder to hold the formatted todos with hyphens
-        StringBuilder formattedTodos = new StringBuilder();
-
-        // Add hyphen "-" in front of each todo item
-        for (String todo : todos) {
-            formattedTodos.append("- ").append(todo).append("\n");
-        }
-
-        views.setTextViewText(R.id.todoListTextView, formattedTodos.toString());
-
-        // Create an Intent to launch ManageTodosActivity
-        Intent intent = new Intent(context, ManageTodosActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
-        views.setOnClickPendingIntent(R.id.widget_layout, pendingIntent);
-
-        // Update all instances of the widget with the updated RemoteViews
-        appWidgetManager.updateAppWidget(appWidgetIds, views);
+    @Override
+    public void onDisabled(Context context) {
+        super.onDisabled(context);
+        WorkManager.getInstance(context).cancelUniqueWork(WORK_NAME);
     }
 
+    private void schedulePeriodicUpdate(Context context) {
+        PeriodicWorkRequest workRequest = new PeriodicWorkRequest.Builder(
+                ToDoUpdateWorker.class,
+                15, TimeUnit.MINUTES)
+                .addTag(WORK_NAME)
+                .build();
 
+        WorkManager.getInstance(context).enqueueUniquePeriodicWork(
+                WORK_NAME,
+                ExistingPeriodicWorkPolicy.KEEP,
+                workRequest);
+    }
 }
