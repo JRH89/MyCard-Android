@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/buttonRow"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@drawable/nav_bar_background"
+    android:gravity="center_vertical"
+    android:padding="4dp">
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/home_button"
+        style="@style/Widget.Material3.Button.TextButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/home"
+        android:textColor="@color/onSurface"
+        android:textSize="16sp"
+        app:icon="@android:drawable/ic_menu_today"
+        app:iconGravity="top"
+        app:iconPadding="4dp"
+        app:iconSize="28dp"
+        app:iconTint="@color/onSurface" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="40dp"
+        android:background="@color/divider" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/edit_button"
+        style="@style/Widget.Material3.Button.TextButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/edit"
+        android:textColor="@color/primary"
+        android:textSize="16sp"
+        app:icon="@android:drawable/ic_menu_edit"
+        app:iconGravity="top"
+        app:iconPadding="4dp"
+        app:iconSize="28dp"
+        app:iconTint="@color/primary" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="40dp"
+        android:background="@color/divider" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/share_button"
+        style="@style/Widget.Material3.Button.TextButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/share"
+        android:textColor="@color/secondary"
+        android:textSize="16sp"
+        app:icon="@android:drawable/ic_menu_share"
+        app:iconGravity="top"
+        app:iconPadding="4dp"
+        app:iconSize="28dp"
+        app:iconTint="@color/secondary" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="40dp"
+        android:background="@color/divider" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/menu_button"
+        style="@style/Widget.Material3.Button.TextButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/menu"
+        android:textColor="@color/onSurface"
+        android:textSize="16sp"
+        app:icon="@android:drawable/ic_menu_more"
+        app:iconGravity="top"
+        app:iconPadding="4dp"
+        app:iconSize="28dp"
+        app:iconTint="@color/onSurface" />
+
+</LinearLayout>

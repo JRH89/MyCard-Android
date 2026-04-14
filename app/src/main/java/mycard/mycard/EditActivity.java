@@ -111,6 +111,40 @@ public class EditActivity extends AppCompatActivity {
             }
         });
 
+        setupNavigation();
+    }
+
+    private void setupNavigation() {
+        View navBar = findViewById(R.id.buttonRow);
+        if (navBar == null) return;
+
+        View homeBtn = navBar.findViewById(R.id.home_button);
+        if (homeBtn != null) {
+            homeBtn.setOnClickListener(v -> {
+                startActivity(new Intent(this, MainActivity.class));
+            });
+        }
+
+        View editBtn = navBar.findViewById(R.id.edit_button);
+        if (editBtn != null) {
+            editBtn.setOnClickListener(v -> {
+                Toast.makeText(this, "You are editing your card", Toast.LENGTH_SHORT).show();
+            });
+        }
+
+        View shareBtn = navBar.findViewById(R.id.share_button);
+        if (shareBtn != null) {
+            shareBtn.setOnClickListener(v -> {
+                Toast.makeText(this, "Go to Home to share your card", Toast.LENGTH_SHORT).show();
+            });
+        }
+
+        View menuBtn = navBar.findViewById(R.id.menu_button);
+        if (menuBtn != null) {
+            menuBtn.setOnClickListener(v -> {
+                startActivity(new Intent(this, MenuActivity.class));
+            });
+        }
     }
 
     private void loadUserData() {

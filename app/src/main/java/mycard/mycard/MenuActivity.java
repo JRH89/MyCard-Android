@@ -73,15 +73,43 @@ public class MenuActivity extends AppCompatActivity {
             showDeleteAccountConfirmationDialog();
         });
 
-        buttonEditCard = findViewById(R.id.editCard);
-        buttonEditCard.setOnClickListener(view -> {
-            Intent intent = new Intent(getApplicationContext(), EditActivity.class);
-            startActivity(intent);
-        });
+        setupNavigation();
+    }
 
-        buttonCloseMenu = findViewById(R.id.btnCloseMenu);
-        buttonCloseMenu.setOnClickListener(view -> onBackPressed());
+    private void setupNavigation() {
+        View navBar = findViewById(R.id.buttonRow);
+        if (navBar != null) {
+            View homeBtn = navBar.findViewById(R.id.home_button);
+            if (homeBtn != null) {
+                homeBtn.setOnClickListener(v -> {
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    startActivity(intent);
+                });
+            }
 
+            View editBtn = navBar.findViewById(R.id.edit_button);
+            if (editBtn != null) {
+                editBtn.setOnClickListener(v -> {
+                    startActivity(new Intent(this, EditActivity.class));
+                });
+            }
+
+            View shareBtn = navBar.findViewById(R.id.share_button);
+            if (shareBtn != null) {
+                shareBtn.setOnClickListener(v -> {
+                    Toast.makeText(this, "Go to Home to share your card", Toast.LENGTH_SHORT).show();
+                });
+            }
+
+            View menuBtn = navBar.findViewById(R.id.menu_button);
+            if (menuBtn != null) {
+                menuBtn.setOnClickListener(v -> {
+                    Toast.makeText(this, "You are in the menu", Toast.LENGTH_SHORT).show();
+                });
+            }
+        }
+        
         buttonSupport = findViewById(R.id.supportButton);
         buttonSupport.setOnClickListener(view -> {
             Intent intent = new Intent(Intent.ACTION_SENDTO);
@@ -146,8 +174,6 @@ public class MenuActivity extends AppCompatActivity {
                 }
             }
         });
-
-
     }
 
         private Bitmap convertBase64ToBitmap(String base64String) {

@@ -1,6 +1,7 @@
 package mycard.mycard;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 
 import android.graphics.Color;
@@ -59,6 +60,41 @@ public class GenerateQRCodeActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+        setupNavigation();
+    }
+
+    private void setupNavigation() {
+        android.view.View navBar = findViewById(R.id.buttonRow);
+        if (navBar == null) return;
+
+        android.view.View homeBtn = navBar.findViewById(R.id.home_button);
+        if (homeBtn != null) {
+            homeBtn.setOnClickListener(v -> {
+                startActivity(new Intent(this, MainActivity.class));
+            });
+        }
+
+        android.view.View editBtn = navBar.findViewById(R.id.edit_button);
+        if (editBtn != null) {
+            editBtn.setOnClickListener(v -> {
+                startActivity(new Intent(this, EditActivity.class));
+            });
+        }
+
+        android.view.View shareBtn = navBar.findViewById(R.id.share_button);
+        if (shareBtn != null) {
+            shareBtn.setOnClickListener(v -> {
+                Toast.makeText(this, "You are already sharing", Toast.LENGTH_SHORT).show();
+            });
+        }
+
+        android.view.View menuBtn = navBar.findViewById(R.id.menu_button);
+        if (menuBtn != null) {
+            menuBtn.setOnClickListener(v -> {
+                startActivity(new Intent(this, MenuActivity.class));
+            });
+        }
     }
 
     private void generateQRCodeAndShow() {

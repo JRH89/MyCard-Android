@@ -194,43 +194,61 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        MaterialButton hamburgerButton = findViewById(R.id.hamburger_button);
-        hamburgerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MenuActivity.class);
-                startActivity(intent);
-            }
-        });
-        LinearLayout buttonRow = findViewById(R.id.buttonRow);
 
-        MaterialButton shareButton = findViewById(R.id.share_button);
-        shareButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+
+        // MaterialButton editCardBtn = findViewById(R.id.editCard);
+        // editCardBtn.setOnClickListener(new View.OnClickListener() {
+        //     @Override
+        //     public void onClick(View v) {
+        //         Intent intent = new Intent(getApplicationContext(), EditActivity.class);
+        //         startActivity(intent);
+        //     }
+        // });
+
+        setupNavigation();
+    }
+
+    private void setupNavigation() {
+        View navBar = findViewById(R.id.buttonRow);
+        if (navBar == null) return;
+
+        View homeBtn = navBar.findViewById(R.id.home_button);
+        if (homeBtn != null) {
+            homeBtn.setOnClickListener(v -> {
+                Toast.makeText(MainActivity.this, "You are at Home", Toast.LENGTH_SHORT).show();
+            });
+        }
+
+        View editBtn = navBar.findViewById(R.id.edit_button);
+        if (editBtn != null) {
+            editBtn.setOnClickListener(v -> {
+                try {
+                    startActivity(new Intent(this, EditActivity.class));
+                } catch (Exception e) {
+                    Toast.makeText(this, "Error starting EditActivity", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
+            });
+        }
+
+        View shareBtn = navBar.findViewById(R.id.share_button);
+        if (shareBtn != null) {
+            shareBtn.setOnClickListener(v -> {
                 showShareDialog();
-            }
-        });
+            });
+        }
 
-        MaterialButton editCardBtn = findViewById(R.id.editCard);
-        editCardBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), EditActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        /*
-        textView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String url = textView.getText().toString();
-                openInBrowser(url);
-            }
-        });
-        */
-        registerForContextMenu(qrImageView);
+        View menuBtn = navBar.findViewById(R.id.menu_button);
+        if (menuBtn != null) {
+            menuBtn.setOnClickListener(v -> {
+                try {
+                    startActivity(new Intent(this, MenuActivity.class));
+                } catch (Exception e) {
+                    Toast.makeText(this, "Error starting MenuActivity", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
+            });
+        }
     }
 
     @Override

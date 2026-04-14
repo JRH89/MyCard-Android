@@ -37,6 +37,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import android.content.Context;
+import android.content.Intent;
 import android.view.inputmethod.InputMethodManager;
 
 
@@ -218,6 +219,44 @@ public class WeatherActivity extends AppCompatActivity {
             }
         });
 
+        setupNavigation();
+    }
+
+    private void setupNavigation() {
+        View navBar = findViewById(R.id.buttonRow);
+        if (navBar == null) return;
+
+        View homeBtn = navBar.findViewById(R.id.home_button);
+        if (homeBtn != null) {
+            homeBtn.setOnClickListener(v -> {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+            });
+        }
+
+        View editBtn = navBar.findViewById(R.id.edit_button);
+        if (editBtn != null) {
+            editBtn.setOnClickListener(v -> {
+                Intent intent = new Intent(getApplicationContext(), EditActivity.class);
+                startActivity(intent);
+            });
+        }
+
+        View shareBtn = navBar.findViewById(R.id.share_button);
+        if (shareBtn != null) {
+            shareBtn.setOnClickListener(v -> {
+                Toast.makeText(this, "Go to Home to share your card", Toast.LENGTH_SHORT).show();
+            });
+        }
+
+        View menuBtn = navBar.findViewById(R.id.menu_button);
+        if (menuBtn != null) {
+            menuBtn.setOnClickListener(v -> {
+                Intent intent = new Intent(getApplicationContext(), MenuActivity.class);
+                startActivity(intent);
+            });
+        }
     }
 
     private void hideKeyboard() {

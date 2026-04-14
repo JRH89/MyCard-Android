@@ -114,6 +114,23 @@ public class ImageUploadActivity extends AppCompatActivity {
             }
         });
 
+        setupNavigation();
+    }
+
+    private void setupNavigation() {
+        View navBar = findViewById(R.id.buttonRow);
+        navBar.findViewById(R.id.home_button).setOnClickListener(v -> {
+            startActivity(new Intent(this, MainActivity.class));
+        });
+        navBar.findViewById(R.id.edit_button).setOnClickListener(v -> {
+            startActivity(new Intent(this, EditActivity.class));
+        });
+        navBar.findViewById(R.id.share_button).setOnClickListener(v -> {
+            Toast.makeText(this, "Go to Home to share your card", Toast.LENGTH_SHORT).show();
+        });
+        navBar.findViewById(R.id.menu_button).setOnClickListener(v -> {
+            startActivity(new Intent(this, MenuActivity.class));
+        });
     }
 
 

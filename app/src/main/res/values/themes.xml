@@ -10,6 +10,7 @@
     <style name="Theme.MyCard" parent="Base.Theme.MyCard">
         <item name="android:statusBarColor">@color/background</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+        <item name="android:navigationBarColor">@color/surface</item>
         <item name="statusBarBackground">@color/background</item>
         <item name="backgroundColor">@color/background</item>
         <item name="android:backgroundTint">@color/background</item>

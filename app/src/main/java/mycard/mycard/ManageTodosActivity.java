@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 import com.google.android.material.button.MaterialButton;
 import android.widget.Button;
 import android.widget.EditText;
@@ -71,6 +72,41 @@ public class ManageTodosActivity extends AppCompatActivity {
 
         // Fetch todos from Firestore
         fetchTodosFromFirestore();
+
+        setupNavigation();
+    }
+
+    private void setupNavigation() {
+        View navBar = findViewById(R.id.buttonRow);
+        if (navBar == null) return;
+
+        View homeBtn = navBar.findViewById(R.id.home_button);
+        if (homeBtn != null) {
+            homeBtn.setOnClickListener(v -> {
+                startActivity(new Intent(this, MainActivity.class));
+            });
+        }
+
+        View editBtn = navBar.findViewById(R.id.edit_button);
+        if (editBtn != null) {
+            editBtn.setOnClickListener(v -> {
+                startActivity(new Intent(this, EditActivity.class));
+            });
+        }
+
+        View shareBtn = navBar.findViewById(R.id.share_button);
+        if (shareBtn != null) {
+            shareBtn.setOnClickListener(v -> {
+                Toast.makeText(this, "Go to Home to share your card", Toast.LENGTH_SHORT).show();
+            });
+        }
+
+        View menuBtn = navBar.findViewById(R.id.menu_button);
+        if (menuBtn != null) {
+            menuBtn.setOnClickListener(v -> {
+                startActivity(new Intent(this, MenuActivity.class));
+            });
+        }
     }
 
     private void fetchTodosFromFirestore() {

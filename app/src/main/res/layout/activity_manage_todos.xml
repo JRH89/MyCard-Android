@@ -73,8 +73,15 @@
         android:text="@string/delete_todo_hint"
         android:textColor="@color/onSurface"
         android:textStyle="italic"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/buttonRow"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <include
+        android:id="@+id/buttonRow"
+        layout="@layout/nav_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
