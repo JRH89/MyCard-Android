@@ -11,10 +11,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="32dp"
         android:text="Share My Card"
-        android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textColor="@color/onSurface"
+        android:textSize="22sp"
         android:textStyle="bold" />
 
     <com.google.android.material.button.MaterialButton
@@ -22,44 +22,53 @@
         style="@style/Widget.Material3.Button.TonalButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
+        android:layout_marginBottom="16dp"
+        android:paddingVertical="14dp"
         android:text="Share Link"
-        android:textColor="@color/white"
-        app:backgroundTint="@color/secondary"
+        android:textColor="@color/secondary"
+        app:backgroundTint="@color/surface"
         app:icon="@android:drawable/ic_menu_share"
-        app:iconTint="@color/white" />
+        app:iconTint="@color/secondary"
+        app:cornerRadius="12dp" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/shareQRCode"
         style="@style/Widget.Material3.Button.TonalButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
+        android:layout_marginBottom="16dp"
+        android:paddingVertical="14dp"
         android:text="Share QR Code"
-        android:textColor="@color/white"
-        app:backgroundTint="@color/primary"
+        android:textColor="@color/primary"
+        app:backgroundTint="@color/surface"
         app:icon="@drawable/qrcode"
-        app:iconTint="@color/black" />
+        app:iconTint="@color/primary"
+        app:cornerRadius="12dp" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/shareEmail"
         style="@style/Widget.Material3.Button.TonalButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
+        android:layout_marginBottom="16dp"
+        android:paddingVertical="14dp"
         android:text="Share via Email"
-        android:textColor="@color/white"
-        app:backgroundTint="@color/orange"
+        android:textColor="@color/onSurface"
+        app:backgroundTint="@color/surface"
         app:icon="@android:drawable/ic_dialog_email"
-        app:iconTint="@color/white" />
+        app:iconTint="@color/onSurface"
+        app:cornerRadius="12dp" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnCancelShare"
         style="@style/Widget.Material3.Button.OutlinedButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:paddingVertical="12dp"
         android:text="Cancel"
-        android:textColor="@color/white"
-        app:strokeColor="@color/outline" />
+        android:textColor="@color/onSurface"
+        app:strokeColor="@color/outline"
+        app:cornerRadius="12dp" />
 
 </LinearLayout>

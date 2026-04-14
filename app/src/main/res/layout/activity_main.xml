@@ -125,52 +125,42 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:background="@color/surface"
+        android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/editCard"
-            style="@style/Widget.Material3.Button.TonalButton"
+            style="@style/Widget.Material3.Button.TextButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:insetTop="0dp"
-            android:insetBottom="0dp"
-            android:insetLeft="0dp"
-            android:insetRight="0dp"
             android:text="@string/edit"
-            android:textColor="@color/white"
-            app:backgroundTint="@color/red"
-            app:cornerRadius="0dp" />
+            android:textColor="@color/primary"
+            app:icon="@android:drawable/ic_menu_edit"
+            app:iconTint="@color/primary" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/share_button"
-            style="@style/Widget.Material3.Button.TonalButton"
+            style="@style/Widget.Material3.Button.TextButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:insetTop="0dp"
-            android:insetBottom="0dp"
-            android:insetLeft="0dp"
-            android:insetRight="0dp"
             android:text="@string/share"
-            android:textColor="@color/white"
-            app:backgroundTint="@color/orange"
-            app:cornerRadius="0dp" />
+            android:textColor="@color/secondary"
+            app:icon="@android:drawable/ic_menu_share"
+            app:iconTint="@color/secondary" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/hamburger_button"
-            style="@style/Widget.Material3.Button.TonalButton"
+            style="@style/Widget.Material3.Button.TextButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:insetTop="0dp"
-            android:insetBottom="0dp"
-            android:insetLeft="0dp"
-            android:insetRight="0dp"
             android:text="@string/menu"
-            android:textColor="@color/white"
-            app:backgroundTint="@color/light_blue_600"
-            app:cornerRadius="0dp" />
+            android:textColor="@color/onSurface"
+            app:icon="@android:drawable/ic_menu_more"
+            app:iconTint="@color/onSurface" />
 
     </LinearLayout>
 
