@@ -1,8 +1,11 @@
 package mycard.mycard;
 
+import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
@@ -62,6 +65,21 @@ public class QRCodeWidget extends AppWidgetProvider {
         }
     }
 
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        super.onReceive(context, intent);
+        if (intent != null) {
+            String action = intent.getAction();
+            if (action != null && (action.equals(AppWidgetManager.ACTION_APPWIDGET_UPDATE) || action.equals(Intent.ACTION_BOOT_COMPLETED))) {
+                AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+                int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(context, QRCodeWidget.class));
+                if (appWidgetIds != null && appWidgetIds.length > 0) {
+                    onUpdate(context, appWidgetManager, appWidgetIds);
+                }
+            }
+        }
+    }
+
     private Bitmap convertBase64ToBitmap(String base64String) {
         // Remove the data URL prefix (e.g., "data:image/png;base64,")
         String imageData = base64String.substring(base64String.indexOf(",") + 1);
@@ -77,6 +95,11 @@ public class QRCodeWidget extends AppWidgetProvider {
 
         // Set the generated QR code bitmap to the ImageView in the widget layout
         views.setImageViewBitmap(R.id.qr_code_image_widget, qrCodeBitmap);
+
+        // Create an Intent to launch GenerateQRCodeActivity
+        Intent intent = new Intent(context, GenerateQRCodeActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+        views.setOnClickPendingIntent(R.id.qr_widget_layout, pendingIntent);
 
         // Update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);

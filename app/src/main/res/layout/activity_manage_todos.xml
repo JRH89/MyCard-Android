@@ -28,8 +28,9 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
         android:hint="@string/enter_new_todo"
-        app:boxStrokeColor="@color/secondary"
-        app:hintTextColor="@color/secondary"
+        app:boxStrokeColor="@color/white"
+        app:hintTextColor="@color/white"
+        app:placeholderTextColor="@color/white"
         app:layout_constraintEnd_toStartOf="@id/btnAddTodo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/todoTitle">
@@ -39,7 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
-            android:textColor="@color/onSurface" />
+            android:textColor="@color/white" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
@@ -47,7 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:text="@string/add"
-        android:textColor="@color/onPrimary"
+        android:textColor="@color/black"
         app:backgroundTint="@color/primary"
         app:layout_constraintBottom_toBottomOf="@id/todoInputLayout"
         app:layout_constraintEnd_toEndOf="parent"

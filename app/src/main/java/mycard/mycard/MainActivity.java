@@ -63,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
     TextView greeting;
     ImageView qrImageView;
     TextView weather;
-    WebView cardPreview;
 
     Button editCard;
 
@@ -83,7 +82,6 @@ public class MainActivity extends AppCompatActivity {
         qrImageView = findViewById(R.id.qr_image);
         greeting = findViewById(R.id.greeting);
         weather = findViewById(R.id.temperature); // Initialize the weather TextView
-        cardPreview = findViewById(R.id.cardPreview);
         editCard = findViewById(R.id.editCard);
 
         Calendar calendar = Calendar.getInstance();
@@ -169,34 +167,7 @@ public class MainActivity extends AppCompatActivity {
                         String userLink4 = document.getString("social4");
                         String userTheme = document.getString("theme");
 
-                        try {
-                        String encodedFullName = URLEncoder.encode(fullName, "UTF-8");
-                        String encodedUserJob = URLEncoder.encode(userJob, "UTF-8");
-                        String encodedUserPhone = URLEncoder.encode(userPhone, "UTF-8");
-                        String encodedUserEmail = URLEncoder.encode(userEmail, "UTF-8");
-                        String encodedUserLabel1 = URLEncoder.encode(userLabel1, "UTF-8");
-                        String encodedUserLink1 = URLEncoder.encode(userLink1, "UTF-8");
-                        String encodedUserLabel2 = URLEncoder.encode(userLabel2, "UTF-8");
-                        String encodedUserLink2 = URLEncoder.encode(userLink2, "UTF-8");
-                        String encodedUserLabel3 = URLEncoder.encode(userLabel3, "UTF-8");
-                        String encodedUserLink3 = URLEncoder.encode(userLink3, "UTF-8");
-                        String encodedUserLabel4 = URLEncoder.encode(userLabel4, "UTF-8");
-                        String encodedUserLink4 = URLEncoder.encode(userLink4, "UTF-8");
-                        String encodedUserTheme = URLEncoder.encode(userTheme, "UTF-8");
-
-                            String baseUrl = "https://have-mycard.vercel.app";
-                            String dynamicUrl = String.format("%s/%s/?name=%s&job=%s&phone=%s&email=%s&social1Label=%s&social1=%s&social2Label=%s&social2=%s&social3Label=%s&social3=%s&social4Label=%s&social4=%s",
-                                    baseUrl, encodedUserTheme, encodedFullName, encodedUserJob, encodedUserPhone, encodedUserEmail, encodedUserLabel1, encodedUserLink1, encodedUserLabel2, encodedUserLink2, encodedUserLabel3, encodedUserLink3, encodedUserLabel4, encodedUserLink4);
-
-                            Log.d("LongURL", dynamicUrl);
-
-                            cardPreview.getSettings().setJavaScriptEnabled(true);
-                            cardPreview.setWebViewClient(new WebViewClient());
-                            cardPreview.loadUrl(dynamicUrl);
-
-                        } catch (UnsupportedEncodingException e) {
-                            e.printStackTrace();
-                        }
+                        String city = document.getString("favoriteCity");
 
                     }
                 } else {

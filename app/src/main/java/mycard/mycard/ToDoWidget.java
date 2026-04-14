@@ -1,7 +1,9 @@
 package mycard.mycard;
 
+import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.widget.RemoteViews;
@@ -76,10 +78,10 @@ public class ToDoWidget extends AppWidgetProvider {
         super.onReceive(context, intent);
         if (intent != null) {
             String action = intent.getAction();
-            if (action != null && action.equals(AppWidgetManager.ACTION_APPWIDGET_UPDATE)) {
+            if (action != null && (action.equals(AppWidgetManager.ACTION_APPWIDGET_UPDATE) || action.equals(Intent.ACTION_BOOT_COMPLETED))) {
                 // Update the widget UI whenever the broadcast is received
                 AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-                int[] appWidgetIds = intent.getIntArrayExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS);
+                int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(context, ToDoWidget.class));
                 if (appWidgetIds != null && appWidgetIds.length > 0) {
                     onUpdate(context, appWidgetManager, appWidgetIds);
                 }
@@ -100,6 +102,11 @@ public class ToDoWidget extends AppWidgetProvider {
         }
 
         views.setTextViewText(R.id.todoListTextView, formattedTodos.toString());
+
+        // Create an Intent to launch ManageTodosActivity
+        Intent intent = new Intent(context, ManageTodosActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+        views.setOnClickPendingIntent(R.id.widget_layout, pendingIntent);
 
         // Update all instances of the widget with the updated RemoteViews
         appWidgetManager.updateAppWidget(appWidgetIds, views);

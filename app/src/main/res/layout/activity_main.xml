@@ -147,8 +147,23 @@
             android:insetLeft="0dp"
             android:insetRight="0dp"
             android:text="@string/edit"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             app:backgroundTint="@color/red"
+            app:cornerRadius="0dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/share_button"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:insetLeft="0dp"
+            android:insetRight="0dp"
+            android:text="@string/share"
+            android:textColor="@color/white"
+            app:backgroundTint="@color/orange"
             app:cornerRadius="0dp" />
 
         <com.google.android.material.button.MaterialButton
@@ -162,7 +177,7 @@
             android:insetLeft="0dp"
             android:insetRight="0dp"
             android:text="@string/menu"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             app:backgroundTint="@color/green"
             app:cornerRadius="0dp" />
 

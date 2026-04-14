@@ -51,7 +51,7 @@
             android:paddingVertical="12dp"
             android:text="@string/todo_list"
             app:backgroundTint="@color/secondary"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -64,7 +64,7 @@
             android:paddingVertical="12dp"
             android:text="@string/support"
             app:backgroundTint="@color/orange"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -91,7 +91,7 @@
             android:paddingVertical="12dp"
             android:text="@string/delete_account"
             app:backgroundTint="@color/primary"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -104,7 +104,7 @@
             android:paddingVertical="12dp"
             android:text="@string/logout"
             app:backgroundTint="@color/error"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="18sp"
             android:textStyle="bold" />
 

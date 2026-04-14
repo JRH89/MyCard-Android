@@ -75,7 +75,21 @@ public class WeatherWidget extends AppWidgetProvider {
     }
 
 
-    // Method to fetch weather data for the widget using AsyncTask
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        super.onReceive(context, intent);
+        if (intent != null) {
+            String action = intent.getAction();
+            if (action != null && (action.equals(AppWidgetManager.ACTION_APPWIDGET_UPDATE) || action.equals(Intent.ACTION_BOOT_COMPLETED))) {
+                AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+                int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(context, WeatherWidget.class));
+                if (appWidgetIds != null && appWidgetIds.length > 0) {
+                    onUpdate(context, appWidgetManager, appWidgetIds);
+                }
+            }
+        }
+    }
+
     // Method to fetch weather data for the widget using AsyncTask
     private static class FetchWeatherDataTask extends AsyncTask<Void, Void, Double> {
         private Context context;
@@ -145,6 +159,11 @@ public class WeatherWidget extends AppWidgetProvider {
                     // Construct the RemoteViews object for the widget
                     RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.weather_widget);
                     views.setTextViewText(R.id.temperature, Math.round(temperature) + "°F");
+
+                    // Create an Intent to launch WeatherActivity
+                    Intent intent = new Intent(context, WeatherActivity.class);
+                    PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+                    views.setOnClickPendingIntent(R.id.weather_widget_layout, pendingIntent);
 
                     // Instruct the widget manager to update the widget
                     appWidgetManager.updateAppWidget(appWidgetId, views);

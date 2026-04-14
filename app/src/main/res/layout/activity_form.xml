@@ -80,8 +80,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:hint="@string/name"
-            app:boxStrokeColor="@color/secondary"
-            app:hintTextColor="@color/secondary">
+            app:boxStrokeColor="@color/white"
+            app:hintTextColor="@color/white"
+            app:placeholderTextColor="@color/white">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/name"
@@ -97,8 +98,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:hint="@string/job_title"
-            app:boxStrokeColor="@color/secondary"
-            app:hintTextColor="@color/secondary">
+            app:boxStrokeColor="@color/white"
+            app:hintTextColor="@color/white"
+            app:placeholderTextColor="@color/white">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/job"
@@ -114,8 +116,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:hint="@string/phone"
-            app:boxStrokeColor="@color/secondary"
-            app:hintTextColor="@color/secondary">
+            app:boxStrokeColor="@color/white"
+            app:hintTextColor="@color/white"
+            app:placeholderTextColor="@color/white">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/phone"
@@ -131,8 +134,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:hint="@string/cardemail"
-            app:boxStrokeColor="@color/secondary"
-            app:hintTextColor="@color/secondary">
+            app:boxStrokeColor="@color/white"
+            app:hintTextColor="@color/white"
+            app:placeholderTextColor="@color/white">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/email"
@@ -148,8 +152,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:hint="@string/city"
-            app:boxStrokeColor="@color/secondary"
-            app:hintTextColor="@color/secondary">
+            app:boxStrokeColor="@color/white"
+            app:hintTextColor="@color/white"
+            app:placeholderTextColor="@color/white">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/city"
@@ -165,8 +170,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:hint="@string/link_1_label"
-            app:boxStrokeColor="@color/secondary"
-            app:hintTextColor="@color/secondary">
+            app:boxStrokeColor="@color/white"
+            app:hintTextColor="@color/white"
+            app:placeholderTextColor="@color/white">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/Link1Label"
@@ -182,8 +188,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:hint="@string/https"
-            app:boxStrokeColor="@color/secondary"
-            app:hintTextColor="@color/secondary">
+            app:boxStrokeColor="@color/white"
+            app:hintTextColor="@color/white"
+            app:placeholderTextColor="@color/white">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/Link1"
@@ -210,8 +217,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:hint="@string/link_2_label"
-            app:boxStrokeColor="@color/secondary"
-            app:hintTextColor="@color/secondary">
+            app:boxStrokeColor="@color/white"
+            app:hintTextColor="@color/white"
+            app:placeholderTextColor="@color/white">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/Link2Label"
@@ -227,8 +235,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:hint="@string/https"
-            app:boxStrokeColor="@color/secondary"
-            app:hintTextColor="@color/secondary">
+            app:boxStrokeColor="@color/white"
+            app:hintTextColor="@color/white"
+            app:placeholderTextColor="@color/white">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/Link2"
@@ -244,8 +253,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:hint="@string/link_3_label"
-            app:boxStrokeColor="@color/secondary"
-            app:hintTextColor="@color/secondary">
+            app:boxStrokeColor="@color/white"
+            app:hintTextColor="@color/white"
+            app:placeholderTextColor="@color/white">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/Link3Label"
@@ -261,8 +271,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:hint="@string/https"
-            app:boxStrokeColor="@color/secondary"
-            app:hintTextColor="@color/secondary">
+            app:boxStrokeColor="@color/white"
+            app:hintTextColor="@color/white"
+            app:placeholderTextColor="@color/white">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/Link3"
@@ -278,8 +289,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:hint="@string/link_4_label"
-            app:boxStrokeColor="@color/secondary"
-            app:hintTextColor="@color/secondary">
+            app:boxStrokeColor="@color/white"
+            app:hintTextColor="@color/white"
+            app:placeholderTextColor="@color/white">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/Link4Label"
@@ -295,8 +307,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:hint="@string/https"
-            app:boxStrokeColor="@color/secondary"
-            app:hintTextColor="@color/secondary">
+            app:boxStrokeColor="@color/white"
+            app:hintTextColor="@color/white"
+            app:placeholderTextColor="@color/white">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/Link4"
