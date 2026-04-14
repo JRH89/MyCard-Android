@@ -44,6 +44,20 @@
             android:exported="false" />
 
         <receiver
+            android:name=".QRCodeWidget"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="android.appwidget.action.APPWIDGET_ENABLED" />
+                <action android:name="android.appwidget.action.APPWIDGET_DISABLED" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/q_r_code_widget_info" />
+        </receiver>
+
+        <receiver
             android:name=".ToDoWidget"
             android:exported="true">
             <intent-filter>
@@ -55,6 +69,7 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/to_do_widget_info" />
         </receiver>
+
         <receiver
             android:name=".WeatherWidget"
             android:exported="true">
@@ -79,35 +94,6 @@
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/combined_widget_info" />
-        </receiver>
-
-
-        <activity
-            android:name=".MenuActivity"
-            android:exported="false"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".EditActivity"
-            android:exported="false"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".FormActivity"
-            android:exported="false"
-            android:label="@string/title_activity_form"
-            android:theme="@style/AppTheme.NoActionBar" />
-
-        <receiver
-            android:name=".QRCodeWidget"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-                <action android:name="android.appwidget.action.APPWIDGET_ENABLED" />
-                <action android:name="android.appwidget.action.APPWIDGET_DISABLED" />
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-            </intent-filter>
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/q_r_code_widget_info" />
         </receiver>
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -139,5 +125,14 @@
             android:name=".SupportActivity"
             android:exported="false"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".MenuActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FormActivity"
+            android:exported="false" />
     </application>
 </manifest>

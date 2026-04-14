@@ -83,7 +83,6 @@
             android:layout_marginBottom="16dp"
             android:paddingVertical="14dp"
             android:text="@string/edit_card"
-            android:visibility="gone"
             app:backgroundTint="@color/surface"
             android:textColor="@color/primary"
             app:icon="@android:drawable/ic_menu_edit"

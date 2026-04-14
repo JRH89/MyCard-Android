@@ -88,7 +88,6 @@ public class MainActivity extends AppCompatActivity {
         qrImageView = findViewById(R.id.qr_image);
         greeting = findViewById(R.id.greeting);
         weather = findViewById(R.id.temperature); // Initialize the weather TextView
-        editCard = findViewById(R.id.editCard);
 
         Calendar calendar = Calendar.getInstance();
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
@@ -195,7 +194,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button hamburgerButton = findViewById(R.id.hamburger_button);
+        MaterialButton hamburgerButton = findViewById(R.id.hamburger_button);
         hamburgerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -205,7 +204,7 @@ public class MainActivity extends AppCompatActivity {
         });
         LinearLayout buttonRow = findViewById(R.id.buttonRow);
 
-        Button shareButton = findViewById(R.id.share_button);
+        MaterialButton shareButton = findViewById(R.id.share_button);
         shareButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -213,7 +212,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        editCard.setOnClickListener(new View.OnClickListener() {
+        MaterialButton editCardBtn = findViewById(R.id.editCard);
+        editCardBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), EditActivity.class);
