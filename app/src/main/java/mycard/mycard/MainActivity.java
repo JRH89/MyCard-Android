@@ -11,11 +11,13 @@ import android.text.util.Linkify;
 import android.util.Base64;
 import android.util.Log;
 import android.view.ContextMenu;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
+import com.google.android.material.button.MaterialButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import com.google.android.material.card.MaterialCardView;
@@ -35,6 +37,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -70,13 +73,16 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    private String cardUrl = "";
+    private String userEmailStr = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         auth = FirebaseAuth.getInstance();
-        textView = findViewById(R.id.user_details);
+        // textView = findViewById(R.id.user_details);
         user = auth.getCurrentUser();
         db = FirebaseFirestore.getInstance();
         qrImageView = findViewById(R.id.qr_image);
@@ -103,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         } else {
-            textView.setText(user.getEmail());
+            // textView.setText(user.getEmail());
         }
         final ImageView qrImageView = findViewById(R.id.qr_image);
 
@@ -132,8 +138,9 @@ public class MainActivity extends AppCompatActivity {
 
 
                         String url = document.getString("short");
-                        textView.setText(url);
-                        Linkify.addLinks(textView, Linkify.WEB_URLS); // Make the URL clickable
+                        cardUrl = url;
+                        // textView.setText(url);
+                        // Linkify.addLinks(textView, Linkify.WEB_URLS); // Make the URL clickable
 
                         String qrImageData = document.getString("qrImage");
                         if (qrImageData != null) {
@@ -157,6 +164,7 @@ public class MainActivity extends AppCompatActivity {
                         String userJob = document.getString("jobTitle");
                         String userPhone = document.getString("phone");
                         String userEmail = document.getString("email");
+                        userEmailStr = userEmail;
                         String userLabel1 = document.getString("social1Label");
                         String userLink1 = document.getString("social1");
                         String userLabel2 = document.getString("social2Label");
@@ -166,8 +174,6 @@ public class MainActivity extends AppCompatActivity {
                         String userLabel4 = document.getString("social4Label");
                         String userLink4 = document.getString("social4");
                         String userTheme = document.getString("theme");
-
-                        String city = document.getString("favoriteCity");
 
                     }
                 } else {
@@ -199,6 +205,14 @@ public class MainActivity extends AppCompatActivity {
         });
         LinearLayout buttonRow = findViewById(R.id.buttonRow);
 
+        Button shareButton = findViewById(R.id.share_button);
+        shareButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showShareDialog();
+            }
+        });
+
         editCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -207,6 +221,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        /*
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -214,6 +229,7 @@ public class MainActivity extends AppCompatActivity {
                 openInBrowser(url);
             }
         });
+        */
         registerForContextMenu(qrImageView);
     }
 
@@ -269,7 +285,7 @@ public class MainActivity extends AppCompatActivity {
         qrImageView.setDrawingCacheEnabled(false);
 
         // Get the URL to be included in the message
-        String url = textView.getText().toString();
+        String url = cardUrl; // textView.getText().toString();
 
         // Create an intent to send the image
         Intent sendIntent = new Intent(Intent.ACTION_SEND);
@@ -317,6 +333,62 @@ public class MainActivity extends AppCompatActivity {
         Uri uri = Uri.parse(url);
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         startActivity(intent);
+    }
+
+    private void showShareDialog() {
+        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.dialog_share_options, null);
+        builder.setView(dialogView);
+
+        final android.app.AlertDialog dialog = builder.create();
+
+        MaterialButton shareLinkBtn = dialogView.findViewById(R.id.shareLink);
+        MaterialButton shareQRCodeBtn = dialogView.findViewById(R.id.shareQRCode);
+        MaterialButton shareEmailBtn = dialogView.findViewById(R.id.shareEmail);
+        MaterialButton btnCancelShare = dialogView.findViewById(R.id.btnCancelShare);
+
+        shareLinkBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, "Check out my digital business card: " + cardUrl);
+                sendIntent.setType("text/plain");
+                startActivity(Intent.createChooser(sendIntent, "Share via"));
+                dialog.dismiss();
+            }
+        });
+
+        shareQRCodeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendImage();
+                dialog.dismiss();
+            }
+        });
+
+        shareEmailBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("message/rfc822");
+                intent.putExtra(Intent.EXTRA_EMAIL, new String[]{""});
+                intent.putExtra(Intent.EXTRA_SUBJECT, "My Digital Business Card");
+                intent.putExtra(Intent.EXTRA_TEXT, "Hi,\n\nYou can view my digital business card here: " + cardUrl);
+                startActivity(Intent.createChooser(intent, "Send Email"));
+                dialog.dismiss();
+            }
+        });
+
+        btnCancelShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
     }
 
     private void fetchWeatherData(String city) {

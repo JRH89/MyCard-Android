@@ -185,4 +185,5 @@
     <string name="placeholder_sunny">Sunny</string>
     <string name="placeholder_city_label">City</string>
     <string name="placeholder_humidity_simple">60%</string>
+    <string name="share">Share</string>
 </resources>
