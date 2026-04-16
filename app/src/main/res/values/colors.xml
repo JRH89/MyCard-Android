@@ -8,21 +8,24 @@
     <color name="light_blue_200">#81D4FA</color>
     <color name="light_blue_600">#039BE5</color>
     <color name="light_blue_900">#01579B</color>
+    <color name="light_blue_translucent">#33039BE5</color>
     <color name="yellow">#D4E157</color>
     <color name="orange">#FB8C00</color>
     <color name="gray">#9E9E9E</color>
 
     <!-- Modern Palette -->
-    <color name="primary">#4ade80</color>
+    <color name="primary">#10b981</color>
     <color name="onPrimary">#000000</color>
-    <color name="secondary">#039BE5</color>
+    <color name="secondary">#12121a</color>
     <color name="onSecondary">#FFFFFF</color>
-    <color name="surface">#1E293B</color>
+    <color name="surface">#12121a</color>
     <color name="onSurface">#FFFFFF</color>
-    <color name="background">#0F172A</color>
+    <color name="background">#0a0a0f</color>
     <color name="divider">#334155</color>
     <color name="error">#FF0660</color>
     <color name="error_muted">#CF6679</color>
-    <color name="outline">#444444</color>
-    <color name="dialog_bg">#121212</color>
+    <color name="outline">#10b981</color>
+    <color name="dialog_bg">#12121a</color>
+    <color name="brand_primary">#10b981</color>
+    <color name="brand_dark">#12121a</color>
 </resources>

@@ -25,13 +25,15 @@
         android:layout_marginBottom="16dp"
         android:paddingVertical="14dp"
         android:text="Share Link"
-        android:textColor="@color/white"
+        android:textColor="@color/primary"
         android:textSize="18sp"
-        app:backgroundTint="@color/background"
+        app:backgroundTint="@color/surface"
         app:icon="@android:drawable/ic_menu_share"
-        app:iconTint="@color/white"
+        app:iconTint="@color/primary"
         app:iconPadding="8dp"
-        app:cornerRadius="12dp" />
+        app:cornerRadius="12dp"
+        app:strokeColor="@color/primary"
+        app:strokeWidth="1dp" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/shareQRCode"
@@ -41,13 +43,15 @@
         android:layout_marginBottom="16dp"
         android:paddingVertical="14dp"
         android:text="Share QR Code"
-        android:textColor="@color/white"
+        android:textColor="@color/primary"
         android:textSize="18sp"
-        app:backgroundTint="@color/background"
+        app:backgroundTint="@color/surface"
         app:icon="@drawable/qrcode"
-        app:iconTint="@color/white"
+        app:iconTint="@color/primary"
         app:iconPadding="8dp"
-        app:cornerRadius="12dp" />
+        app:cornerRadius="12dp"
+        app:strokeColor="@color/primary"
+        app:strokeWidth="1dp" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/shareEmail"
@@ -57,13 +61,15 @@
         android:layout_marginBottom="16dp"
         android:paddingVertical="14dp"
         android:text="Share via Email"
-        android:textColor="@color/white"
+        android:textColor="@color/primary"
         android:textSize="18sp"
-        app:backgroundTint="@color/background"
+        app:backgroundTint="@color/surface"
         app:icon="@android:drawable/ic_dialog_email"
-        app:iconTint="@color/white"
+        app:iconTint="@color/primary"
         app:iconPadding="8dp"
-        app:cornerRadius="12dp" />
+        app:cornerRadius="12dp"
+        app:strokeColor="@color/primary"
+        app:strokeWidth="1dp" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnCancelShare"

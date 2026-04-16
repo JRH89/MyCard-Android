@@ -55,13 +55,15 @@
                     android:layout_marginBottom="16dp"
                     android:paddingVertical="14dp"
                     android:text="@string/todo_list"
-                    android:textColor="@color/white"
+                    android:textColor="@color/primary"
                     android:textSize="20sp"
                     app:backgroundTint="@color/surface"
                     app:cornerRadius="12dp"
                     app:icon="@android:drawable/checkbox_on_background"
                     app:iconPadding="8dp"
-                    app:iconTint="@color/white" />
+                    app:iconTint="@color/primary"
+                    app:strokeColor="@color/primary"
+                    app:strokeWidth="1dp" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/supportButton"
@@ -71,13 +73,15 @@
                     android:layout_marginBottom="16dp"
                     android:paddingVertical="14dp"
                     android:text="@string/support"
-                    android:textColor="@color/white"
+                    android:textColor="@color/primary"
                     android:textSize="20sp"
                     app:backgroundTint="@color/surface"
                     app:cornerRadius="12dp"
                     app:icon="@android:drawable/ic_menu_help"
                     app:iconPadding="8dp"
-                    app:iconTint="@color/white" />
+                    app:iconTint="@color/primary"
+                    app:strokeColor="@color/primary"
+                    app:strokeWidth="1dp" />
 
 
                 <com.google.android.material.button.MaterialButton
@@ -88,13 +92,15 @@
                     android:layout_marginBottom="16dp"
                     android:paddingVertical="14dp"
                     android:text="@string/delete_account"
-                    android:textColor="@color/white"
+                    android:textColor="@color/primary"
                     android:textSize="20sp"
                     app:backgroundTint="@color/surface"
                     app:cornerRadius="12dp"
                     app:icon="@android:drawable/ic_menu_delete"
                     app:iconPadding="8dp"
-                    app:iconTint="@color/white" />
+                    app:iconTint="@color/primary"
+                    app:strokeColor="@color/primary"
+                    app:strokeWidth="1dp" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/logout"
@@ -104,13 +110,15 @@
                     android:layout_marginBottom="16dp"
                     android:paddingVertical="14dp"
                     android:text="@string/logout"
-                    android:textColor="@color/white"
+                    android:textColor="@color/primary"
                     android:textSize="20sp"
                     app:backgroundTint="@color/surface"
                     app:cornerRadius="12dp"
                     app:icon="@android:drawable/ic_lock_power_off"
                     app:iconPadding="8dp"
-                    app:iconTint="@color/white" />
+                    app:iconTint="@color/primary"
+                    app:strokeColor="@color/primary"
+                    app:strokeWidth="1dp" />
 
             </LinearLayout>
 

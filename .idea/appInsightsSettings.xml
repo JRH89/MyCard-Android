@@ -8,7 +8,7 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="mycard.mycard" />
+                  <option name="appId" value="com.hookerhillstudios.mycard" />
                   <option name="mobileSdkAppId" value="1:831763755162:android:54f6f5fbbe23a0bb3b6f23" />
                   <option name="projectId" value="next-dbc" />
                   <option name="projectNumber" value="831763755162" />

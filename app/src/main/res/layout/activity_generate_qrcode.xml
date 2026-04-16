@@ -26,9 +26,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:hint="@string/enter_text_or_url"
-        android:textColorHint="@color/outline"
-        app:boxStrokeColor="@color/primary"
-        app:hintTextColor="@color/primary"
+        app:boxStrokeColor="@color/box_stroke_color"
+        app:hintTextColor="@color/hint_text_color"
+        app:placeholderTextColor="@color/brand_primary"
+        app:boxBackgroundColor="@color/brand_dark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/qrTitle">

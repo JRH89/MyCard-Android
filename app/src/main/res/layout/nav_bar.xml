@@ -16,13 +16,13 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="@string/home"
-        android:textColor="@color/white"
+        android:textColor="@color/brand_primary"
         android:textSize="16sp"
         app:icon="@android:drawable/ic_menu_today"
         app:iconGravity="top"
         app:iconPadding="4dp"
         app:iconSize="28dp"
-        app:iconTint="@color/white" />
+        app:iconTint="@color/brand_primary" />
 
     <View
         android:layout_width="1dp"
@@ -36,13 +36,13 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="@string/edit"
-        android:textColor="@color/white"
+        android:textColor="@color/brand_primary"
         android:textSize="16sp"
         app:icon="@android:drawable/ic_menu_edit"
         app:iconGravity="top"
         app:iconPadding="4dp"
         app:iconSize="28dp"
-        app:iconTint="@color/white" />
+        app:iconTint="@color/brand_primary" />
 
     <View
         android:layout_width="1dp"
@@ -56,13 +56,13 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="@string/share"
-        android:textColor="@color/white"
+        android:textColor="@color/brand_primary"
         android:textSize="16sp"
         app:icon="@android:drawable/ic_menu_share"
         app:iconGravity="top"
         app:iconPadding="4dp"
         app:iconSize="28dp"
-        app:iconTint="@color/white" />
+        app:iconTint="@color/brand_primary" />
 
     <View
         android:layout_width="1dp"
@@ -76,12 +76,12 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="@string/menu"
-        android:textColor="@color/white"
+        android:textColor="@color/brand_primary"
         android:textSize="16sp"
         app:icon="@android:drawable/ic_menu_more"
         app:iconGravity="top"
         app:iconPadding="4dp"
         app:iconSize="28dp"
-        app:iconTint="@color/white" />
+        app:iconTint="@color/brand_primary" />
 
 </LinearLayout>

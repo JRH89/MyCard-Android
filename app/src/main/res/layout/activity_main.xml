@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="@string/welcome_back"
-        android:textColor="@color/onSurface"
+        android:textColor="@color/primary"
         android:textSize="28sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -94,17 +94,22 @@
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
-    <WebView
-        android:id="@+id/cardPreview"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginVertical="16dp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@id/buttonRow"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnPreviewCard"
+        style="@style/Widget.Material3.Button.TonalButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Preview My Card"
+        android:textColor="@color/light_blue_600"
+        app:backgroundTint="@color/light_blue_translucent"
+        app:cornerRadius="8dp"
+        app:layout_constraintBottom_toTopOf="@id/qr_image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/weatherWidget" />
+        app:layout_constraintTop_toBottomOf="@id/weatherWidget"
+        app:strokeColor="@color/light_blue_600"
+        app:strokeWidth="1dp" />
 
     <ImageView
         android:id="@+id/qr_image"
@@ -116,9 +121,7 @@
         app:layout_constraintBottom_toTopOf="@id/buttonRow"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/weatherWidget" />
-
-
+        app:layout_constraintTop_toBottomOf="@id/btnPreviewCard" />
 
     <include
         android:id="@+id/buttonRow"
@@ -126,5 +129,33 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent" />
+
+    <!-- Full Screen Preview Overlay -->
+    <FrameLayout
+        android:id="@+id/previewOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background"
+        android:elevation="20dp"
+        android:visibility="gone">
+
+        <WebView
+            android:id="@+id/cardPreviewFull"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnClosePreview"
+            style="@style/Widget.Material3.Button.IconButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|end"
+            android:layout_margin="16dp"
+            app:icon="@android:drawable/ic_menu_close_clear_cancel"
+            app:iconTint="@color/primary"
+            app:backgroundTint="@color/surface"
+            app:strokeColor="@color/primary"
+            app:strokeWidth="1dp" />
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -15,8 +15,10 @@
         android:layout_marginTop="24dp"
         android:layout_marginStart="16dp"
         android:hint="@string/enter_city_name"
-        app:boxStrokeColor="@color/secondary"
-        app:hintTextColor="@color/secondary"
+        app:boxStrokeColor="@color/box_stroke_color"
+        app:hintTextColor="@color/hint_text_color"
+        app:placeholderTextColor="@color/brand_primary"
+        app:boxBackgroundColor="@color/brand_dark"
         app:layout_constraintEnd_toStartOf="@id/buttonSearch"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -65,7 +67,7 @@
                 android:id="@+id/currentCity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/onSurface"
+                android:textColor="@color/primary"
                 android:textSize="32sp"
                 android:textStyle="bold" />
 
@@ -147,7 +149,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/three_hour_forecast"
-            android:textColor="@color/onSurface"
+            android:textColor="@color/primary"
             android:textSize="18sp"
             android:textStyle="bold" />
 
